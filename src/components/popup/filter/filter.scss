@@ -5,8 +5,28 @@
    bottom: 0;
    right: 0;
    left: 50px;
-   p {
-      font-size: 30px;
-      line-height: 40px;
+
+   .popup__name {
+      display: flex;
+      justify-content: left;
+      margin-left: 10px;
+      padding-left: 10px;
+
+      button {
+         background: none;
+         border: 0;
+         cursor: pointer;
+
+         img {
+            width: 30px;
+            height: 30px;
+         }
+      }
+
+      p {
+         font-size: 30px;
+         line-height: 40px;
+         font-weight: 900;
+      }
    }
 }

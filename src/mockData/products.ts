@@ -32,7 +32,8 @@ const products: Products[] = [
    price: "100.00",
    currency: "USD",
    part: "item",
-}
+},
+
 ]
 
 

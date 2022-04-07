@@ -1,4 +1,5 @@
 import './filter.scss';
+import arrowRight from '../../../images/arrow-left-solid.svg';
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector, RootStateOrAny} from 'react-redux';
@@ -26,8 +27,10 @@ function Filter() {
 
    return (
       <div className="popup">
-         <button onClick={closePopup}>close</button>
-         <p>Filter</p>
+         <div className='popup__name'>
+            <button onClick={closePopup}><img src={arrowRight} alt="" /></button>
+            <p>Filter</p>
+         </div>
       </div>
    )
 }
