@@ -13,7 +13,6 @@ function Search(): JSX.Element {
 
    const isPopup = useSelector((state : RootStateOrAny) => state.products.popup);
 
-   // const [isPopup, setIsPopup] = useState(false); //dispatch store
 
    const showPopup = () => {
       dispatch(setPopup(true));

@@ -1,0 +1,73 @@
+.cards-element {
+   padding-top: 20px;
+   padding-bottom: 20px;
+
+   .cards-element__row {
+      display: flex;
+      flex-wrap: wrap;
+
+      .cards-element__column {
+         flex: 50%;
+         max-width: 50%;
+
+         .card {
+            margin-top: 20px;
+            margin-left: 10px;
+            margin-right: 10px;
+            vertical-align: middle;
+            background-color: rgb(236, 236, 236);
+            border-radius: 10px;
+
+            .card__image {
+               img {
+                  border-radius: 10px;
+                  border-bottom-left-radius: 2px;
+                  width: 100%;
+               }
+            }
+
+            .card__name {
+               font-size: 12px;
+               font-weight: 700;
+               padding-left: 10px;
+               padding-right: 10px;
+            }
+
+            .card__price {
+               padding-left: 10px;
+               padding-right: 10px;
+               display: flex;
+               flex-direction: row;
+               justify-content: space-between;
+               align-items: baseline;
+
+               p:first-child {
+                  font-size: 13px;
+                  font-weight: 700;
+               }
+
+               p:last-child {
+                  font-size: 10px;
+               }
+            }
+         }
+
+         .cards-element__add-card {
+            padding-bottom: 40px;
+            padding-top: 40px;
+            font-size: 12px;
+            font-weight: 700;
+            button {
+            border: 0;
+            background: none;
+            cursor: pointer;
+               img {
+               width: 30px;
+               height: 30px;
+            }
+            }
+            
+         }
+      }
+   }
+}

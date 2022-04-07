@@ -11,7 +11,7 @@ function Menu(): JSX.Element {
 
    const dispatch = useDispatch();
 
-   const cards = useSelector((state : RootStateOrAny) => state.products.cardArray);
+   // const cards = useSelector((state : RootStateOrAny) => state.products.cardArray);
 
 
    // const getProducts = () => {
@@ -23,9 +23,6 @@ function Menu(): JSX.Element {
       dispatch(getProducts());
    }, []);
 
-   useEffect(() => {
-      console.log(cards);
-   }, [cards]);
 
    return (
       <div className="menu-element">
