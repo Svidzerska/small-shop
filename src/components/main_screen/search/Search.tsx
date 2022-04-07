@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import './search.scss';
-import sliders from '../images/sliders-solid.svg';
-import glass from '../images/magnifying-glass-solid.svg';
-import Filter from "./Popup/Filter";
+import sliders from '../../../images/sliders-solid.svg';
+import glass from '../../../images/magnifying-glass-solid.svg';
+import Filter from "../../popup/filter/Filter";
 
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import { setPopup } from "../features/products/productSlice";
+import { setPopup } from "../../../features/products/productSlice";
 
 function Search(): JSX.Element {
 

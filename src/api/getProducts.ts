@@ -1,4 +1,5 @@
 import products from "../mockData/products";
+import { wait } from "../utils/wait";
 
 const Api = {
    getProducts: () => {
@@ -7,16 +8,6 @@ const Api = {
       });
    },
 }
-
-function wait(duration : number) {
-   return new Promise((resolve, reject) => {
-      if (duration < 0) {
-         reject(new Error("wrong value"));
-      }
-      setTimeout(resolve, duration);
-   });
-}
-
 
 export default Api;
 

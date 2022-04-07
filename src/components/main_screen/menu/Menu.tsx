@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import './menu.scss';
 // import Api from "../api/getProducts";
-import list from '../images/list.svg';
+import list from '../../../images/list.svg';
 
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import { getProducts } from "../features/products/productSlice";
+import { getProducts } from "../../../features/products/productSlice";
 
 
 function Menu(): JSX.Element {

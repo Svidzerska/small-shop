@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.scss';
 
-import Menu from './components/Menu';
-import Search from './components/Search';
+import Menu from './components/main_screen/menu/Menu';
+import Search from './components/main_screen/search/Search';
 
 
 
