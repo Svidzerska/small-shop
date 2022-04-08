@@ -3,7 +3,7 @@ import arrowRight from '../../../images/arrow-left-solid.svg';
 import pensil from '../../../images/square-pen-solid.svg';
 import info from '../../../images/info-solid.svg';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector, RootStateOrAny} from 'react-redux';
 import { setPopup } from '../../../features/products/productSlice';
 
@@ -14,6 +14,7 @@ function Filter() {
 
    const categories:Array<string> = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
 
+   const [isActiveCategory, setIsActiveCategory] = useState(""); 
 
    useEffect(() => {
       dispatch(getCategories());
@@ -27,9 +28,26 @@ function Filter() {
       dispatch(setPopup(false));
    }
 
+   const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>):void => {
+      if (isActiveCategory === e.currentTarget.value) {
+         setIsActiveCategory(""); 
+      } else {
+         setIsActiveCategory(e.currentTarget.value);
+      }
+   }
+
+   const chooseAll = ():void => {
+      setIsActiveCategory("");
+   }
+
    const displayCategories:JSX.Element[] = categories.map((category: string) => {
       return (
-         <button key={category} className='categories-name__button'>{category}</button>
+         <button key={category}
+            onClick={chooseCategory}
+            className={isActiveCategory === category ? 'categories-name__button active' : 'categories-name__button'}
+            value={category}>
+            {category}
+         </button>
       )
    })
 
@@ -45,7 +63,7 @@ function Filter() {
             <p className='categories-change__info'><img src={info} alt="" /></p>
          </div>
          <div className='popup__categories-name'>
-            <button className='categories-name__button'>All</button>
+            <button onClick={chooseAll} className={isActiveCategory === "" ? 'categories-name__button active' : 'categories-name__button'}>All</button>
             {displayCategories}
          </div>
       </div>
