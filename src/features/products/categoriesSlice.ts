@@ -42,7 +42,7 @@ export const categoriesSlice = createSlice({
          state.categoriesArray = action.payload;
       });
       builder.addCase(getCategories.pending, (state) => {
-         state.categoriesArray = [{warning : 'please wait a moment'}];
+         state.categoriesArray = ['please wait a moment'];
          console.log('pending')});
       builder.addCase(getCategories.rejected, (state) => {
          state.categoriesArray = [];

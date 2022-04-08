@@ -11,14 +11,6 @@ function Menu(): JSX.Element {
 
    const dispatch = useDispatch();
 
-   // const cards = useSelector((state : RootStateOrAny) => state.products.cardArray);
-
-
-   // const getProducts = () => {
-   //    // const a = Api.getProducts().then(data => console.log(data));
-   //    // console.log(a);
-   // }
-
    useEffect(() => {
       dispatch(getProducts());
    }, []);
