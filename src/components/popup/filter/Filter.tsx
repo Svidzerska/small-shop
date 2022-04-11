@@ -9,42 +9,56 @@ import { setPopup } from '../../../features/products/productSlice';
 
 import { getCategories } from "../../../features/products/categoriesSlice";
 
+
+const initialActiveCategory:string[] = [];
+
 function Filter() {
    const dispatch = useDispatch();
 
    const categories:Array<string> = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
 
-   const [isActiveCategory, setIsActiveCategory] = useState(""); 
+   const [isActiveCategory, setIsActiveCategory] = useState<Array<string>>(initialActiveCategory); 
+
 
    useEffect(() => {
       dispatch(getCategories());
    }, []);
 
    useEffect(() => {
-      console.log(categories);
-   }, [categories]);
+      if (isActiveCategory.length === categories.length) {
+         setIsActiveCategory([]);
+      }
+   }, [isActiveCategory]);
 
    const closePopup = () => {
       dispatch(setPopup(false));
    }
 
    const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>):void => {
-      if (isActiveCategory === e.currentTarget.value) {
-         setIsActiveCategory(""); 
+      const currentActiveCategory:string[] = [...isActiveCategory];
+      const currentIndex:number = currentActiveCategory.findIndex((item => item === e.currentTarget.value));
+
+      if (currentIndex !== -1) {
+         setIsActiveCategory((arr) => {
+            const elementDeleteCategory:string[] = [...arr]
+            elementDeleteCategory.splice(currentIndex,1,);
+            return elementDeleteCategory;
+         }); 
       } else {
-         setIsActiveCategory(e.currentTarget.value);
+         const currentTargetValue:string = e.currentTarget.value;
+         setIsActiveCategory(arr => [...arr, `${currentTargetValue}`]);
       }
    }
 
    const chooseAll = ():void => {
-      setIsActiveCategory("");
+      setIsActiveCategory([]);
    }
 
    const displayCategories:JSX.Element[] = categories.map((category: string) => {
       return (
          <button key={category}
             onClick={chooseCategory}
-            className={isActiveCategory === category ? 'categories-name__button active' : 'categories-name__button'}
+            className={isActiveCategory.find(item => item === category)  ? 'categories-name__button active' : 'categories-name__button'}
             value={category}>
             {category}
          </button>
@@ -63,7 +77,8 @@ function Filter() {
             <p className='categories-change__info'><img src={info} alt="" /></p>
          </div>
          <div className='popup__categories-name'>
-            <button onClick={chooseAll} className={isActiveCategory === "" ? 'categories-name__button active' : 'categories-name__button'}>All</button>
+            <button onClick={chooseAll}
+             className={isActiveCategory.length === 0 ? 'categories-name__button active' : 'categories-name__button'}>All</button>
             {displayCategories}
          </div>
       </div>
