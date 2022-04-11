@@ -4,6 +4,7 @@ import Api from '../../api/getCategories';
 
 interface InitialState {
    categoriesArray: object,
+   correct:boolean
 }
 
 interface Data {
@@ -13,6 +14,7 @@ interface Data {
 
 const initialState = {
    categoriesArray: [],
+   correct: false
 } as InitialState
 
 
@@ -34,7 +36,9 @@ export const categoriesSlice = createSlice({
    name: 'categories',
    initialState,
    reducers: { 
-
+      setCorrect: (state, action : PayloadAction<boolean>) => {
+         state.correct = action.payload
+      }
    },
    extraReducers: (builder) => {
       builder.addCase(getCategories.fulfilled, (state, action) => {
@@ -51,6 +55,8 @@ export const categoriesSlice = createSlice({
    }
 },
 )
+
+export const { setCorrect } = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;
 
