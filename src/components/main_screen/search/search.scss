@@ -4,33 +4,7 @@
    display: flex;
    justify-content: space-between;
 
-   input {
-      width: 85%;
-      border-radius: 20px;
-      border: 0;
-      background-color: rgb(236, 236, 236);
-      padding-left: 10px;
-   }
-
-   .search-element__button-glass {
-      cursor: pointer;
-      padding: 0;
-      width: fit-content;
-      height: fit-content;
-      background: none;
-      border: none;
-      text-align: center;
-      border-radius: 7px;
-      transform: translateX(-30px);
-
-      img {
-         padding: 5px;
-         vertical-align: middle;
-         width: 20px;
-         height: 20px;
-         transform: rotateZ(90deg);
-      }
-   }
+   
 
    .search-element__button-sliders {
       cursor: pointer;

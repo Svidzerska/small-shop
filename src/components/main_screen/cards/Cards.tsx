@@ -3,15 +3,8 @@ import './cards.scss';
 import plus from '../../../images/plus-square-fill.svg';
 
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
+import { Products } from "../../../interfaces/Products";
 
-
-interface Products {
-   name : string,
-   picture: string,
-   price: string,
-   currency: string,
-   part: string,
-}
 
 function Cards(): JSX.Element {
 
@@ -47,7 +40,7 @@ function Cards(): JSX.Element {
 
 
    return (
-      <div className="cards-element">
+      <main className="cards-element">
          <div className="cards-element__row">
             <div className="cards-element__column">{displayCardsOdd}</div>
             <div className="cards-element__column">
@@ -58,7 +51,7 @@ function Cards(): JSX.Element {
                </div>
             </div>
          </div>
-      </div>
+      </main>
    )
 };
 

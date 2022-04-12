@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import './menu.scss';
-// import Api from "../api/getProducts";
 import list from '../../../images/list.svg';
 
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
@@ -17,13 +16,13 @@ function Menu(): JSX.Element {
 
 
    return (
-      <div className="menu-element">
+      <header className="menu-element">
          <p className="">Shop</p>
          <button className=""
          onClick={getProducts}>
            <img src={list} alt="list"/>
          </button> 
-      </div>
+      </header>
    )
 };
 

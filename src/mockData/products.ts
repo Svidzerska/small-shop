@@ -1,14 +1,6 @@
 import image1 from '../images/image1.jpg';
 import image2 from '../images/image2.jpg';
-
-interface Products {
-   name : string,
-   picture: string,
-   price: string,
-   currency: string,
-   part: string,
-}
-
+import { Products } from '../interfaces/Products';
 
 
 const products: Products[] = [

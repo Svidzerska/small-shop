@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import './search.scss';
 import sliders from '../../../images/sliders-solid.svg';
-import glass from '../../../images/magnifying-glass-solid.svg';
 import Filter from "../../popup/filter/Filter";
 
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { setPopup } from "../../../features/products/productSlice";
+import SearchInput from "./searchInput/SearchInput";
 
 function Search(): JSX.Element {
 
@@ -23,13 +23,14 @@ function Search(): JSX.Element {
    }, [isPopup]);
 
    return (
-      <div className="search-element">
-         <input className="" placeholder="Search"/>
-         <button className="search-element__button-glass"><img src={glass} alt=""/></button>
-         <button className="search-element__button-sliders" onClick={showPopup}><img src={sliders} alt=""/></button>
+      <section className="search-element">
+         <SearchInput/>
+         <button className="search-element__button-sliders" onClick={showPopup}>
+            <img src={sliders} alt=""/>
+         </button>
          {isPopup ? <Filter/> : ""}
-      </div>
-   )
+      </section>
+   ) 
 };
 
 
