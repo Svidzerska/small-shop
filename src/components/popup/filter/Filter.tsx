@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import './filter.scss';
 
+import Edit from '../edit/Edit';
+
 import arrowRight from '../../../images/arrow-left-solid.svg';
 import pensil from '../../../images/square-pen-solid.svg';
 import info from '../../../images/info-solid.svg';
@@ -117,7 +119,7 @@ function Filter() {
              <button onClick={handleCorrect}><img src={pensil} alt="" /></button>}
             <p className='categories-change__info'><img src={info} alt="" /></p>
          </div>
-         {!toCorrect ? viewPopupCategories() : displayCategories}
+         {!toCorrect ? viewPopupCategories() : <Edit/>}
       </div>
    )
 }

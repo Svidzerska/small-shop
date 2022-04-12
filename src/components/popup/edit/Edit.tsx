@@ -1,6 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import './edit.scss';
 
+import pensil from '../../../images/square-pen-solid.svg';
+import trash from '../../../images/trash-can-solid.svg';
+
+
 
 import { useDispatch, useSelector, RootStateOrAny} from 'react-redux';
 
@@ -13,51 +17,37 @@ function Edit() {
 
    const categories:Array<string> = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
 
-   const [isActiveCategory, setIsActiveCategory] = useState<Array<string>>([]); 
+   const [isActiveCategory, setIsActiveCategory] = useState<string>(categories[0]); 
 
 
    useEffect(() => {
       dispatch(getCategories());
    }, []);
 
-   useEffect(() => {
-      if (isActiveCategory.length === categories.length) {
-         setIsActiveCategory([]);
-      }
-   }, [isActiveCategory]);
 
-
-   const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>):void => {
-      const currentActiveCategory:string[] = [...isActiveCategory];
-      const currentIndex:number = currentActiveCategory.findIndex((item => item === e.currentTarget.value));
-
-      if (currentIndex !== -1) {
-         setIsActiveCategory((arr) => {
-            const elementDeleteCategory:string[] = [...arr]
-            elementDeleteCategory.splice(currentIndex,1,);
-            return elementDeleteCategory;
-         }); 
-      } else {
-         const currentTargetValue:string = e.currentTarget.value;
-         setIsActiveCategory(arr => [...arr, `${currentTargetValue}`]);
-      }
-   }
-
-
-
-   const editCategory = ():void => {
-      
+   const editCategory = (e: React.MouseEvent<HTMLButtonElement>):void => {
+         setIsActiveCategory(e.currentTarget.value);
    }
    
  
    const displayCategories:JSX.Element[] = categories.map((category: string) => {
-      return (
+      return (<>
          <button key={category}
-            onClick={editCategory} //choose category
-            className={isActiveCategory.find(item => item === category)  ? 'categories-name__button active' : 'categories-name__button'}
+            onClick={editCategory}
+            className={isActiveCategory === category  ? 'categories-name__button active' : 'categories-name__button'}
             value={category}>
             {category}
          </button>
+         {isActiveCategory === category ? 
+         <>
+         <button>
+            <img src={pensil} alt="" />
+         </button>
+         <button>
+            <img src={trash} alt="" />
+         </button>
+         </> : <></>}
+         </>
       )
    })
 
