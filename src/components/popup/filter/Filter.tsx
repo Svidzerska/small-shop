@@ -67,6 +67,17 @@ function Filter() {
    const closeCorrection = ():void => {
       dispatch(setCorrect(false));
    }
+
+   const buttonsEdit = ():JSX.Element => {
+      return (
+         <>
+            <button onClick={chooseAll}
+             className='categories-change__buttonAll'>All</button>
+             <button><img src={plus} alt=""/></button>
+             <button><img src={check} alt=""/></button>
+         </>
+      )
+   }
  
    const displayCategories:JSX.Element[] = categories.map((category: string) => {
       return (
@@ -88,12 +99,8 @@ function Filter() {
          {toCorrect ? <div className='popup__comments'><p>Categories editing</p></div> : <></>}
          <div className='popup__categories-change'>
             <p>Categories</p>
-            {toCorrect ? <><button onClick={chooseAll}
-             className={isActiveCategory.length === 0 ? 'categories-name__button active' : 'categories-name__button'}>All</button>
-             <button><img src={plus} alt=""/></button>
-             <button><img src={check} alt=""/></button></> : 
+            {toCorrect ? buttonsEdit() : 
              <button onClick={handleCorrect}><img src={pensil} alt="" /></button>}
-
             <p className='categories-change__info'><img src={info} alt="" /></p>
          </div>
          <div className='popup__categories-name'>
