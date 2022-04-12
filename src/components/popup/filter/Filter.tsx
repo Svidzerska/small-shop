@@ -3,6 +3,9 @@ import arrowRight from '../../../images/arrow-left-solid.svg';
 import pensil from '../../../images/square-pen-solid.svg';
 import info from '../../../images/info-solid.svg';
 import cross from '../../../images/xmark-solid.svg';
+import plus from '../../../images/plus-square-fill.svg';
+import check from '../../../images/square-check-solid.svg';
+
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector, RootStateOrAny} from 'react-redux';
@@ -82,9 +85,15 @@ function Filter() {
             <button onClick={!toCorrect ? closePopup : closeCorrection}><img src={!toCorrect ? arrowRight : cross} alt="" /></button>
             <p>Filter</p>
          </div>
+         {toCorrect ? <div className='popup__comments'><p>Categories editing</p></div> : <></>}
          <div className='popup__categories-change'>
             <p>Categories</p>
-            <button onClick={handleCorrect}><img src={pensil} alt="" /></button>
+            {toCorrect ? <><button onClick={chooseAll}
+             className={isActiveCategory.length === 0 ? 'categories-name__button active' : 'categories-name__button'}>All</button>
+             <button><img src={plus} alt=""/></button>
+             <button><img src={check} alt=""/></button></> : 
+             <button onClick={handleCorrect}><img src={pensil} alt="" /></button>}
+
             <p className='categories-change__info'><img src={info} alt="" /></p>
          </div>
          <div className='popup__categories-name'>

@@ -35,6 +35,17 @@
       }
    }
 
+   .popup__comments {
+      padding-left: 60px;
+      text-align: start;
+      color: gray;
+      font-size: 14px;
+      p {
+         margin-bottom: 0;
+      }
+      
+   }
+
    .popup__categories-change {
       display: flex;
       flex-direction: row;
