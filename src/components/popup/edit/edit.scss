@@ -6,6 +6,11 @@
    
       .edit-component {
          display: flex;
+         button:last-child {
+            img {
+               height: 28px;
+            }
+         }
       }
 
       .edit-component.active {
@@ -39,4 +44,5 @@
          margin: 5px;
       }
 
+      
 }

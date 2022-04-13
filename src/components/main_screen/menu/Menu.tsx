@@ -4,6 +4,7 @@ import list from '../../../images/list.svg';
 
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { getProducts } from "../../../features/products/productSlice";
+import { getCategories } from "../../../features/products/categoriesSlice";
 
 
 const Menu: React.FC = () => {
@@ -14,6 +15,9 @@ const Menu: React.FC = () => {
       dispatch(getProducts());
    }, []);
 
+   useEffect(() => {
+      dispatch(getCategories());
+   }, []);
 
    return (
       <header className="menu-element">

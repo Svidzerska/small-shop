@@ -14,8 +14,6 @@ import { useDispatch, useSelector, RootStateOrAny} from 'react-redux';
 import { setPopup } from '../../../features/products/productSlice';
 import { setCorrect } from '../../../features/products/categoriesSlice';
 
-import { getCategories } from "../../../features/products/categoriesSlice";
-
 import { Categories } from '../../../interfaces/Categories';
 
 
@@ -30,14 +28,10 @@ const Filter:React.FC = () => {
 
 
    useEffect(() => {
-      dispatch(getCategories());
-   }, []);
-
-   useEffect(() => {
       if (isActiveCategory.length === categories.length) {
          setIsActiveCategory([]);
       }
-   }, [isActiveCategory]);
+   }, [isActiveCategory.length]);
 
    const closePopup = () => {
       dispatch(setPopup(false));

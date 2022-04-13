@@ -40,7 +40,10 @@ export const categoriesSlice = createSlice({
    initialState,
    reducers: { 
       setCorrect: (state, action : PayloadAction<boolean>) => {
-         state.correct = action.payload
+         state.correct = action.payload;
+      }, 
+      setCategories: (state, action : PayloadAction<Categories[]>) => {
+         state.categoriesArray = action.payload;
       }
    },
    extraReducers: (builder) => {
@@ -59,7 +62,7 @@ export const categoriesSlice = createSlice({
 },
 )
 
-export const { setCorrect } = categoriesSlice.actions;
+export const { setCorrect, setCategories } = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;
 
