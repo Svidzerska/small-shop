@@ -4,10 +4,19 @@
    padding-left: 60px;
    flex-wrap: wrap;
    
+      .edit-component {
+         display: flex;
+      }
+
+      .edit-component.active {
+         margin-right: 100%;
+      }
+
       button {
          cursor: pointer;
          background: none;
          border: 0;
+         height: 30px;
       }
 
       .categories-name__button { 

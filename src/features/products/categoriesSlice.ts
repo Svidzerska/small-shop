@@ -1,6 +1,9 @@
 import { createSlice, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
 import Api from '../../api/getCategories';
 
+import { Categories } from '../../interfaces/Categories';
+
+
 
 interface InitialState {
    categoriesArray: object,
@@ -8,7 +11,7 @@ interface InitialState {
 }
 
 interface Data {
-   data: Array<string>
+   data: Categories[]
 }
  
 
@@ -46,7 +49,7 @@ export const categoriesSlice = createSlice({
          state.categoriesArray = action.payload;
       });
       builder.addCase(getCategories.pending, (state) => {
-         state.categoriesArray = ['please wait a moment'];
+         state.categoriesArray = [{id:'00', warning:'please wait a moment'}];
          console.log('pending')});
       builder.addCase(getCategories.rejected, (state) => {
          state.categoriesArray = [];

@@ -6,11 +6,11 @@ import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { Products } from "../../../interfaces/Products";
 
 
-function Cards(): JSX.Element {
+const Cards:React.FC = () => {
 
    const dispatch = useDispatch();
 
-   const cards = useSelector((state : RootStateOrAny) => state.products.cardArray);
+   const cards:Products[] = useSelector((state : RootStateOrAny) => state.products.cardArray);
 
    useEffect(() => {
       console.log(cards);
@@ -19,9 +19,9 @@ function Cards(): JSX.Element {
 
    const displayCards:JSX.Element[] = cards.map((card: Products) => {
          return (
-         <div key={card.name+card.picture} className="card">
+         <div key={card.id} className="card">
             <div className="card__image"><img src={card.picture} alt=""/></div>
-            <div className="card__name">{card.name}</div>
+            <div className="card__name">{card.warning !== "" ? card.warning : card.name}</div>
             <div className="card__price">
                <p>{card.currency} {card.price}</p>
                <p>{card.part}</p>
@@ -38,17 +38,26 @@ function Cards(): JSX.Element {
       index % 2 === 0
    )
 
+   const renderAddCard = ():JSX.Element => {
+      return (
+         <div className="card cards-element__add-card">
+                  <p><button><img src={plus} alt=""/></button></p>
+                  <p>Tap to add <br/> a new item</p>
+         </div>
+      )
+   }
+
 
    return (
       <main className="cards-element">
          <div className="cards-element__row">
-            <div className="cards-element__column">{displayCardsOdd}</div>
+            <div className="cards-element__column">
+               {displayCardsOdd}
+               {cards.length % 2 === 0 ? renderAddCard() : <></>}
+            </div>
             <div className="cards-element__column">
                {displayCardsEven}
-               <div className="card cards-element__add-card">
-                  <p><button><img src={plus} alt=""/></button></p>
-                  <p>Tap to add <br/> a new item</p>
-               </div>
+               {cards.length % 2 !== 0 ? renderAddCard() : <></>}
             </div>
          </div>
       </main>

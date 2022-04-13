@@ -7,10 +7,9 @@ import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { setPopup } from "../../../features/products/productSlice";
 import SearchInput from "./searchInput/SearchInput";
 
-function Search(): JSX.Element {
+const Search : React.FC = () => {
 
    const dispatch = useDispatch();
-
    const isPopup = useSelector((state : RootStateOrAny) => state.products.popup);
 
 

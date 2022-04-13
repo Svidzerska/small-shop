@@ -16,11 +16,14 @@ import { setCorrect } from '../../../features/products/categoriesSlice';
 
 import { getCategories } from "../../../features/products/categoriesSlice";
 
+import { Categories } from '../../../interfaces/Categories';
 
-function Filter() {
+
+
+const Filter:React.FC = () => {
    const dispatch = useDispatch();
 
-   const categories:Array<string> = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
+   const categories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
    const toCorrect:boolean = useSelector((state : RootStateOrAny) => state.categories.correct);
 
    const [isActiveCategory, setIsActiveCategory] = useState<Array<string>>([]); 
@@ -68,31 +71,40 @@ function Filter() {
       dispatch(setCorrect(false));
    }
 
-   const editCategory = ():void => {
-
-   }
  
    const buttonsEdit = ():JSX.Element => {
       return (
          <>
             <button onClick={chooseAll}
              className='categories-change__buttonAll'>All</button>
-             <button><img src={plus} alt=""/></button>
-             <button><img src={check} alt=""/></button>
+             <button>
+                <img src={plus} alt=""/>
+            </button>
+             <button>
+                <img src={check} alt=""/>
+            </button>
          </>
       )
    }
 
    
  
-   const displayCategories:JSX.Element[] = categories.map((category: string) => {
+   const displayCategories:JSX.Element[] = categories.map((category: Categories) => {
+      console.log(category.id);
       return (
-         <button key={category}
-            onClick={toCorrect ? chooseCategory : editCategory}
-            className={isActiveCategory.find(item => item === category)  ? 'categories-name__button active' : 'categories-name__button'}
-            value={category}>
-            {category}
-         </button>
+         <div key={category.id}>
+         {category.warning !== "" ?
+          <p className='category-warning'>{category.warning}</p> :
+          <button
+          onClick={chooseCategory}
+          className={isActiveCategory.find(item => item === category.name)  ?
+             'categories-name__button active' :
+             'categories-name__button'}
+          value={category.name}>
+          {category.name}
+         </button>}
+         </div>
+         
       )
    })
 
@@ -109,15 +121,23 @@ function Filter() {
    return (
       <div className="popup">
          <div className='popup__name'>
-            <button onClick={!toCorrect ? closePopup : closeCorrection}><img src={!toCorrect ? arrowRight : cross} alt="" /></button>
+            <button onClick={!toCorrect ? closePopup : closeCorrection}>
+               <img src={!toCorrect ? arrowRight : cross} alt="" />
+            </button>
             <p>Filter</p>
          </div>
-         {toCorrect ? <div className='popup__comments'><p>Categories editing</p></div> : <></>}
+         {toCorrect ? <div className='popup__comments'>
+            <p>Categories editing</p>
+         </div> : <></>}
          <div className='popup__categories-change'>
             <p>Categories</p>
             {toCorrect ? buttonsEdit() : 
-             <button onClick={handleCorrect}><img src={pensil} alt="" /></button>}
-            <p className='categories-change__info'><img src={info} alt="" /></p>
+             <button onClick={handleCorrect}>
+               <img src={pensil} alt="" />
+            </button>}
+            <p className='categories-change__info'>
+               <img src={info} alt="" />
+            </p>
          </div>
          {!toCorrect ? viewPopupCategories() : <Edit/>}
       </div>

@@ -112,6 +112,13 @@
       flex-direction: row;
       padding-left: 60px;
       flex-wrap: wrap;
+      align-items: center;
+
+      .category-warning {
+         margin-top: 0;
+         margin-bottom: 0;
+         margin-left: 20px;
+      }
 
       .categories-name__button.active {
          background-color: rgb(179, 129, 255);

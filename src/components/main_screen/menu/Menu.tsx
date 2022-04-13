@@ -6,7 +6,7 @@ import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { getProducts } from "../../../features/products/productSlice";
 
 
-function Menu(): JSX.Element {
+const Menu: React.FC = () => {
 
    const dispatch = useDispatch();
 
