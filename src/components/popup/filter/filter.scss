@@ -6,6 +6,10 @@
    right: 0;
    left: 0px;
 
+   .unactivated {
+      opacity: 40%;
+   }
+
    .categories-name__button { 
       cursor: pointer;
       background-color: rgb(237, 237, 237);

@@ -7,7 +7,8 @@ import { Categories } from '../../interfaces/Categories';
 
 interface InitialState {
    categoriesArray: object,
-   correct:boolean
+   correct:boolean,
+   editCategory:boolean
 }
 
 interface Data {
@@ -17,7 +18,8 @@ interface Data {
 
 const initialState = {
    categoriesArray: [],
-   correct: false
+   correct: false,
+   editCategory: false
 } as InitialState
 
 
@@ -44,6 +46,9 @@ export const categoriesSlice = createSlice({
       }, 
       setCategories: (state, action : PayloadAction<Categories[]>) => {
          state.categoriesArray = action.payload;
+      },
+      setEditCategory: (state, action : PayloadAction<boolean>) => {
+         state.editCategory = action.payload;
       }
    },
    extraReducers: (builder) => {
@@ -62,7 +67,7 @@ export const categoriesSlice = createSlice({
 },
 )
 
-export const { setCorrect, setCategories } = categoriesSlice.actions;
+export const { setCorrect, setCategories, setEditCategory } = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;
 

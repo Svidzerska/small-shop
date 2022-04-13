@@ -10,7 +10,7 @@ import xmark from '../../../images/square-xmark-solid.svg';
 
 
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
-import { setCategories } from "../../../features/products/categoriesSlice";
+import { setCategories, setEditCategory } from "../../../features/products/categoriesSlice";
 
 import { Categories } from '../../../interfaces/Categories';
 
@@ -44,11 +44,11 @@ const Edit: React.FC = () => {
 
    const editCurrentCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
       setIsEditCategory(e.currentTarget.id);
+      setIsInputValue(e.currentTarget.id);
+      dispatch(setEditCategory(true));
    }
 
    const editInputCategory = (e: any): void => {
-      console.log(e.currentTarget.id);
-      console.log(e.currentTarget.value); 
       setIsInputValue(e.currentTarget.value);
    }
 
@@ -62,10 +62,12 @@ const Edit: React.FC = () => {
       const currentCategory = categoriesInput.findIndex((item) => item.name === e.currentTarget.id);
       categoriesInput[currentCategory] = {...categoriesInput[currentCategory], name: isInputValue};
       dispatch(setCategories(categoriesInput)); 
+      setIsEditCategory("");
    }
 
    const cancelEditCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
       setIsEditCategory("");
+      dispatch(setEditCategory(false));
    }
 
    const renderEditButtons = (category:Categories):JSX.Element => {

@@ -24,6 +24,8 @@ const Filter:React.FC = () => {
 
    const categories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
    const toCorrect:boolean = useSelector((state : RootStateOrAny) => state.categories.correct);
+   const editCategoryFromStore:boolean = useSelector((state: RootStateOrAny) => state.categories.editCategory);
+
 
    const [isActiveCategory, setIsActiveCategory] = useState<Array<string>>([]); 
 
@@ -41,6 +43,7 @@ const Filter:React.FC = () => {
    const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>):void => {
       const currentActiveCategory:string[] = [...isActiveCategory];
       const currentIndex:number = currentActiveCategory.findIndex((item => item === e.currentTarget.value));
+      
 
       if (currentIndex !== -1) {
          setIsActiveCategory((arr) => {
@@ -66,16 +69,20 @@ const Filter:React.FC = () => {
       dispatch(setCorrect(false));
    }
 
+   const unactivated = () => {
+
+   }
+
  
    const buttonsEdit = ():JSX.Element => {
       return (
          <>
-            <button onClick={chooseAll}
-             className='categories-change__buttonAll'>All</button>
-             <button>
+            <button onClick={!editCategoryFromStore ? chooseAll : unactivated}
+             className={!editCategoryFromStore ? 'categories-change__buttonAll' : 'categories-change__buttonAll unactivated'} >All</button>
+             <button className={!editCategoryFromStore ? '' : 'unactivated'}>
                 <img src={plus} alt=""/>
             </button>
-             <button>
+             <button className={!editCategoryFromStore ? '' : 'unactivated'}>
                 <img src={check} alt=""/>
             </button>
          </>
@@ -127,7 +134,7 @@ const Filter:React.FC = () => {
              <button onClick={handleCorrect}>
                <img src={pensil} alt="" />
             </button>}
-            <p className='categories-change__info'>
+            <p className={!editCategoryFromStore ? 'categories-change__info' : 'categories-change__info unactivated'}>
                <img src={info} alt="" />
             </p>
          </div>
