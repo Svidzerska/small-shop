@@ -3,6 +3,9 @@ import './edit.scss';
 
 import pensil from '../../../images/square-pen-solid.svg';
 import trash from '../../../images/trash-can-solid.svg';
+import check from '../../../images/square-check-solid.svg';
+import xmark from '../../../images/square-xmark-solid.svg';
+
 
 
 
@@ -21,16 +24,18 @@ const Edit: React.FC = () => {
    const [isActiveCategory, setIsActiveCategory] = useState<string>(categories[0]?.name);
    const [isEditCategory, setIsEditCategory] = useState<string>("");
 
+   const [isInputValue, setIsInputValue] = useState<string>("");
+
 
 
 
    useEffect(() => {
       setIsActiveCategory(categories[0]?.name);
-   }, [categories.length]);
+   }, [categories.length, categories]);
 
-   useEffect(() => {
-      console.log(categories);
-   }, [categories]);
+   // useEffect(() => {
+   //    console.log(isInputValue);
+   // }, [isInputValue]);
 
 
    const editCategories = (e: React.MouseEvent<HTMLButtonElement>): void => {
@@ -44,17 +49,49 @@ const Edit: React.FC = () => {
    const editInputCategory = (e: any): void => {
       console.log(e.currentTarget.id);
       console.log(e.currentTarget.value); 
-
-      const categoriesInput = [...categories];
-      const currentCategory = categoriesInput.findIndex((item) => item.id === e.currentTarget.id);
-      categoriesInput[currentCategory] = {...categoriesInput[currentCategory], name: e.currentTarget.value}
-      // dispatch(setCategories(categoriesInput)); // це на кнопці прийняти, тому треба useState
+      setIsInputValue(e.currentTarget.value);
    }
 
    const deleteCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
-      console.log(e.currentTarget.id);
       const currentCategories = [...categories];
       dispatch(setCategories(currentCategories.filter((item) => item.id !== e.currentTarget.id)));
+   }
+
+   const doneInputCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
+      const categoriesInput = [...categories];
+      const currentCategory = categoriesInput.findIndex((item) => item.name === e.currentTarget.id);
+      categoriesInput[currentCategory] = {...categoriesInput[currentCategory], name: isInputValue};
+      dispatch(setCategories(categoriesInput)); 
+   }
+
+   const cancelEditCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
+      setIsEditCategory("");
+   }
+
+   const renderEditButtons = (category:Categories):JSX.Element => {
+      return (
+         <>
+            <button onClick={editCurrentCategory} id={category.name}>
+               <img src={pensil} alt="" />
+            </button>
+            <button onClick={deleteCategory} id={category.id}>
+               <img src={trash} alt="" />
+            </button>
+         </>
+      )
+   }
+
+   const renderDoneButtons = (category:Categories):JSX.Element => {
+      return (
+         <>
+            <button onClick={doneInputCategory} id={category.name}>
+               <img src={check} alt="" />
+            </button>
+            <button onClick={cancelEditCategory} id={category.id}>
+               <img src={xmark} alt="" />
+            </button>
+         </>
+      )
    }
 
 
@@ -72,15 +109,11 @@ const Edit: React.FC = () => {
                         <input id={category.id} defaultValue={category.name} onChange={editInputCategory} className="inputForEdit" autoFocus/> :
                         category.name}
                   </button>
-                  {isActiveCategory === category.name ?
-                     <>
-                        <button onClick={editCurrentCategory} id={category.name}>
-                           <img src={pensil} alt="" />
-                        </button>
-                        <button onClick={deleteCategory} id={category.id}>
-                           <img src={trash} alt="" />
-                        </button>
-                     </> : <></>}
+                  {isActiveCategory === category.name ? 
+                  isEditCategory !== "" && isEditCategory === category.name ? 
+                     renderDoneButtons(category) : 
+                     renderEditButtons(category) : 
+                      <></>}
                </>}
          </div>
       )

@@ -82,10 +82,7 @@ const Filter:React.FC = () => {
       )
    }
 
-   
- 
    const displayCategories:JSX.Element[] = categories.map((category: Categories) => {
-      console.log(category.id);
       return (
          <div key={category.id}>
          {category.warning !== "" ?
