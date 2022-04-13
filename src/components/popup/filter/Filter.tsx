@@ -14,6 +14,7 @@ import { useDispatch, useSelector, RootStateOrAny} from 'react-redux';
 import { setPopup } from '../../../features/products/productSlice';
 import { setCorrect } from '../../../features/products/categoriesSlice';
 
+
 import { Categories } from '../../../interfaces/Categories';
 
 

@@ -11,6 +11,18 @@
                height: 28px;
             }
          }
+
+         .inputForEdit {
+            width: 100px;
+         }
+
+         .inputForEdit:focus-visible {
+            border: none;
+            background: none;
+            outline: none;
+            background-color: yellow;
+            border-radius: 0;
+         }
       }
 
       .edit-component.active {
