@@ -14,7 +14,7 @@ import xmark from '../../../images/square-xmark-solid.svg';
 
 import { useDispatch, useSelector, RootStateOrAny} from 'react-redux';
 import { setPopup } from '../../../features/products/productSlice';
-import { setCorrect, setCategories } from '../../../features/products/categoriesSlice';
+import { setCorrect, setCategories, setEditCategory } from '../../../features/products/categoriesSlice';
 
 
 import { Categories } from '../../../interfaces/Categories';
@@ -72,11 +72,13 @@ const Filter:React.FC = () => {
    const closeCorrection = ():void => {
       dispatch(setCorrect(false));
       setIsAddNewCategory(false);
+      dispatch(setEditCategory(false));
    }
 
    const addNewCategory = () => {
       console.log("addNewCategory");
       setIsAddNewCategory(true);
+      dispatch(setEditCategory(true));
    }
 
    const doneNewCategory = () => {
@@ -98,10 +100,12 @@ const Filter:React.FC = () => {
       if (isInputValue === "") {
          setIsInputValue("New Category");
       }
+      dispatch(setEditCategory(false));
    }
 
    const cancelInputNewCategory = () => {
       setIsAddNewCategory(false);
+      dispatch(setEditCategory(false));
    }
 
    const editNewCategory = (e: any) => {
@@ -143,7 +147,6 @@ const Filter:React.FC = () => {
           {category.name}
          </button>}
          </div>
-         
       )
    })
 
