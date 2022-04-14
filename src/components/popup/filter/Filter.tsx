@@ -71,6 +71,7 @@ const Filter:React.FC = () => {
 
    const closeCorrection = ():void => {
       dispatch(setCorrect(false));
+      setIsAddNewCategory(false);
    }
 
    const addNewCategory = () => {
@@ -81,11 +82,22 @@ const Filter:React.FC = () => {
    const doneNewCategory = () => {
       console.log("doneNewCategory");
       setIsAddNewCategory(false);
+
+      const categoriesInput = [...categories];
+
+      console.log(categoriesInput[0].name);
+      console.log(isInputValue);
+
+      if (categoriesInput[0].name !== isInputValue && categoriesInput[0].name !== "") {
+         categoriesInput.unshift({id: `${Math.random()}`, name: isInputValue, warning: ""});
+         dispatch(setCategories(categoriesInput));
+      }
    }
 
    const doneInputNewCategory = () => {
-      console.log(isInputValue);
-      //dispatch setCategories (isInputValue);
+      if (isInputValue === "") {
+         setIsInputValue("New Category");
+      }
    }
 
    const cancelInputNewCategory = () => {
@@ -148,17 +160,17 @@ const Filter:React.FC = () => {
 
    const renderAddCategoryField = () => {
       return (
-         <>
+         <div className='addField'>
             <button className='categories-name__button'>
                <input defaultValue="New Category" onChange={editNewCategory} className="inputForEdit" autoFocus/> 
             </button>
-            <button onClick={doneInputNewCategory}>
+            <button className='addField__buttonResult' onClick={doneInputNewCategory}>
                <img src={check} alt="" />
             </button>
-            <button onClick={cancelInputNewCategory}>
+            <button className='addField__buttonResult' onClick={cancelInputNewCategory}>
                <img src={xmark} alt="" />
             </button>
-         </>
+         </div>
       )
    }
 

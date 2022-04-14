@@ -10,7 +10,46 @@
       opacity: 40%;
    }
 
+   .addField {
+      display: flex;
+      margin-left: 60px;
+      align-items: center;
+      margin-bottom: 15px;
+
+      button {
+         margin-left: 0;
+         height: 30px;
+      }
+
+      .categories-name__button {
+         border: 2px solid rgb(179, 129, 255);
+
+         .inputForEdit {
+            width: 100px;
+         }
+
+         .inputForEdit:focus-visible {
+            border: none;
+            background: none;
+            outline: none;
+            background-color: yellow;
+            border-radius: 0;
+         }
+      }
+
+      .addField__buttonResult {
+         border: none;
+         background: none;
+
+         img {
+            width: 30px;
+            height: 30px;
+         }
+      }
+   }
+
    .categories-name__button { 
+      width: max-content;
       cursor: pointer;
       background-color: rgb(237, 237, 237);
       border: 0;
