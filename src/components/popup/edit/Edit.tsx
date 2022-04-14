@@ -20,6 +20,8 @@ const Edit: React.FC = () => {
    const dispatch = useDispatch();
 
    const categories: Array<Categories> = useSelector((state: RootStateOrAny) => state.categories.categoriesArray);
+   const addCategoryFromStore:boolean = useSelector((state: RootStateOrAny) => state.categories.addCategory);
+
 
    const [isActiveCategory, setIsActiveCategory] = useState<string>(categories[0]?.name);
    const [isEditCategory, setIsEditCategory] = useState<string>("");
@@ -75,11 +77,11 @@ const Edit: React.FC = () => {
    const renderEditButtons = (category:Categories):JSX.Element => {
       return (
          <>
-            <button onClick={editCurrentCategory} id={category.name}>
-               <img src={pensil} alt="" />
+            <button onClick={editCurrentCategory} id={category.name} disabled={!addCategoryFromStore ? false : true}>
+               <img className={!addCategoryFromStore ? '' : "unactivated"} src={pensil} alt="" />
             </button>
-            <button onClick={deleteCategory} id={category.id}>
-               <img src={trash} alt="" />
+            <button onClick={deleteCategory} id={category.id} disabled={!addCategoryFromStore ? false : true}>
+               <img className={!addCategoryFromStore ? '' : "unactivated"} src={trash} alt="" />
             </button>
          </>
       )
@@ -91,7 +93,7 @@ const Edit: React.FC = () => {
             <button onClick={doneInputCategory} id={category.name}>
                <img src={check} alt="" />
             </button>
-            <button onClick={cancelEditCategory} id={category.id}>
+            <button onClick={cancelEditCategory} id={category.id} >
                <img src={xmark} alt="" />
             </button>
          </>
@@ -108,7 +110,8 @@ const Edit: React.FC = () => {
                <>
                   <button onClick={editCategories}
                      className={isActiveCategory === category.name ? 'categories-name__button active' : 'categories-name__button'}
-                     value={category.name}>
+                     value={category.name}
+                     disabled={!addCategoryFromStore ? false : true}>
                      {isActiveCategory === isEditCategory && isActiveCategory === category.name ?
                         <input id={category.id} defaultValue={category.name} onChange={editInputCategory} className="inputForEdit" autoFocus/> :
                         category.name}

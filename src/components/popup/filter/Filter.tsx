@@ -14,7 +14,7 @@ import xmark from '../../../images/square-xmark-solid.svg';
 
 import { useDispatch, useSelector, RootStateOrAny} from 'react-redux';
 import { setPopup } from '../../../features/products/productSlice';
-import { setCorrect, setCategories, setEditCategory } from '../../../features/products/categoriesSlice';
+import { setCorrect, setCategories, setEditCategory, setAddCategory } from '../../../features/products/categoriesSlice';
 
 
 import { Categories } from '../../../interfaces/Categories';
@@ -39,6 +39,7 @@ const Filter:React.FC = () => {
          setIsActiveCategory([]);
       }
    }, [isActiveCategory.length]);
+
 
    const closePopup = () => {
       dispatch(setPopup(false));
@@ -73,12 +74,14 @@ const Filter:React.FC = () => {
       dispatch(setCorrect(false));
       setIsAddNewCategory(false);
       dispatch(setEditCategory(false));
+      dispatch(setAddCategory(false));
    }
 
    const addNewCategory = () => {
       console.log("addNewCategory");
       setIsAddNewCategory(true);
       dispatch(setEditCategory(true));
+      dispatch(setAddCategory(true));
    }
 
    const doneNewCategory = () => {
@@ -94,6 +97,7 @@ const Filter:React.FC = () => {
          categoriesInput.unshift({id: `${Math.random()}`, name: isInputValue, warning: ""});
          dispatch(setCategories(categoriesInput));
       }
+      dispatch(setAddCategory(false));
    }
 
    const doneInputNewCategory = () => {
@@ -106,6 +110,7 @@ const Filter:React.FC = () => {
    const cancelInputNewCategory = () => {
       setIsAddNewCategory(false);
       dispatch(setEditCategory(false));
+      dispatch(setAddCategory(false));
    }
 
    const editNewCategory = (e: any) => {
