@@ -8,8 +8,9 @@ import { Categories } from '../../interfaces/Categories';
 interface InitialState {
    categoriesArray: object,
    correct:boolean,
-   editCategory:boolean,
-   addCategory: boolean
+   editingCategory:boolean,
+   addingCategory: boolean,
+   toAddNewCategory: boolean
 }
 
 interface Data {
@@ -20,8 +21,9 @@ interface Data {
 const initialState = {
    categoriesArray: [],
    correct: false,
-   editCategory: false,
-   addCategory: false
+   editingCategory: false,
+   addingCategory: false,
+   toAddNewCategory: false
 } as InitialState
 
 
@@ -49,11 +51,14 @@ export const categoriesSlice = createSlice({
       setCategories: (state, action : PayloadAction<Categories[]>) => {
          state.categoriesArray = action.payload;
       },
-      setEditCategory: (state, action : PayloadAction<boolean>) => {
-         state.editCategory = action.payload;
+      setEditingCategory: (state, action : PayloadAction<boolean>) => {
+         state.editingCategory = action.payload;
       },
-      setAddCategory: (state, action : PayloadAction<boolean>) => {
-         state.addCategory = action.payload;
+      setAddingCategory: (state, action : PayloadAction<boolean>) => {
+         state.addingCategory = action.payload;
+      },
+      setToAddNewCategory: (state, action : PayloadAction<boolean>) => {
+         state.toAddNewCategory = action.payload;
       },
    },
    extraReducers: (builder) => {
@@ -72,7 +77,7 @@ export const categoriesSlice = createSlice({
 },
 )
 
-export const { setCorrect, setCategories, setEditCategory, setAddCategory } = categoriesSlice.actions;
+export const { setCorrect, setCategories, setEditingCategory, setAddingCategory, setToAddNewCategory } = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;
 

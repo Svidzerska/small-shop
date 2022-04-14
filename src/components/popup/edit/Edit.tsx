@@ -10,7 +10,7 @@ import xmark from '../../../images/square-xmark-solid.svg';
 
 
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
-import { setCategories, setEditCategory } from "../../../features/products/categoriesSlice";
+import { setCategories, setEditingCategory } from "../../../features/products/categoriesSlice";
 
 import { Categories } from '../../../interfaces/Categories';
 
@@ -20,7 +20,7 @@ const Edit: React.FC = () => {
    const dispatch = useDispatch();
 
    const categories: Array<Categories> = useSelector((state: RootStateOrAny) => state.categories.categoriesArray);
-   const addCategoryFromStore:boolean = useSelector((state: RootStateOrAny) => state.categories.addCategory);
+   const addingCategoryFromStore:boolean = useSelector((state: RootStateOrAny) => state.categories.addingCategory);
 
 
    const [isActiveCategory, setIsActiveCategory] = useState<string>(categories[0]?.name);
@@ -29,26 +29,20 @@ const Edit: React.FC = () => {
    const [isInputValue, setIsInputValue] = useState<string>("");
 
 
-
-
    useEffect(() => {
       setIsActiveCategory(categories[0]?.name);
    }, [categories.length, categories]);
 
-   // useEffect(() => {
-   //    console.log(isInputValue);
-   // }, [isInputValue]);
-
 
    const editCategories = (e: React.MouseEvent<HTMLButtonElement>): void => {
       setIsActiveCategory(e.currentTarget.value);
-      dispatch(setEditCategory(false));
+      dispatch(setEditingCategory(false));
    }
 
    const editCurrentCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
       setIsEditCategory(e.currentTarget.id);
       setIsInputValue(e.currentTarget.id);
-      dispatch(setEditCategory(true));
+      dispatch(setEditingCategory(true));
    }
 
    const editInputCategory = (e: any): void => {
@@ -66,22 +60,22 @@ const Edit: React.FC = () => {
       categoriesInput[currentCategory] = {...categoriesInput[currentCategory], name: isInputValue};
       dispatch(setCategories(categoriesInput)); 
       setIsEditCategory("");
-      dispatch(setEditCategory(false));
+      dispatch(setEditingCategory(false));
    }
 
    const cancelEditCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
       setIsEditCategory("");
-      dispatch(setEditCategory(false));
+      dispatch(setEditingCategory(false));
    }
 
    const renderEditButtons = (category:Categories):JSX.Element => {
       return (
          <>
-            <button onClick={editCurrentCategory} id={category.name} disabled={!addCategoryFromStore ? false : true}>
-               <img className={!addCategoryFromStore ? '' : "unactivated"} src={pensil} alt="" />
+            <button onClick={editCurrentCategory} id={category.name} disabled={!addingCategoryFromStore ? false : true}>
+               <img className={!addingCategoryFromStore ? '' : "unactivated"} src={pensil} alt="" />
             </button>
-            <button onClick={deleteCategory} id={category.id} disabled={!addCategoryFromStore ? false : true}>
-               <img className={!addCategoryFromStore ? '' : "unactivated"} src={trash} alt="" />
+            <button onClick={deleteCategory} id={category.id} disabled={!addingCategoryFromStore ? false : true}>
+               <img className={!addingCategoryFromStore ? '' : "unactivated"} src={trash} alt="" />
             </button>
          </>
       )
@@ -111,7 +105,7 @@ const Edit: React.FC = () => {
                   <button onClick={editCategories}
                      className={isActiveCategory === category.name ? 'categories-name__button active' : 'categories-name__button'}
                      value={category.name}
-                     disabled={!addCategoryFromStore ? false : true}>
+                     disabled={!addingCategoryFromStore ? false : true}>
                      {isActiveCategory === isEditCategory && isActiveCategory === category.name ?
                         <input id={category.id} defaultValue={category.name} onChange={editInputCategory} className="inputForEdit" autoFocus/> :
                         category.name}

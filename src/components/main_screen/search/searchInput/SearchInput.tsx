@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import './searchInput.scss';
 import glass from '../../../../images/magnifying-glass-solid.svg';
 

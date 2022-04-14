@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import './search.scss';
 import sliders from '../../../images/sliders-solid.svg';
 import Filter from "../../popup/filter/Filter";
@@ -17,9 +17,6 @@ const Search : React.FC = () => {
       dispatch(setPopup(true));
    }
 
-   useEffect (() => {
-      console.log(isPopup);
-   }, [isPopup]);
 
    return (
       <section className="search-element">
