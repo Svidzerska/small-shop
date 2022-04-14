@@ -40,6 +40,7 @@ const Edit: React.FC = () => {
 
    const editCategories = (e: React.MouseEvent<HTMLButtonElement>): void => {
       setIsActiveCategory(e.currentTarget.value);
+      dispatch(setEditCategory(false));
    }
 
    const editCurrentCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
@@ -63,6 +64,7 @@ const Edit: React.FC = () => {
       categoriesInput[currentCategory] = {...categoriesInput[currentCategory], name: isInputValue};
       dispatch(setCategories(categoriesInput)); 
       setIsEditCategory("");
+      dispatch(setEditCategory(false));
    }
 
    const cancelEditCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {

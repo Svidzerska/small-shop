@@ -9,10 +9,12 @@ import info from '../../../images/info-solid.svg';
 import cross from '../../../images/xmark-solid.svg';
 import plus from '../../../images/plus-square-fill.svg';
 import check from '../../../images/square-check-solid.svg';
+import xmark from '../../../images/square-xmark-solid.svg';
+
 
 import { useDispatch, useSelector, RootStateOrAny} from 'react-redux';
 import { setPopup } from '../../../features/products/productSlice';
-import { setCorrect } from '../../../features/products/categoriesSlice';
+import { setCorrect, setCategories } from '../../../features/products/categoriesSlice';
 
 
 import { Categories } from '../../../interfaces/Categories';
@@ -28,6 +30,8 @@ const Filter:React.FC = () => {
 
 
    const [isActiveCategory, setIsActiveCategory] = useState<Array<string>>([]); 
+   const [isAddNewCategory, setIsAddNewCategory] = useState<boolean>(false);
+   const [isInputValue, setIsInputValue] = useState<string>("");
 
 
    useEffect(() => {
@@ -69,21 +73,45 @@ const Filter:React.FC = () => {
       dispatch(setCorrect(false));
    }
 
-   const unactivated = () => {
+   const addNewCategory = () => {
+      console.log("addNewCategory");
+      setIsAddNewCategory(true);
+   }
 
+   const doneNewCategory = () => {
+      console.log("doneNewCategory");
+      setIsAddNewCategory(false);
+   }
+
+   const doneInputNewCategory = () => {
+      console.log(isInputValue);
+      //dispatch setCategories (isInputValue);
+   }
+
+   const cancelInputNewCategory = () => {
+      setIsAddNewCategory(false);
+   }
+
+   const editNewCategory = (e: any) => {
+      setIsInputValue(e.currentTarget.value);
    }
 
  
    const buttonsEdit = ():JSX.Element => {
       return (
          <>
-            <button onClick={!editCategoryFromStore ? chooseAll : unactivated}
-             className={!editCategoryFromStore ? 'categories-change__buttonAll' : 'categories-change__buttonAll unactivated'} >All</button>
-             <button className={!editCategoryFromStore ? '' : 'unactivated'}>
-                <img src={plus} alt=""/>
+            <button onClick={chooseAll}
+               disabled={!editCategoryFromStore ? false : true}
+               className='categories-change__buttonAll'>All</button>
+            <button className={!editCategoryFromStore ? '' : "unactivated"}
+               onClick={addNewCategory}
+               disabled={!editCategoryFromStore ? false : true}>
+                  <img src={plus} alt="" />
             </button>
-             <button className={!editCategoryFromStore ? '' : 'unactivated'}>
-                <img src={check} alt=""/>
+            <button className={!editCategoryFromStore ? '' : "unactivated"}
+               onClick={doneNewCategory}
+               disabled={!editCategoryFromStore ? false : true}>
+                  <img src={check} alt="" />
             </button>
          </>
       )
@@ -107,13 +135,30 @@ const Filter:React.FC = () => {
       )
    })
 
-   const viewPopupCategories = ():JSX.Element => {
+
+   const renderPopupCategories = ():JSX.Element => {
       return (
       <div className='popup__categories-name'>
             <button onClick={chooseAll}
              className={isActiveCategory.length === 0 ? 'categories-name__button active' : 'categories-name__button'}>All</button>
             {displayCategories}
       </div>
+      )
+   }
+
+   const renderAddCategoryField = () => {
+      return (
+         <>
+            <button className='categories-name__button'>
+               <input defaultValue="New Category" onChange={editNewCategory} className="inputForEdit" autoFocus/> 
+            </button>
+            <button onClick={doneInputNewCategory}>
+               <img src={check} alt="" />
+            </button>
+            <button onClick={cancelInputNewCategory}>
+               <img src={xmark} alt="" />
+            </button>
+         </>
       )
    }
 
@@ -138,7 +183,8 @@ const Filter:React.FC = () => {
                <img src={info} alt="" />
             </p>
          </div>
-         {!toCorrect ? viewPopupCategories() : <Edit/>}
+         {isAddNewCategory ? renderAddCategoryField() : ""}
+         {!toCorrect ? renderPopupCategories() : <Edit/>}
       </div>
    )
 }
