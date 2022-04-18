@@ -5,13 +5,14 @@
    padding-bottom: 30px;
    display: flex;
    justify-content: space-between;
-   font-size: 30px;
-   line-height: 40px;
-   font-weight: 900;
+   // font-size: 30px;
+   // line-height: 40px;
+   // font-weight: 900;
    align-items: end;
 
-   p {
+   h1 {
       margin: 0;
+      font-weight: 900;
    }
 
    button {
@@ -22,7 +23,8 @@
       background: none;
       border: none;
 
-      img {
+      i {
+         display: inline-block;
          width: 30px;
          height: 30px;
       }

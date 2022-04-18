@@ -66,7 +66,7 @@ const Filter:React.FC = () => {
             <button onClick={!toCorrect ? closePopup : closeCorrection}>
                <img src={!toCorrect ? arrowRight : cross} alt="" />
             </button>
-            <p>Filter</p>
+            <h1>Filter</h1>
          </div>
          {toCorrect ? <div className='popup__comments'>
             <p>Categories editing</p>
@@ -96,7 +96,7 @@ const Filter:React.FC = () => {
       if (categoriesInput[0].name !== isInputValue &&
           categoriesInput[0].name !== "" &&
           isInputValue !== "") {
-         categoriesInput.unshift({id: `${Math.random()}`, name: isInputValue, warning: ""});
+         categoriesInput.unshift({id: `${Math.random()}`, name: isInputValue});
          dispatch(setCategories(categoriesInput));
       }
       dispatch(setAddingCategory(false));
@@ -211,8 +211,6 @@ const Filter:React.FC = () => {
    const displayCategories:JSX.Element[] = categories.map((category: Categories) => {
       return (
          <div key={category.id}>
-         {category.warning !== "" ?
-          <p className='category-warning'>{category.warning}</p> :
           <button
           onClick={chooseCategory}
           className={isActiveCategory.find(item => item === category.name)  ?
@@ -220,7 +218,7 @@ const Filter:React.FC = () => {
              'categories-name__button'}
           value={category.name}>
           {category.name}
-         </button>}
+         </button>
          </div>
       )
    })

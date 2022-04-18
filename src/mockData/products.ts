@@ -10,8 +10,7 @@ const products: Products[] = [
    picture: image1,
    price: "100.00",
    currency: "USD",
-   part: "item",
-   warning: ""
+   part: "item"
 },
 {
    id: "2b",
@@ -19,8 +18,7 @@ const products: Products[] = [
    picture: image2,
    price: "100.00",
    currency: "USD",
-   part: "piece",
-   warning: ""
+   part: "piece"
 },
 {
    id: "3c",
@@ -28,8 +26,7 @@ const products: Products[] = [
    picture: image2,
    price: "100.00",
    currency: "USD",
-   part: "item",
-   warning: ""
+   part: "item"
 },
 {
    id: "4d",
@@ -37,8 +34,7 @@ const products: Products[] = [
    picture: image2,
    price: "100.00",
    currency: "USD",
-   part: "piece",
-   warning: ""
+   part: "piece"
 }
 
 ]

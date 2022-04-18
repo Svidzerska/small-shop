@@ -9,13 +9,15 @@ import Cards from './components/main_screen/cards/Cards'
 
 
 function App() {
-  return (
-    <div className="App">
-      <Menu/>
-      <Search/>
-      <Cards/>
-    </div>
-  );
+   return (
+      <>
+         <Menu />
+         <main>
+            <Search />
+            <Cards />
+         </main>
+      </>
+   );
 }
 
 export default App;

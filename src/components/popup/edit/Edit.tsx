@@ -99,8 +99,6 @@ const Edit: React.FC = () => {
       return (
          <div key={category.id}
             className={isActiveCategory === category.name ? 'edit-component active' : 'edit-component'}>
-            {category.warning !== "" ?
-               <p className='category-warning'>{category.warning}</p> :
                <>
                   <button onClick={editCategories}
                      className={isActiveCategory === category.name ? 'categories-name__button active' : 'categories-name__button'}
@@ -115,7 +113,7 @@ const Edit: React.FC = () => {
                      renderDoneButtons(category) : 
                      renderEditButtons(category) : 
                       <></>}
-               </>}
+               </>
          </div>
       )
    })

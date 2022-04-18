@@ -16,7 +16,7 @@ interface InitialState {
 interface Data {
    data: Categories[]
 }
- 
+
 
 const initialState = {
    categoriesArray: [],
@@ -44,10 +44,10 @@ Data
 export const categoriesSlice = createSlice({
    name: 'categories',
    initialState,
-   reducers: { 
+   reducers: {
       setCorrect: (state, action : PayloadAction<boolean>) => {
          state.correct = action.payload;
-      }, 
+      },
       setCategories: (state, action : PayloadAction<Categories[]>) => {
          state.categoriesArray = action.payload;
       },
@@ -67,10 +67,10 @@ export const categoriesSlice = createSlice({
          state.categoriesArray = action.payload;
       });
       builder.addCase(getCategories.pending, (state) => {
-         state.categoriesArray = [{id:'00', warning:'please wait a moment'}];
+         // state.categoriesArray = [{id:'00', warning:'please wait a moment'}];
          console.log('pending')});
       builder.addCase(getCategories.rejected, (state) => {
-         state.categoriesArray = [];
+         // state.categoriesArray = [];
          console.log('rejected')
       })
    }

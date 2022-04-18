@@ -47,10 +47,10 @@ export const productSlice = createSlice({
          state.cardArray = action.payload;
       });
       builder.addCase(getProducts.pending, (state) => {
-         state.cardArray = [{id: "00", warning : 'please wait a moment'}];
+         // state.cardArray = [{id: "00", warning : 'please wait a moment'}];
          console.log('pending')});
       builder.addCase(getProducts.rejected, (state) => {
-         state.cardArray = [];
+         // state.cardArray = [];
          console.log('rejected')
       })
    }

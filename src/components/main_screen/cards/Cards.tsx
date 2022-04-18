@@ -19,14 +19,14 @@ const Cards:React.FC = () => {
 
    const displayCards:JSX.Element[] = cards.map((card: Products) => {
          return (
-         <div key={card.id} className="card">
-            <div className="card__image"><img src={card.picture} alt=""/></div>
-            <div className="card__name">{card.warning !== "" ? card.warning : card.name}</div>
+         <article key={card.id} className="card">
+            <p className="card__image"><img src={card.picture} alt=""/></p>
+            <h5 className="card__name">{card.name}</h5>
             <div className="card__price">
                <p>{card.currency} {card.price}</p>
                <p>{card.part}</p>
             </div>
-         </div>
+         </article>
       )
    })
 
@@ -49,18 +49,16 @@ const Cards:React.FC = () => {
 
 
    return (
-      <main className="cards-element">
-         <div className="cards-element__row">
-            <div className="cards-element__column">
-               {displayCardsOdd}
-               {cards.length % 2 === 0 ? renderAddCard() : <></>}
-            </div>
-            <div className="cards-element__column">
-               {displayCardsEven}
-               {cards.length % 2 !== 0 ? renderAddCard() : <></>}
-            </div>
+      <section className="cards-element__row">
+         <div className="cards-element__column">
+            {displayCardsOdd}
+            {cards.length % 2 === 0 ? renderAddCard() : <></>}
          </div>
-      </main>
+         <div className="cards-element__column">
+            {displayCardsEven}
+            {cards.length % 2 !== 0 ? renderAddCard() : <></>}
+         </div>
+      </section>
    )
 };
 

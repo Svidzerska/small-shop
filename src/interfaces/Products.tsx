@@ -4,6 +4,5 @@ export interface Products {
    picture: string,
    price: string,
    currency: string,
-   part: string,
-   warning: string
+   part: string
 }
