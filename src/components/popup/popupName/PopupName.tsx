@@ -1,15 +1,15 @@
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 
 import { setPopup } from "../../../features/products/productSlice";
-import { setCorrect,
-    setToAddNewCategory,
-     setEditingCategory,
-      setAddingCategory } from "../../../features/products/categoriesSlice";
+import {
+   setCorrect,
+   setToAddNewCategory,
+   setEditingCategory,
+   setAddingCategory
+} from "../../../features/products/categoriesSlice";
 
 import arrowRight from '../../../images/arrow-left-solid.svg';
 import cross from '../../../images/xmark-solid.svg';
-
-
 
 
 export const PopupName : React.FC = (): JSX.Element => {
@@ -39,7 +39,7 @@ const closeCorrection = ():void => {
          </div>
          {toCorrect ? <div className='popup__comments'>
             <p>Categories editing</p>
-         </div> : <></>}
+         </div> : null}
       </>
    )
 }

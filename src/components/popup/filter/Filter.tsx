@@ -25,6 +25,7 @@ import {
 import { Categories } from '../../../interfaces/Categories';
 
 import { PopupName } from '../popupName/PopupName';
+import { PopupCategories } from '../popupCategories/popupCategories';
 
 
 
@@ -37,15 +38,8 @@ const Filter:React.FC = () => {
    const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
 
 
-   const [isActiveCategory, setIsActiveCategory] = useState<Array<string>>([]);    
    const [isInputValue, setIsInputValue] = useState<string>("");
 
-
-   useEffect(() => {
-      if (isActiveCategory.length === categories.length) {
-         setIsActiveCategory([]);
-      }
-   }, [isActiveCategory.length]);
 
 
    //////
@@ -160,65 +154,12 @@ const Filter:React.FC = () => {
       )
    }
 
-   //////
-
-   const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>):void => {
-      const currentActiveCategory:string[] = [...isActiveCategory];
-      const currentIndex:number = currentActiveCategory.findIndex((item => item === e.currentTarget.value));
-      
-
-      if (currentIndex !== -1) {
-         setIsActiveCategory((arr) => {
-            const elementDeleteCategory:string[] = [...arr]
-            elementDeleteCategory.splice(currentIndex,1,);
-            return elementDeleteCategory;
-         }); 
-      } else {
-         const currentTargetValue:string = e.currentTarget.value;
-         setIsActiveCategory(arr => [...arr, `${currentTargetValue}`]);
-      }
-   }
-
-
-   const displayCategories:JSX.Element[] = categories.map((category: Categories) => {
-      return (
-         <div key={category.id}>
-          <button
-          onClick={chooseCategory}
-          className={isActiveCategory.find(item => item === category.name)  ?
-             'categories-name__button active' :
-             'categories-name__button'}
-          value={category.name}>
-          {category.name}
-         </button>
-         </div>
-      )
-   })
-
-   //////
-
-   const chooseAll = ():void => {
-      setIsActiveCategory([]);
-   }
-
-   const renderPopupCategories = ():JSX.Element => {
-      return (
-      <div className='popup__categories-name'>
-            <button onClick={chooseAll}
-             className={isActiveCategory.length === 0 ? 'categories-name__button active' : 'categories-name__button'}>All</button>
-            {displayCategories}
-      </div>
-      )
-   }
-
-
-
    return (
       <div className="popup">
          <PopupName/>
          {renderPopupCategoriesChanging()}
          {isAddNewCategory ? renderAddCategoryField() : ""}
-         {!toCorrect ? renderPopupCategories() : <Edit/>}
+         {!toCorrect ? <PopupCategories/> : <Edit/>}
       </div>
    )
 }
