@@ -4,10 +4,11 @@ import { useSelector, RootStateOrAny} from 'react-redux';
 import { Categories } from '../../../interfaces/Categories';
 
 
-export const PopupCategories = (props:any) : JSX.Element => {
-   console.log(props.categories);
+interface Props {
+   categories: Categories[];
+}
 
-   // const categories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
+export const PopupCategories: React.FC<Props> = (props):JSX.Element => {
    const [isActiveCategory, setIsActiveCategory] = useState<Array<string>>([]);  
 
    const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>):void => {
