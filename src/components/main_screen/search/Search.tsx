@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import './search.scss';
 import sliders from '../../../images/sliders-solid.svg';
-import Filter from "../../popup/filter/Filter";
+import Popup from "../../popup/Popup";
 
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { setPopup } from "../../../features/products/productSlice";
@@ -24,7 +24,7 @@ const Search : React.FC = () => {
          <button className="search-element__button-sliders" onClick={showPopup}>
             <img src={sliders} alt=""/>
          </button>
-         {isPopup ? <Filter/> : ""}
+         {isPopup ? <Popup/> : ""}
       </section>
    ) 
 };
