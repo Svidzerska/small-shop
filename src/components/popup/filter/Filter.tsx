@@ -159,7 +159,7 @@ const Filter:React.FC = () => {
          <PopupName/>
          {renderPopupCategoriesChanging()}
          {isAddNewCategory ? renderAddCategoryField() : ""}
-         {!toCorrect ? <PopupCategories/> : <Edit/>}
+         {!toCorrect ? <PopupCategories categories={categories}/> : <Edit/>}
       </div>
    )
 }

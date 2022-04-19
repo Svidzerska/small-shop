@@ -4,9 +4,10 @@ import { useSelector, RootStateOrAny} from 'react-redux';
 import { Categories } from '../../../interfaces/Categories';
 
 
-export const PopupCategories: React.FC = ():JSX.Element => {
+export const PopupCategories = (props:any) : JSX.Element => {
+   console.log(props.categories);
 
-   const categories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
+   // const categories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
    const [isActiveCategory, setIsActiveCategory] = useState<Array<string>>([]);  
 
    const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>):void => {
@@ -26,9 +27,9 @@ export const PopupCategories: React.FC = ():JSX.Element => {
       }
    }
 
-   const displayCategories: JSX.Element[] = categories.map((category: Categories) => {
+   const displayCategories: JSX.Element[] = props.categories.map((category: Categories) => {
       return (
-         <div key={category.id}>
+         <li key={category.id}>
             <button
                onClick={chooseCategory}
                className={isActiveCategory.find(item => item === category.name) ?
@@ -37,7 +38,7 @@ export const PopupCategories: React.FC = ():JSX.Element => {
                value={category.name}>
                {category.name}
             </button>
-         </div>
+         </li>
       )
    })
 
@@ -46,10 +47,12 @@ export const PopupCategories: React.FC = ():JSX.Element => {
    }
    
    return (
-   <div className='popup__categories-name'>
-         <button onClick={chooseAll}
-            className={isActiveCategory.length === 0 ? 'categories-name__button active' : 'categories-name__button'}>All</button>
+      <ul className='popup__categories-name'>
+         <li>
+            <button onClick={chooseAll}
+               className={isActiveCategory.length === 0 ? 'categories-name__button active' : 'categories-name__button'}>All</button>
+         </li>
          {displayCategories}
-   </div>
+      </ul>
    )
 }
