@@ -3,17 +3,16 @@ import './filter.scss';
 
 import Edit from '../edit/Edit';
 
-import arrowRight from '../../../images/arrow-left-solid.svg';
+
 import pensil from '../../../images/square-pen-solid.svg';
 import info from '../../../images/info-solid.svg';
-import cross from '../../../images/xmark-solid.svg';
 import plus from '../../../images/plus-square-fill.svg';
 import check from '../../../images/square-check-solid.svg';
 import xmark from '../../../images/square-xmark-solid.svg';
 
 
 import { useDispatch, useSelector, RootStateOrAny} from 'react-redux';
-import { setPopup } from '../../../features/products/productSlice';
+
 import {
    setCorrect,
    setCategories,
@@ -24,6 +23,8 @@ import {
 
 
 import { Categories } from '../../../interfaces/Categories';
+
+import { PopupName } from '../popupName/PopupName';
 
 
 
@@ -49,35 +50,6 @@ const Filter:React.FC = () => {
 
    //////
 
-   const closePopup = () => {
-      dispatch(setPopup(false));
-   }
-
-   const closeCorrection = ():void => {
-      dispatch(setCorrect(false));
-      dispatch(setToAddNewCategory(false));
-      dispatch(setEditingCategory(false));
-      dispatch(setAddingCategory(false));
-   }
-
-   const renderPopupName = (): JSX.Element => {
-      return (<>
-         <div className='popup__name'>
-            <button onClick={!toCorrect ? closePopup : closeCorrection}>
-               <img src={!toCorrect ? arrowRight : cross} alt="" />
-            </button>
-            <h1>Filter</h1>
-         </div>
-         {toCorrect ? <div className='popup__comments'>
-            <p>Categories editing</p>
-         </div> : <></>}
-      </>
-      )
-   }
-
-
-   //////
-
    const chooseAllFirstButton = ():void => {
       console.log(categories);
    }
@@ -95,7 +67,7 @@ const Filter:React.FC = () => {
 
       if (categoriesInput[0].name !== isInputValue &&
           categoriesInput[0].name !== "" &&
-          isInputValue !== "") {
+          isInputValue !== "") { //isInputValueAsProps
          categoriesInput.unshift({id: `${Math.random()}`, name: isInputValue});
          dispatch(setCategories(categoriesInput));
       }
@@ -243,7 +215,7 @@ const Filter:React.FC = () => {
 
    return (
       <div className="popup">
-         {renderPopupName()}
+         <PopupName/>
          {renderPopupCategoriesChanging()}
          {isAddNewCategory ? renderAddCategoryField() : ""}
          {!toCorrect ? renderPopupCategories() : <Edit/>}
