@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './popupAddAndEditBlock.scss';
 
 import check from '../../../images/square-check-solid.svg';
@@ -6,9 +6,11 @@ import xmark from '../../../images/square-xmark-solid.svg';
 
 
 import { useDispatch, useSelector, RootStateOrAny} from 'react-redux';
+import { Categories } from '../../../interfaces/Categories';
 
 import {
-   setToAddNewCategory
+   setToAddNewCategory, 
+   setTemporaryCategories
 } from '../../../features/products/categoriesSlice';
 
 
@@ -22,6 +24,13 @@ const PopupAddAndEditBlock:React.FC = () => {
    const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
    const [isInputValue, setIsInputValue] = useState<string>("New Category");
    
+   const temporaryCategories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
+   
+
+   // set New Category after canceling of editing
+   useEffect(() => {
+      setIsInputValue("New Category");
+   }, [isAddNewCategory]);
 
    const selectRange = (e:any):void => {
       e.currentTarget.setSelectionRange(0,e.currentTarget.value.length,);
@@ -32,14 +41,20 @@ const PopupAddAndEditBlock:React.FC = () => {
    }
 
    const doneInputNewCategory = ():void => {
-      if (isInputValue === "") {
-         setIsInputValue("New Category");
+      
+      const existingCategories = [...temporaryCategories];
+      if (isInputValue !== "") {
+         existingCategories.unshift({id: `${Math.random()}`, name: isInputValue})
       }
+
+      dispatch(setTemporaryCategories(existingCategories));
       dispatch(setToAddNewCategory(false));
+      setIsInputValue("New Category");
    }
 
    const cancelInputNewCategory = ():void => {
       dispatch(setToAddNewCategory(false));
+      setIsInputValue("New Category");
    }
 
    const renderAddCategoryField = () => {

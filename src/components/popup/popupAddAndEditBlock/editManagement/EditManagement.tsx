@@ -8,7 +8,7 @@ import check from '../../../../images/square-check-solid.svg';
 
 
 import { setCorrect } from "../../../../features/products/categoriesSlice";
-import { setToAddNewCategory, setCategories } from "../../../../features/products/categoriesSlice";
+import { setToAddNewCategory, setCategories, setTemporaryCategories} from "../../../../features/products/categoriesSlice";
 import { Categories } from "../../../../interfaces/Categories";
 
 
@@ -26,19 +26,17 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
 
 
    const categories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
+   const temporaryCategories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
 
 
    useEffect(() => {
-      console.log(isAddNewCategory);
-      console.log(isAddNewCategory || editingCurrentCategory);
+      console.log(isAddNewCategory || editingCurrentCategory)
    }, [isAddNewCategory]);
 
    useEffect(() => {
       console.log(editingCurrentCategory);
-      console.log(isAddNewCategory || editingCurrentCategory);
+      console.log(isAddNewCategory || editingCurrentCategory)
    }, [editingCurrentCategory]);
-
-
 
    const chooseAllFirstButton = ():void => {
       console.log(categories);
@@ -50,15 +48,8 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
 
    const doneNewCategory = ():void => {
       dispatch(setToAddNewCategory(false));
-
-      const categoriesInput = [...categories];
-
-      if (categoriesInput[0].name !== props.inputValue &&
-          categoriesInput[0].name !== "" &&
-          props.inputValue !== "") {
-         categoriesInput.unshift({id: `${Math.random()}`, name: props.inputValue});
-         dispatch(setCategories(categoriesInput));
-      }
+      dispatch(setCategories([...temporaryCategories]));
+      alert('Your changes were saved');
    }
 
 
@@ -84,6 +75,7 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
 
    const handleCorrect = ():void => {
       dispatch(setCorrect(true));
+      dispatch(setTemporaryCategories([...categories]));
    }
 
    const buttonToEdit = (): JSX.Element => {

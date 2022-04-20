@@ -7,6 +7,7 @@ import { Categories } from '../../interfaces/Categories';
 
 interface InitialState {
    categoriesArray: object,
+   categoriesTemporaryArray: object,
    correct:boolean,
    editingCategory:boolean,
    toAddNewCategory: boolean
@@ -19,6 +20,7 @@ interface Data {
 
 const initialState = {
    categoriesArray: [],
+   categoriesTemporaryArray: [],
    correct: false,
    editingCategory: false,
    toAddNewCategory: false
@@ -32,7 +34,6 @@ Data
    'categories/getCategories',
    async () => {
       return Api.getCategories()?.then(data => {
-         console.log(data);
          return data;  //payload - data
       }) as Promise<Data>;
    },
@@ -49,6 +50,9 @@ export const categoriesSlice = createSlice({
       setCategories: (state, action : PayloadAction<Categories[]>) => {
          state.categoriesArray = action.payload;
       },
+      setTemporaryCategories: (state, action : PayloadAction<Categories[]>) => {
+         state.categoriesTemporaryArray = action.payload;
+      },
       setEditingCategory: (state, action : PayloadAction<boolean>) => {
          state.editingCategory = action.payload;
       },
@@ -58,7 +62,6 @@ export const categoriesSlice = createSlice({
    },
    extraReducers: (builder) => {
       builder.addCase(getCategories.fulfilled, (state, action) => {
-         console.log(action.payload);
          state.categoriesArray = action.payload;
       });
       builder.addCase(getCategories.pending, (state) => {
@@ -69,7 +72,11 @@ export const categoriesSlice = createSlice({
 },
 )
 
-export const { setCorrect, setCategories, setEditingCategory, setToAddNewCategory } = categoriesSlice.actions;
+export const { setCorrect,
+   setCategories,
+   setTemporaryCategories,
+   setEditingCategory,
+   setToAddNewCategory } = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;
 

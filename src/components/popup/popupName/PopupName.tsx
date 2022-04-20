@@ -3,6 +3,7 @@ import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { setPopup } from "../../../features/products/productSlice";
 import {
    setCorrect,
+   setEditingCategory,
    setToAddNewCategory
 } from "../../../features/products/categoriesSlice";
 
@@ -22,6 +23,7 @@ const closePopup = () => {
 const closeCorrection = ():void => {
    dispatch(setCorrect(false));
    dispatch(setToAddNewCategory(false));
+   dispatch(setEditingCategory(false));
 }
 
 

@@ -7,15 +7,8 @@ import { Products } from "../../../interfaces/Products";
 
 
 const Cards:React.FC = () => {
-
-   const dispatch = useDispatch();
-
+   
    const cards:Products[] = useSelector((state : RootStateOrAny) => state.products.cardArray);
-
-   useEffect(() => {
-      console.log(cards);
-   }, [cards]);
-
 
    const displayCards:JSX.Element[] = cards.map((card: Products) => {
          return (

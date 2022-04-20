@@ -10,7 +10,7 @@ import xmark from '../../../images/square-xmark-solid.svg';
 
 
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
-import { setCategories, setEditingCategory } from "../../../features/products/categoriesSlice";
+import { setTemporaryCategories, setEditingCategory } from "../../../features/products/categoriesSlice";
 
 import { Categories } from '../../../interfaces/Categories';
 
@@ -19,25 +19,24 @@ import { Categories } from '../../../interfaces/Categories';
 const PopupEditCategories: React.FC = ():JSX.Element => {
    const dispatch = useDispatch();
 
-   const categories: Array<Categories> = useSelector((state: RootStateOrAny) => state.categories.categoriesArray);
+   const temporaryCategories: Array<Categories> = useSelector((state: RootStateOrAny) => state.categories.categoriesTemporaryArray);
    const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
 
 
-   const [isActiveCategory, setIsActiveCategory] = useState<string>(categories[0]?.name);
+   const [isActiveCategory, setIsActiveCategory] = useState<string>(temporaryCategories[0]?.name);
    const [isEditCategory, setIsEditCategory] = useState<string>("");
 
    const [isInputValue, setIsInputValue] = useState<string>("");
 
 
    useEffect(() => {
-      setIsActiveCategory(categories[0]?.name);
-   }, [categories.length, categories]);
+      setIsActiveCategory(temporaryCategories[0]?.name);
+   }, [temporaryCategories.length, temporaryCategories]);
 
 
 
    const editCategories = (e: React.MouseEvent<HTMLButtonElement>): void => {
       setIsActiveCategory(e.currentTarget.value);
-      dispatch(setEditingCategory(false));
    }
 
    const editCurrentCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
@@ -51,16 +50,15 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
    }
 
    const deleteCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
-      const currentCategories = [...categories];
-      dispatch(setCategories(currentCategories.filter((item) => item.id !== e.currentTarget.id)));
-      dispatch(setEditingCategory(false));
+      const currentCategories = [...temporaryCategories];
+      dispatch(setTemporaryCategories(currentCategories.filter((item) => item.id !== e.currentTarget.id)));
    }
 
    const doneInputCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
-      const categoriesInput = [...categories];
+      const categoriesInput = [...temporaryCategories];
       const currentCategory = categoriesInput.findIndex((item) => item.name === e.currentTarget.id);
       categoriesInput[currentCategory] = {...categoriesInput[currentCategory], name: isInputValue};
-      dispatch(setCategories(categoriesInput)); 
+      dispatch(setTemporaryCategories(categoriesInput)); 
       setIsEditCategory("");
       dispatch(setEditingCategory(false));
    }
@@ -97,7 +95,7 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
    }
 
 
-   const displayCategories: JSX.Element[] = categories.map((category: Categories) => {
+   const displayCategories: JSX.Element[] = temporaryCategories.map((category: Categories) => {
       return (
          <div key={category.id}
             className={isActiveCategory === category.name ? 'edit-component active' : 'edit-component'}>

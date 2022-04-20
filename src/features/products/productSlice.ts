@@ -26,7 +26,6 @@ Data
    'products/getProducts',
    async () => {
       return Api.getProducts()?.then(data => {
-         console.log(data);
          return data;  //payload - data
       }) as Promise<Data>;
    },
@@ -43,14 +42,11 @@ export const productSlice = createSlice({
    },
    extraReducers: (builder) => {
       builder.addCase(getProducts.fulfilled, (state, action) => {
-         console.log(action.payload);
          state.cardArray = action.payload;
       });
       builder.addCase(getProducts.pending, (state) => {
-         // state.cardArray = [{id: "00", warning : 'please wait a moment'}];
          console.log('pending')});
       builder.addCase(getProducts.rejected, (state) => {
-         // state.cardArray = [];
          console.log('rejected')
       })
    }
