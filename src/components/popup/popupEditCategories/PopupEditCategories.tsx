@@ -15,7 +15,6 @@ import { setTemporaryCategories, setEditingCategory } from "../../../features/pr
 import { Categories } from '../../../interfaces/Categories';
 
 
-
 const PopupEditCategories: React.FC = ():JSX.Element => {
    const dispatch = useDispatch();
 
@@ -23,48 +22,44 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
    const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
 
 
-   // const [isActiveCategory, setIsActiveCategory] = useState<string>(temporaryCategories[0]?.name);
    const [isActiveCategories, setIsActiveCategories] = useState<Array<string>>([temporaryCategories[0]?.name]);  
-
    const [isEditCategory, setIsEditCategory] = useState<string>("");
    const [isInputValue, setIsInputValue] = useState<string>("");
 
-
    useEffect(() => {
-      setIsActiveCategories([temporaryCategories[0]?.name]);
-   }, [temporaryCategories.length, temporaryCategories]);
-
+      console.log(isActiveCategories);
+   }, [isActiveCategories]);
 
 
    const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>):void => {
-      const currentActiveCategories:string[] = [...isActiveCategories];
-      const targetValue:string = e.currentTarget.value;
-      console.log(e.currentTarget.value);
+      console.log(isEditCategory);
+      console.log(e.currentTarget.id);
 
-      const checkActiveCategory = currentActiveCategories.includes(e.currentTarget.value);
 
-      if (checkActiveCategory) {
-         setIsActiveCategories(() => {
-            const categoriesWithoutDeleteElement:string[] = currentActiveCategories.filter(item => item !== targetValue);
-            return categoriesWithoutDeleteElement;
-         });
-      } else {
-         setIsActiveCategories(arr => [...arr, `${targetValue}`]);
+      if (isEditCategory !== e.currentTarget.id) {
+         const currentActiveCategories:string[] = [...isActiveCategories];
+         const targetValue:string = e.currentTarget.value;
+         console.log(e.currentTarget.value);
+
+         const checkActiveCategory = currentActiveCategories.includes(e.currentTarget.value);
+
+            if (checkActiveCategory) {
+               setIsActiveCategories(() => {
+                  const categoriesWithoutDeleteElement:string[] = currentActiveCategories.filter(item => item !== targetValue);
+                  return categoriesWithoutDeleteElement;
+               });
+            } else {
+               setIsActiveCategories(arr => [...arr, `${targetValue}`]);
+            }
+
+      dispatch(setEditingCategory(false));
       }
    }
 
-   // const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
-   //    if (isActiveCategory !== e.currentTarget.value) {
-   //       dispatch(setEditingCategory(false));
-   //    }
-   //    setIsActiveCategory(e.currentTarget.value);
-   // }
+
 
    const editCurrentCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
-      console.log(e.currentTarget);
-
       setIsEditCategory(e.currentTarget.id);
-
       setIsInputValue(e.currentTarget.id);
       dispatch(setEditingCategory(true));
    }
@@ -76,16 +71,27 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
    const deleteCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
       const currentCategories = [...temporaryCategories];
       dispatch(setTemporaryCategories(currentCategories.filter((item) => item.id !== e.currentTarget.id)));
+      
+      const deleteCategory = currentCategories.find((item) => item.id === e.currentTarget.id);
+      setIsActiveCategories(isActiveCategories.filter((item) => item !== deleteCategory?.name));
    }
 
    const doneInputCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
       const categoriesInput = [...temporaryCategories];
       const currentCategory = categoriesInput.findIndex((item) => item.id === e.currentTarget.id);
+      const indexActiveCategory = isActiveCategories.findIndex((item) => item === categoriesInput[currentCategory].name);
+      
       categoriesInput[currentCategory] = {...categoriesInput[currentCategory], name: isInputValue};
       dispatch(setTemporaryCategories(categoriesInput)); 
       
       setIsEditCategory("");
       dispatch(setEditingCategory(false));
+
+      setIsActiveCategories((arr) => {
+         const updateArr = [...arr];
+         updateArr.splice(indexActiveCategory,1,isInputValue);
+         return updateArr;
+      })
    }
 
    const cancelEditCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
@@ -94,7 +100,6 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
    }
 
    const renderEditButtons = (category:Categories):JSX.Element => {
-      console.log(category.id);
       return (
          <>
             <button onClick={editCurrentCategory} id={category.id} disabled={isAddNewCategory}>
@@ -129,7 +134,8 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
                   <button onClick={chooseCategory}
                      className={isActiveCategories.find(item => item === category.name) ? 'categories-name__button active' : 'categories-name__button'}
                      value={category.name}
-                     disabled={isAddNewCategory}>
+                     disabled={isAddNewCategory}
+                     id={category.id}>
                      {isEditCategory === category.id ?
                         <input id={category.id} defaultValue={category.name} onChange={editInputCategory} className="inputForEdit" autoFocus/> :
                         category.name}
