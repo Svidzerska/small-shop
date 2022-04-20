@@ -29,14 +29,14 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
    const temporaryCategories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
 
 
-   useEffect(() => {
-      console.log(isAddNewCategory || editingCurrentCategory)
-   }, [isAddNewCategory]);
+   // useEffect(() => {
+   //    console.log(isAddNewCategory || editingCurrentCategory)
+   // }, [isAddNewCategory]);
 
-   useEffect(() => {
-      console.log(editingCurrentCategory);
-      console.log(isAddNewCategory || editingCurrentCategory)
-   }, [editingCurrentCategory]);
+   // useEffect(() => {
+   //    console.log(editingCurrentCategory);
+   //    console.log(isAddNewCategory || editingCurrentCategory)
+   // }, [editingCurrentCategory]);
 
    const chooseAllFirstButton = ():void => {
       console.log(categories);

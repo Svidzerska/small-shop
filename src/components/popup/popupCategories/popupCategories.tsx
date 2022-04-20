@@ -9,22 +9,22 @@ interface Props {
 }
 
 export const PopupCategories: React.FC<Props> = (props):JSX.Element => {
-   const [isActiveCategory, setIsActiveCategory] = useState<Array<string>>([]);  
+   const [isActiveCategories, setIsActiveCategories] = useState<Array<string>>([]);  
 
    const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>):void => {
-      const currentActiveCategory:string[] = [...isActiveCategory];
+      const currentActiveCategories:string[] = [...isActiveCategories];
       const targetValue:string = e.currentTarget.value;
 
-      const checkActiveCategory = currentActiveCategory.includes(e.currentTarget.value);
+      const checkActiveCategory = currentActiveCategories.includes(e.currentTarget.value);
 
       if (checkActiveCategory) {
-         setIsActiveCategory((arr) => {
-            const elementDeleteCategory:string[] = [...arr];
-            const categoriesWithoutDeleteElement:string[] = elementDeleteCategory.filter(item => item !== targetValue);
+         setIsActiveCategories((arr) => {
+            // const elementDeleteCategory:string[] = [...arr];
+            const categoriesWithoutDeleteElement:string[] = currentActiveCategories.filter(item => item !== targetValue);
             return categoriesWithoutDeleteElement;
          }); 
       } else {
-         setIsActiveCategory(arr => [...arr, `${targetValue}`]);
+         setIsActiveCategories(arr => [...arr, `${targetValue}`]);
       }
    }
 
@@ -33,7 +33,7 @@ export const PopupCategories: React.FC<Props> = (props):JSX.Element => {
          <li key={category.id}>
             <button
                onClick={chooseCategory}
-               className={isActiveCategory.find(item => item === category.name) ?
+               className={isActiveCategories.find(item => item === category.name) ?
                   'categories-name__button active' :
                   'categories-name__button'}
                value={category.name}>
@@ -44,14 +44,14 @@ export const PopupCategories: React.FC<Props> = (props):JSX.Element => {
    })
 
    const chooseAll = ():void => {
-      setIsActiveCategory([]);
+      setIsActiveCategories([]);
    }
    
    return (
       <ul className='popup__categories-name'>
          <li>
             <button onClick={chooseAll}
-               className={isActiveCategory.length === 0 ? 'categories-name__button active' : 'categories-name__button'}>All</button>
+               className={isActiveCategories.length === 0 ? 'categories-name__button active' : 'categories-name__button'}>All</button>
          </li>
          {displayCategories}
       </ul>

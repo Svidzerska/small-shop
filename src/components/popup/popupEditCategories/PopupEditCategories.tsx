@@ -23,24 +23,48 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
    const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
 
 
-   const [isActiveCategory, setIsActiveCategory] = useState<string>(temporaryCategories[0]?.name);
-   const [isEditCategory, setIsEditCategory] = useState<string>("");
+   // const [isActiveCategory, setIsActiveCategory] = useState<string>(temporaryCategories[0]?.name);
+   const [isActiveCategories, setIsActiveCategories] = useState<Array<string>>([temporaryCategories[0]?.name]);  
 
+   const [isEditCategory, setIsEditCategory] = useState<string>("");
    const [isInputValue, setIsInputValue] = useState<string>("");
 
 
    useEffect(() => {
-      setIsActiveCategory(temporaryCategories[0]?.name);
+      setIsActiveCategories([temporaryCategories[0]?.name]);
    }, [temporaryCategories.length, temporaryCategories]);
 
 
 
-   const editCategories = (e: React.MouseEvent<HTMLButtonElement>): void => {
-      setIsActiveCategory(e.currentTarget.value);
+   const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>):void => {
+      const currentActiveCategories:string[] = [...isActiveCategories];
+      const targetValue:string = e.currentTarget.value;
+      console.log(e.currentTarget.value);
+
+      const checkActiveCategory = currentActiveCategories.includes(e.currentTarget.value);
+
+      if (checkActiveCategory) {
+         setIsActiveCategories(() => {
+            const categoriesWithoutDeleteElement:string[] = currentActiveCategories.filter(item => item !== targetValue);
+            return categoriesWithoutDeleteElement;
+         });
+      } else {
+         setIsActiveCategories(arr => [...arr, `${targetValue}`]);
+      }
    }
 
+   // const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
+   //    if (isActiveCategory !== e.currentTarget.value) {
+   //       dispatch(setEditingCategory(false));
+   //    }
+   //    setIsActiveCategory(e.currentTarget.value);
+   // }
+
    const editCurrentCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
+      console.log(e.currentTarget);
+
       setIsEditCategory(e.currentTarget.id);
+
       setIsInputValue(e.currentTarget.id);
       dispatch(setEditingCategory(true));
    }
@@ -56,9 +80,10 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
 
    const doneInputCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
       const categoriesInput = [...temporaryCategories];
-      const currentCategory = categoriesInput.findIndex((item) => item.name === e.currentTarget.id);
+      const currentCategory = categoriesInput.findIndex((item) => item.id === e.currentTarget.id);
       categoriesInput[currentCategory] = {...categoriesInput[currentCategory], name: isInputValue};
       dispatch(setTemporaryCategories(categoriesInput)); 
+      
       setIsEditCategory("");
       dispatch(setEditingCategory(false));
    }
@@ -69,12 +94,13 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
    }
 
    const renderEditButtons = (category:Categories):JSX.Element => {
+      console.log(category.id);
       return (
          <>
-            <button onClick={editCurrentCategory} id={category.name} disabled={!isAddNewCategory ? false : true}>
+            <button onClick={editCurrentCategory} id={category.id} disabled={isAddNewCategory}>
                <img className={!isAddNewCategory ? '' : "unactivated"} src={pensil} alt="" />
             </button>
-            <button onClick={deleteCategory} id={category.id} disabled={!isAddNewCategory ? false : true}>
+            <button onClick={deleteCategory} id={category.id} disabled={isAddNewCategory}>
                <img className={!isAddNewCategory ? '' : "unactivated"} src={trash} alt="" />
             </button>
          </>
@@ -84,7 +110,7 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
    const renderDoneButtons = (category:Categories):JSX.Element => {
       return (
          <>
-            <button onClick={doneInputCategory} id={category.name}>
+            <button onClick={doneInputCategory} id={category.id}>
                <img src={check} alt="" />
             </button>
             <button onClick={cancelEditCategory} id={category.id} >
@@ -98,21 +124,21 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
    const displayCategories: JSX.Element[] = temporaryCategories.map((category: Categories) => {
       return (
          <div key={category.id}
-            className={isActiveCategory === category.name ? 'edit-component active' : 'edit-component'}>
+            className={isActiveCategories.find(item => item === category.name) ? 'edit-component active' : 'edit-component'}>
                <>
-                  <button onClick={editCategories}
-                     className={isActiveCategory === category.name ? 'categories-name__button active' : 'categories-name__button'}
+                  <button onClick={chooseCategory}
+                     className={isActiveCategories.find(item => item === category.name) ? 'categories-name__button active' : 'categories-name__button'}
                      value={category.name}
                      disabled={isAddNewCategory}>
-                     {isActiveCategory === isEditCategory && isActiveCategory === category.name ?
+                     {isEditCategory === category.id ?
                         <input id={category.id} defaultValue={category.name} onChange={editInputCategory} className="inputForEdit" autoFocus/> :
                         category.name}
                   </button>
-                  {isActiveCategory === category.name ? 
-                  isEditCategory !== "" && isEditCategory === category.name ? 
+                  {isActiveCategories.find(item => item === category.name) ? 
+                  (isEditCategory !== "" && isEditCategory === category.id ? 
                      renderDoneButtons(category) : 
-                     renderEditButtons(category) : 
-                      <></>}
+                     renderEditButtons(category)) : 
+                      null}
                </>
          </div>
       )

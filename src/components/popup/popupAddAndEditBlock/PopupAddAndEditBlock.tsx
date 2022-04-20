@@ -43,7 +43,7 @@ const PopupAddAndEditBlock:React.FC = () => {
    const doneInputNewCategory = ():void => {
       
       const existingCategories = [...temporaryCategories];
-      if (isInputValue !== "") {
+      if (isInputValue !== "" && isInputValue !== "New Category") {
          existingCategories.unshift({id: `${Math.random()}`, name: isInputValue})
       }
 
