@@ -1,19 +1,12 @@
 import React from 'react';
-
-import Edit from './edit/Edit';
-
-
-
 import {useSelector, RootStateOrAny} from 'react-redux';
 
-
-
-
 import { Categories } from '../../interfaces/Categories';
-import PopupAddAndEditBlock from './popupAddAndEditBlock/PopupAddAndEditBlock';
 
+import PopupAddAndEditBlock from './popupAddAndEditBlock/PopupAddAndEditBlock';
 import { PopupName } from './popupName/PopupName';
 import { PopupCategories } from './popupCategories/popupCategories';
+import PopupEditCategories from './popupEditCategories/PopupEditCategories';
 
 
 
@@ -26,7 +19,7 @@ const Popup:React.FC = () => {
       <div className="popup">
          <PopupName/>
          <PopupAddAndEditBlock/>
-         {!toCorrect ? <PopupCategories categories={categories}/> : <Edit/>}
+         {!toCorrect ? <PopupCategories categories={categories}/> : <PopupEditCategories/>}
       </div>
    )
 }

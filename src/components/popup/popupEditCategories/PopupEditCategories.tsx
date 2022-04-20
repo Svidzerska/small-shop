@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './edit.scss';
+import './popupEditCategories.scss';
 
 import pensil from '../../../images/square-pen-solid.svg';
 import trash from '../../../images/trash-can-solid.svg';
@@ -16,7 +16,7 @@ import { Categories } from '../../../interfaces/Categories';
 
 
 
-const Edit: React.FC = () => {
+const PopupEditCategories: React.FC = ():JSX.Element => {
    const dispatch = useDispatch();
 
    const categories: Array<Categories> = useSelector((state: RootStateOrAny) => state.categories.categoriesArray);
@@ -126,4 +126,4 @@ const Edit: React.FC = () => {
    )
 }
 
-export default Edit;
+export default PopupEditCategories;
