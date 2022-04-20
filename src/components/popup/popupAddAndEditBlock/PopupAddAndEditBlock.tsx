@@ -8,7 +8,6 @@ import xmark from '../../../images/square-xmark-solid.svg';
 import { useDispatch, useSelector, RootStateOrAny} from 'react-redux';
 
 import {
-   setEditingCategory,
    setToAddNewCategory
 } from '../../../features/products/categoriesSlice';
 
@@ -36,13 +35,11 @@ const PopupAddAndEditBlock:React.FC = () => {
       if (isInputValue === "") {
          setIsInputValue("New Category");
       }
-      dispatch(setEditingCategory(false));
+      dispatch(setToAddNewCategory(false));
    }
 
    const cancelInputNewCategory = ():void => {
       dispatch(setToAddNewCategory(false));
-      dispatch(setEditingCategory(false));
-      // dispatch(setAddingCategory(false));
    }
 
    const renderAddCategoryField = () => {

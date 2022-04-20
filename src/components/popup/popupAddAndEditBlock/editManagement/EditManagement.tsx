@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 
 import pensil from '../../../../images/square-pen-solid.svg';
@@ -8,7 +8,7 @@ import check from '../../../../images/square-check-solid.svg';
 
 
 import { setCorrect } from "../../../../features/products/categoriesSlice";
-import { setToAddNewCategory,setEditingCategory,setCategories } from "../../../../features/products/categoriesSlice";
+import { setToAddNewCategory, setCategories } from "../../../../features/products/categoriesSlice";
 import { Categories } from "../../../../interfaces/Categories";
 
 
@@ -21,9 +21,22 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
 
    const dispatch = useDispatch();
    const toCorrect:boolean = useSelector((state : RootStateOrAny) => state.categories.correct);
-   const editingCategoryFromStore:boolean = useSelector((state: RootStateOrAny) => state.categories.editingCategory);
+   const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
+   const editingCurrentCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.editingCategory);
+
 
    const categories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
+
+
+   useEffect(() => {
+      console.log(isAddNewCategory);
+      console.log(isAddNewCategory || editingCurrentCategory);
+   }, [isAddNewCategory]);
+
+   useEffect(() => {
+      console.log(editingCurrentCategory);
+      console.log(isAddNewCategory || editingCurrentCategory);
+   }, [editingCurrentCategory]);
 
 
 
@@ -33,8 +46,6 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
 
    const addNewCategory = ():void => {
       dispatch(setToAddNewCategory(true));
-      dispatch(setEditingCategory(true));
-      // dispatch(setAddingCategory(true));
    }
 
    const doneNewCategory = ():void => {
@@ -48,7 +59,6 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
          categoriesInput.unshift({id: `${Math.random()}`, name: props.inputValue});
          dispatch(setCategories(categoriesInput));
       }
-      // dispatch(setAddingCategory(false));
    }
 
 
@@ -56,16 +66,16 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
       return (
          <>
             <button onClick={chooseAllFirstButton}
-               disabled={!editingCategoryFromStore ? false : true}
+               disabled={isAddNewCategory || editingCurrentCategory}
                className='categories-change__buttonAll'>All</button>
-            <button className={!editingCategoryFromStore ? '' : "unactivated"}
+            <button className={!(isAddNewCategory || editingCurrentCategory) ? '' : "unactivated"}
                onClick={addNewCategory}
-               disabled={!editingCategoryFromStore ? false : true}>
+               disabled={isAddNewCategory || editingCurrentCategory}>
                   <img src={plus} alt="" />
             </button>
-            <button className={!editingCategoryFromStore ? '' : "unactivated"}
+            <button className={!(isAddNewCategory || editingCurrentCategory) ? '' : "unactivated"}
                onClick={doneNewCategory}
-               disabled={!editingCategoryFromStore ? false : true}>
+               disabled={isAddNewCategory || editingCurrentCategory}>
                   <img src={check} alt="" />
             </button>
          </>
@@ -90,7 +100,7 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
          <div className='popup__categories-change'>
             <p>Categories</p>
             {toCorrect ? buttonsEdit() : buttonToEdit()}
-            <p className={!editingCategoryFromStore ? 'categories-change__info' : 'categories-change__info unactivated'}>
+            <p className={!(isAddNewCategory || editingCurrentCategory) ? 'categories-change__info' : 'categories-change__info unactivated'}>
                <img src={info} alt="" />
             </p>
          </div>

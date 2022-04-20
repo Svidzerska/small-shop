@@ -3,8 +3,7 @@ import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { setPopup } from "../../../features/products/productSlice";
 import {
    setCorrect,
-   setToAddNewCategory,
-   setEditingCategory
+   setToAddNewCategory
 } from "../../../features/products/categoriesSlice";
 
 import arrowRight from '../../../images/arrow-left-solid.svg';
@@ -23,8 +22,6 @@ const closePopup = () => {
 const closeCorrection = ():void => {
    dispatch(setCorrect(false));
    dispatch(setToAddNewCategory(false));
-   dispatch(setEditingCategory(false));
-   // dispatch(setAddingCategory(false));
 }
 
 
