@@ -9,7 +9,6 @@ import { useDispatch, useSelector, RootStateOrAny} from 'react-redux';
 
 import {
    setEditingCategory,
-   setAddingCategory,
    setToAddNewCategory
 } from '../../../features/products/categoriesSlice';
 
@@ -22,12 +21,15 @@ const PopupAddAndEditBlock:React.FC = () => {
    const dispatch = useDispatch();
 
    const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
-   const [isInputValue, setIsInputValue] = useState<string>("");
+   const [isInputValue, setIsInputValue] = useState<string>("New Category");
    
 
-   const editInputNewCategory = (e: any) => {
+   const selectRange = (e:any):void => {
+      e.currentTarget.setSelectionRange(0,e.currentTarget.value.length,);
+   }
+ 
+   const editInputNewCategory = (e: any):void => {
       setIsInputValue(e.currentTarget.value);
-
    }
 
    const doneInputNewCategory = ():void => {
@@ -37,17 +39,21 @@ const PopupAddAndEditBlock:React.FC = () => {
       dispatch(setEditingCategory(false));
    }
 
-   const cancelInputNewCategory = () => {
+   const cancelInputNewCategory = ():void => {
       dispatch(setToAddNewCategory(false));
       dispatch(setEditingCategory(false));
-      dispatch(setAddingCategory(false));
+      // dispatch(setAddingCategory(false));
    }
 
    const renderAddCategoryField = () => {
       return (
          <div className='addField'>
             <button className='categories-name__button'>
-               <input defaultValue="New Category" onChange={editInputNewCategory} className="inputForEdit" autoFocus/> 
+               <input value={isInputValue}
+                  onChange={editInputNewCategory}
+                  onFocus={selectRange}
+                  className="inputForEdit"
+                  autoFocus />
             </button>
             <button className='addField__buttonResult' onClick={doneInputNewCategory}>
                <img src={check} alt="" />

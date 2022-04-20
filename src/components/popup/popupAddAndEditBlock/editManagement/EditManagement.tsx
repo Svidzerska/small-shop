@@ -8,7 +8,7 @@ import check from '../../../../images/square-check-solid.svg';
 
 
 import { setCorrect } from "../../../../features/products/categoriesSlice";
-import { setToAddNewCategory,setEditingCategory, setAddingCategory,setCategories } from "../../../../features/products/categoriesSlice";
+import { setToAddNewCategory,setEditingCategory,setCategories } from "../../../../features/products/categoriesSlice";
 import { Categories } from "../../../../interfaces/Categories";
 
 
@@ -34,7 +34,7 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
    const addNewCategory = ():void => {
       dispatch(setToAddNewCategory(true));
       dispatch(setEditingCategory(true));
-      dispatch(setAddingCategory(true));
+      // dispatch(setAddingCategory(true));
    }
 
    const doneNewCategory = ():void => {
@@ -48,7 +48,7 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
          categoriesInput.unshift({id: `${Math.random()}`, name: props.inputValue});
          dispatch(setCategories(categoriesInput));
       }
-      dispatch(setAddingCategory(false));
+      // dispatch(setAddingCategory(false));
    }
 
 

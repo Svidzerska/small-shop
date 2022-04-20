@@ -9,7 +9,7 @@ interface InitialState {
    categoriesArray: object,
    correct:boolean,
    editingCategory:boolean,
-   addingCategory: boolean,
+   // addingCategory: boolean,
    toAddNewCategory: boolean
 }
 
@@ -22,7 +22,7 @@ const initialState = {
    categoriesArray: [],
    correct: false,
    editingCategory: false,
-   addingCategory: false,
+   // addingCategory: false,
    toAddNewCategory: false
 } as InitialState
 
@@ -54,9 +54,9 @@ export const categoriesSlice = createSlice({
       setEditingCategory: (state, action : PayloadAction<boolean>) => {
          state.editingCategory = action.payload;
       },
-      setAddingCategory: (state, action : PayloadAction<boolean>) => {
-         state.addingCategory = action.payload;
-      },
+      // setAddingCategory: (state, action : PayloadAction<boolean>) => {
+      //    state.addingCategory = action.payload;
+      // },
       setToAddNewCategory: (state, action : PayloadAction<boolean>) => {
          state.toAddNewCategory = action.payload;
       },
@@ -74,7 +74,7 @@ export const categoriesSlice = createSlice({
 },
 )
 
-export const { setCorrect, setCategories, setEditingCategory, setAddingCategory, setToAddNewCategory } = categoriesSlice.actions;
+export const { setCorrect, setCategories, setEditingCategory, setToAddNewCategory } = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;
 

@@ -20,7 +20,7 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
    const dispatch = useDispatch();
 
    const categories: Array<Categories> = useSelector((state: RootStateOrAny) => state.categories.categoriesArray);
-   const addingCategoryFromStore:boolean = useSelector((state: RootStateOrAny) => state.categories.addingCategory);
+   // const addingCategoryFromStore:boolean = useSelector((state: RootStateOrAny) => state.categories.addingCategory);
 
 
    const [isActiveCategory, setIsActiveCategory] = useState<string>(categories[0]?.name);
@@ -71,11 +71,11 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
    const renderEditButtons = (category:Categories):JSX.Element => {
       return (
          <>
-            <button onClick={editCurrentCategory} id={category.name} disabled={!addingCategoryFromStore ? false : true}>
-               <img className={!addingCategoryFromStore ? '' : "unactivated"} src={pensil} alt="" />
+            <button onClick={editCurrentCategory} id={category.name} >
+               <img className="" src={pensil} alt="" />
             </button>
-            <button onClick={deleteCategory} id={category.id} disabled={!addingCategoryFromStore ? false : true}>
-               <img className={!addingCategoryFromStore ? '' : "unactivated"} src={trash} alt="" />
+            <button onClick={deleteCategory} id={category.id} >
+               <img className="" src={trash} alt="" />
             </button>
          </>
       )
@@ -103,7 +103,7 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
                   <button onClick={editCategories}
                      className={isActiveCategory === category.name ? 'categories-name__button active' : 'categories-name__button'}
                      value={category.name}
-                     disabled={!addingCategoryFromStore ? false : true}>
+                     >
                      {isActiveCategory === isEditCategory && isActiveCategory === category.name ?
                         <input id={category.id} defaultValue={category.name} onChange={editInputCategory} className="inputForEdit" autoFocus/> :
                         category.name}

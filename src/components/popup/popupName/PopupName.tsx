@@ -4,8 +4,7 @@ import { setPopup } from "../../../features/products/productSlice";
 import {
    setCorrect,
    setToAddNewCategory,
-   setEditingCategory,
-   setAddingCategory
+   setEditingCategory
 } from "../../../features/products/categoriesSlice";
 
 import arrowRight from '../../../images/arrow-left-solid.svg';
@@ -25,7 +24,7 @@ const closeCorrection = ():void => {
    dispatch(setCorrect(false));
    dispatch(setToAddNewCategory(false));
    dispatch(setEditingCategory(false));
-   dispatch(setAddingCategory(false));
+   // dispatch(setAddingCategory(false));
 }
 
 
