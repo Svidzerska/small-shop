@@ -8,7 +8,7 @@ import check from '../../../../images/square-check-solid.svg';
 
 
 import { setCorrect } from "../../../../features/products/categoriesSlice";
-import { setToAddNewCategory, setCategories, setTemporaryCategories, setChooseAll} from "../../../../features/products/categoriesSlice";
+import { setToAddNewCategory, setCategories, setTemporaryCategories, setChooseAll } from "../../../../features/products/categoriesSlice";
 import { Categories } from "../../../../interfaces/Categories";
 
 
@@ -23,7 +23,8 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
    const toCorrect:boolean = useSelector((state : RootStateOrAny) => state.categories.correct);
    const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
    const editingCurrentCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.editingCategory);
-
+   const toChooseAll:boolean = useSelector((state: RootStateOrAny) => state.categories.chooseAll);
+   
 
    const categories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
    const temporaryCategories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
@@ -39,7 +40,11 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
    // }, [editingCurrentCategory]);
 
    const chooseAllCategoriesForEdit = ():void => {
-      dispatch(setChooseAll(true));
+      if (!toChooseAll) {
+         dispatch(setChooseAll(true));
+      } else if (toChooseAll) {
+         dispatch(setChooseAll(false));
+      }
    }
 
    const addNewCategory = ():void => {

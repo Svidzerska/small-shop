@@ -63,7 +63,7 @@ export const categoriesSlice = createSlice({
       },
       setChooseAll: (state, action : PayloadAction<boolean>) => {
          state.chooseAll = action.payload;
-      }
+      },
    },
    extraReducers: (builder) => {
       builder.addCase(getCategories.fulfilled, (state, action) => {

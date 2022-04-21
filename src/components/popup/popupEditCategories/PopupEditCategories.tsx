@@ -20,6 +20,8 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
    const temporaryCategories: Array<Categories> = useSelector((state: RootStateOrAny) => state.categories.categoriesTemporaryArray);
    const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
    const toChooseAll:boolean = useSelector((state: RootStateOrAny) => state.categories.chooseAll);
+   const toUnchooseAll:boolean = useSelector((state: RootStateOrAny) => state.categories.unchooseAll);
+
 
    const [isActiveCategories, setIsActiveCategories] = useState<Array<string>>([temporaryCategories[0]?.name]);  
    const [isEditCategory, setIsEditCategory] = useState<string>("");
@@ -32,8 +34,11 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
    useEffect(() => {
       if (toChooseAll) {
          setIsActiveCategories([...temporaryCategories].map(item => item.name));
+      } else if (!toChooseAll && isActiveCategories.length === temporaryCategories.length) {
+         setIsActiveCategories([]);
       }
    },[toChooseAll]);
+
 
 
 
