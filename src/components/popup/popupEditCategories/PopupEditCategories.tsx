@@ -20,16 +20,17 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
    const temporaryCategories: Array<Categories> = useSelector((state: RootStateOrAny) => state.categories.categoriesTemporaryArray);
    const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
    const toChooseAll:boolean = useSelector((state: RootStateOrAny) => state.categories.chooseAll);
-   const toUnchooseAll:boolean = useSelector((state: RootStateOrAny) => state.categories.unchooseAll);
 
 
    const [isActiveCategories, setIsActiveCategories] = useState<Array<string>>([temporaryCategories[0]?.name]);  
    const [isEditCategory, setIsEditCategory] = useState<string>("");
    const [isInputValue, setIsInputValue] = useState<string>("");
+   const [editInputField, setEditInputField] = useState<boolean>(false);
+
 
    useEffect(() => {
-      console.log(isActiveCategories);
-   }, [isActiveCategories]);
+      console.log(toChooseAll);
+   }, [toChooseAll]);
 
    useEffect(() => {
       if (toChooseAll) {
@@ -41,13 +42,10 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
 
 
 
-
    const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>):void => {
-      console.log(isEditCategory);
-      console.log(e.currentTarget.id);
+      console.log(isEditCategory, e.currentTarget.id);
 
-
-      if (isEditCategory !== e.currentTarget.id) {
+      if (!editInputField) { //problem
          const currentActiveCategories:string[] = [...isActiveCategories];
          const targetValue:string = e.currentTarget.value;
          console.log(e.currentTarget.value);
@@ -72,13 +70,23 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
 
    const editCurrentCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
       setIsEditCategory(e.currentTarget.id);
-      setIsInputValue(e.currentTarget.id);
+
+      const existValue = temporaryCategories.find(item => item.id === e.currentTarget.id);
+      if (existValue) {
+         setIsInputValue(existValue.name);
+      }
+
       dispatch(setEditingCategory(true));
       dispatch(setChooseAll(false));
    }
 
    const editInputCategory = (e: any): void => {
       setIsInputValue(e.currentTarget.value);
+      setEditInputField(true);
+   }
+
+   const stopEditInput = ():void => {
+      setEditInputField(false);
    }
 
    const deleteCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
@@ -154,7 +162,7 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
                      disabled={isAddNewCategory}
                      id={category.id}>
                      {isEditCategory === category.id ?
-                        <input id={category.id} defaultValue={category.name} onChange={editInputCategory} className="inputForEdit" autoFocus/> :
+                        <input id={category.id} defaultValue={category.name} onChange={editInputCategory} onBlur={stopEditInput} className="inputForEdit" autoFocus/> :
                         category.name}
                   </button>
                   {isActiveCategories.find(item => item === category.name) ? 
