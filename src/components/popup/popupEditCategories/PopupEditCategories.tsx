@@ -7,8 +7,6 @@ import check from '../../../images/square-check-solid.svg';
 import xmark from '../../../images/square-xmark-solid.svg';
 
 
-
-
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { setTemporaryCategories, setEditingCategory, setChooseAll } from "../../../features/products/categoriesSlice";
 import { Categories } from '../../../interfaces/Categories';
@@ -34,16 +32,6 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
       }
    }, [isActiveCategories.length]);
 
-   // useEffect(() => {
-   //    console.log(isActiveCategories.length, isActiveCategories);
-   //    console.log(temporaryCategories.length, temporaryCategories);
-
-   //    if (isActiveCategories.length <= temporaryCategories.length) {
-   //       dispatch(setChooseAll(false));
-   //    }
-
-   // }, [temporaryCategories.length]);
-
 
    useEffect(() => {
       if (toChooseAll) {
@@ -56,7 +44,6 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
 
 
    const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>):void => {
-      console.log(isEditCategory, e.currentTarget.id);
 
       if (!editInputField) { 
          const currentActiveCategories:string[] = [...isActiveCategories];

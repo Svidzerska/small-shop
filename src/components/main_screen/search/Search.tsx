@@ -17,6 +17,15 @@ const Search : React.FC = () => {
       dispatch(setPopup(true));
    }
 
+   useEffect(() => {
+      if (isPopup) {
+         document.body.style.overflow = 'hidden';
+      } else {
+         document.body.style.overflow = 'auto';
+      }
+   }, [isPopup]);
+
+
 
    return (
       <section className="search-element">
@@ -24,7 +33,7 @@ const Search : React.FC = () => {
          <button className="search-element__button-sliders" onClick={showPopup}>
             <img src={sliders} alt=""/>
          </button>
-         {isPopup ? <Popup/> : ""}
+         {isPopup ? <Popup/> : null}
       </section>
    ) 
 };
