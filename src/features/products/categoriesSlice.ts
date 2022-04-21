@@ -10,7 +10,8 @@ interface InitialState {
    categoriesTemporaryArray: object,
    correct:boolean,
    editingCategory:boolean,
-   toAddNewCategory: boolean
+   toAddNewCategory: boolean,
+   chooseAll: boolean
 }
 
 interface Data {
@@ -23,7 +24,8 @@ const initialState = {
    categoriesTemporaryArray: [],
    correct: false,
    editingCategory: false,
-   toAddNewCategory: false
+   toAddNewCategory: false,
+   chooseAll: false
 } as InitialState
 
 
@@ -59,6 +61,9 @@ export const categoriesSlice = createSlice({
       setToAddNewCategory: (state, action : PayloadAction<boolean>) => {
          state.toAddNewCategory = action.payload;
       },
+      setChooseAll: (state, action : PayloadAction<boolean>) => {
+         state.chooseAll = action.payload;
+      }
    },
    extraReducers: (builder) => {
       builder.addCase(getCategories.fulfilled, (state, action) => {
@@ -76,7 +81,9 @@ export const { setCorrect,
    setCategories,
    setTemporaryCategories,
    setEditingCategory,
-   setToAddNewCategory } = categoriesSlice.actions;
+   setToAddNewCategory,
+   setChooseAll
+   } = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;
 

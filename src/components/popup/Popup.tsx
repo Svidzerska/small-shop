@@ -15,6 +15,8 @@ const Popup:React.FC = () => {
    const categories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
    const toCorrect:boolean = useSelector((state : RootStateOrAny) => state.categories.correct);
 
+
+
    return (
       <div className="popup">
          <PopupName/>

@@ -8,7 +8,7 @@ import check from '../../../../images/square-check-solid.svg';
 
 
 import { setCorrect } from "../../../../features/products/categoriesSlice";
-import { setToAddNewCategory, setCategories, setTemporaryCategories} from "../../../../features/products/categoriesSlice";
+import { setToAddNewCategory, setCategories, setTemporaryCategories, setChooseAll} from "../../../../features/products/categoriesSlice";
 import { Categories } from "../../../../interfaces/Categories";
 
 
@@ -38,8 +38,8 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
    //    console.log(isAddNewCategory || editingCurrentCategory)
    // }, [editingCurrentCategory]);
 
-   const chooseAllFirstButton = ():void => {
-      console.log(categories);
+   const chooseAllCategoriesForEdit = ():void => {
+      dispatch(setChooseAll(true));
    }
 
    const addNewCategory = ():void => {
@@ -56,7 +56,7 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
    const buttonsEdit = ():JSX.Element => {
       return (
          <>
-            <button onClick={chooseAllFirstButton}
+            <button onClick={chooseAllCategoriesForEdit}
                disabled={isAddNewCategory || editingCurrentCategory}
                className='categories-change__buttonAll'>All</button>
             <button className={!(isAddNewCategory || editingCurrentCategory) ? '' : "unactivated"}
