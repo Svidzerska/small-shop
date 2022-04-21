@@ -29,8 +29,21 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
 
 
    useEffect(() => {
-      console.log(toChooseAll);
-   }, [toChooseAll]);
+      if (isActiveCategories.length === temporaryCategories.length) {
+         dispatch(setChooseAll(true));
+      }
+   }, [isActiveCategories.length]);
+
+   // useEffect(() => {
+   //    console.log(isActiveCategories.length, isActiveCategories);
+   //    console.log(temporaryCategories.length, temporaryCategories);
+
+   //    if (isActiveCategories.length <= temporaryCategories.length) {
+   //       dispatch(setChooseAll(false));
+   //    }
+
+   // }, [temporaryCategories.length]);
+
 
    useEffect(() => {
       if (toChooseAll) {
@@ -45,7 +58,7 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
    const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>):void => {
       console.log(isEditCategory, e.currentTarget.id);
 
-      if (!editInputField) { //problem
+      if (!editInputField) { 
          const currentActiveCategories:string[] = [...isActiveCategories];
          const targetValue:string = e.currentTarget.value;
          console.log(e.currentTarget.value);
@@ -77,7 +90,6 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
       }
 
       dispatch(setEditingCategory(true));
-      dispatch(setChooseAll(false));
    }
 
    const editInputCategory = (e: any): void => {
@@ -95,7 +107,6 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
       
       const deleteCategory = currentCategories.find((item) => item.id === e.currentTarget.id);
       setIsActiveCategories(isActiveCategories.filter((item) => item !== deleteCategory?.name));
-      dispatch(setChooseAll(false));
    }
 
    const doneInputCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
@@ -114,14 +125,11 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
          updateArr.splice(indexActiveCategory,1,isInputValue);
          return updateArr;
       })
-
-      dispatch(setChooseAll(false));
    }
 
    const cancelEditCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
       setIsEditCategory("");
       dispatch(setEditingCategory(false));
-      dispatch(setChooseAll(false));
    }
 
    const renderEditButtons = (category:Categories):JSX.Element => {

@@ -10,7 +10,8 @@ import { Categories } from '../../../interfaces/Categories';
 
 import {
    setToAddNewCategory, 
-   setTemporaryCategories
+   setTemporaryCategories,
+   setChooseAll
 } from '../../../features/products/categoriesSlice';
 
 
@@ -50,6 +51,7 @@ const PopupAddAndEditBlock:React.FC = () => {
       dispatch(setTemporaryCategories(existingCategories));
       dispatch(setToAddNewCategory(false));
       setIsInputValue("New Category");
+      dispatch(setChooseAll(false));
    }
 
    const cancelInputNewCategory = ():void => {
