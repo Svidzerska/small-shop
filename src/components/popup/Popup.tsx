@@ -12,11 +12,10 @@ import PopupEditCategories from './popupEditCategories/PopupEditCategories';
 
 
 
-const Popup:React.FC = () => {
+const Popup:React.FC = ():JSX.Element => {
 
    const categories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
    const toCorrect:boolean = useSelector((state : RootStateOrAny) => state.categories.correct);
-
 
 
    return (

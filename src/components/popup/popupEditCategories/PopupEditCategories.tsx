@@ -148,9 +148,8 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
 
    const displayCategories: JSX.Element[] = temporaryCategories.map((category: Categories) => {
       return (
-         <div key={category.id}
+         <li key={category.id}
             className={isActiveCategories.find(item => item === category.name) ? 'edit-component active' : 'edit-component'}>
-               <>
                   <button onClick={chooseCategory}
                      className={isActiveCategories.find(item => item === category.name) ? 'categories-name__button active' : 'categories-name__button'}
                      value={category.name}
@@ -165,16 +164,15 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
                      renderDoneButtons(category) : 
                      renderEditButtons(category)) : 
                       null}
-               </>
-         </div>
+         </li>
       )
    })
 
 
    return (
-      <div className="popup__edit-place">
+      <ul className="popup__edit-place">
          {displayCategories}
-      </div>
+      </ul>
    )
 }
 
