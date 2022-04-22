@@ -63,7 +63,7 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
          <>
             <button onClick={chooseAllCategoriesForEdit}
                disabled={isAddNewCategory || editingCurrentCategory}
-               className='categories-change__buttonAll'>All</button>
+               className={toChooseAll ? 'categories-change__buttonAll on' : 'categories-change__buttonAll off'}>All</button>
             <button className={!(isAddNewCategory || editingCurrentCategory) ? '' : "unactivated"}
                onClick={addNewCategory}
                disabled={isAddNewCategory || editingCurrentCategory}>
