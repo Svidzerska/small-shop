@@ -5,8 +5,11 @@ import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 
 import pensil from '../../../../images/square-pen-solid.svg';
 import info from '../../../../images/info-solid.svg';
-import plus from '../../../../images/plus-square-fill.svg';
+import plus from '../../../../images/plusIcon.svg';
 import check from '../../../../images/square-check-solid.svg';
+
+import { ReactComponent as Plus } from '../../../images/plusIcon.svg';
+
 
 
 import { setCorrect } from "../../../../features/products/categoriesSlice";

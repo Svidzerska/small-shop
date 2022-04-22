@@ -1,6 +1,6 @@
 import React from "react";
 import './searchInput.scss';
-import glass from '../../../../images/magnifying-glass-solid.svg';
+import {ReactComponent as Glass} from '../../../../images/glassIcon.svg';
 
 
 const SearchInput: React.FC = () => {
@@ -8,7 +8,9 @@ const SearchInput: React.FC = () => {
       <div className="search-field">
          <input className="" placeholder="Search" />
          <button className="search-element__button-glass">
-            <img src={glass} alt="" />
+            <i>
+               <Glass/>
+            </i>
          </button>
       </div>
    )

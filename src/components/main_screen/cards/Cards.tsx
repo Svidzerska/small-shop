@@ -2,8 +2,11 @@ import React, { useEffect } from "react";
 import './cards.scss';
 import plus from '../../../images/plus-square-fill.svg';
 
+import { ReactComponent as Plus } from '../../../images/plusIcon.svg';
+
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { Products } from "../../../interfaces/Products";
+
 
 
 const Cards:React.FC = () => {
@@ -34,8 +37,12 @@ const Cards:React.FC = () => {
    const renderAddCard = ():JSX.Element => {
       return (
          <div className="card cards-element__add-card">
-                  <p><button><img src={plus} alt=""/></button></p>
-                  <p>Tap to add <br/> a new item</p>
+            <button>
+               <i>
+                  <Plus/>
+               </i>
+            </button>
+            <h5>Tap to add <br/> a new item</h5>
          </div>
       )
    }

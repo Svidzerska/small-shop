@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import './search.scss';
-import sliders from '../../../images/sliders-solid.svg';
+import {ReactComponent as Sliders} from '../../../images/slidersIcon.svg';
+
 import Popup from "../../popup/Popup";
 
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
@@ -31,7 +32,9 @@ const Search : React.FC = () => {
       <section className="search-element">
          <SearchInput/>
          <button className="search-element__button-sliders" onClick={showPopup}>
-            <img src={sliders} alt=""/>
+            <i>
+               <Sliders/>
+            </i>
          </button>
          {isPopup ? <Popup/> : null}
       </section>
