@@ -1,177 +1,44 @@
-.popup {
-   background-color: white;
-   position: absolute;
-   top: 0;
-   bottom: 0;
-   right: 0;
-   left: 0px;
+.addField {
+   display: flex;
+   margin-left: 60px;
+   align-items: center;
+   margin-bottom: 15px;
 
-   .unactivated {
-      opacity: 40%;
+   button {
+      margin-left: 0;
+      height: 30px;
    }
 
-   .addField {
-      display: flex;
-      margin-left: 60px;
-      align-items: center;
-      margin-bottom: 15px;
-
-      button {
-         margin-left: 0;
-         height: 30px;
-      }
-
-      .categories-name__button {
-         border: 2px solid rgb(179, 129, 255);
-
-         .inputForEdit {
-            width: 100px;
-            border: none;
-            background: none;
-            outline: none;
-            border-radius: 0;
-         }
-
-         .inputForEdit::selection {
-            background-color: yellow;
-         }
-      }
-
-      .addField__buttonResult {
-         border: none;
-         background: none;
-         cursor: pointer;
-         
-         img {
-            width: 30px;
-            height: 30px;
-         }
-      }
-   }
-
-   .categories-name__button { 
+   .categories-name__button {
+      border: 2px solid rgb(179, 129, 255);
       width: max-content;
       cursor: pointer;
       background-color: rgb(237, 237, 237);
-      border: 0;
       border-radius: 10px;
       padding: 5px;
       margin: 5px;
-   }
 
-   .popup__name {
-      display: flex;
-      justify-content: left;
-      margin-left: 10px;
-      padding-left: 10px;
-      margin-top: 10px;
-
-      button {
-         padding: 7px 10px 0px 0px;
-         width: fit-content;
-         height: 40px;
+      .inputForEdit {
+         width: 100px;
+         border: none;
          background: none;
-         border: 0;
-         cursor: pointer;
-
-         img {
-            width: 30px;
-            height: 30px;
-         }
+         outline: none;
+         border-radius: 0;
       }
 
-      h1 {
-         margin: 0;      
-         font-weight: 900;
-         font-size: 2em;
+      .inputForEdit::selection {
+         background-color: yellow;
       }
    }
 
-   .popup__comments {
-      padding-left: 60px;
-      text-align: start;
-      color: gray;
-      font-size: 14px;
-      p {
-         margin-bottom: 0;
-      }
+   .addField__buttonResult {
+      border: none;
+      background: none;
+      cursor: pointer;
       
-   }
-
-   .popup__categories-change {
-      display: flex;
-      flex-direction: row;
-      padding-left: 60px;
-      align-items: center;
-
-      p:first-child {
-         font-size: 14px;
-         font-weight: 700;
-         margin-right: 15px;
-      }
-
-      button {
-         cursor: pointer;
-         padding-top: 5px;
-         background: none;
-         border: 0;
-            img {
-            width: 25px;
-            height: 30px;
-         }
-      }
-
-      .categories-change__buttonAll {
-         cursor: pointer;
-         background-color: rgb(237, 237, 237);
-         border: 0;
-         border-radius: 10px;
-         padding: 5px;
-         margin: 5px;
-      }
-
-      .categories-change__buttonAll.on {
-         background-color: black;
-         color: white;
-      }
-
-      
-
-      .categories-change__info {
-         background-color: white;
-         border: 2px solid lightgray;
-         border-radius: 15px;
-         width: 25px;
-         height: 25px;
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         margin-left: 5px;
-
-         img {
-            width: 20px;
-            height: 20px;
-         }
-      }
-   }
-
-   .popup__categories-name {
-      display: flex;
-      flex-direction: row;
-      padding-left: 60px;
-      flex-wrap: wrap;
-      align-items: center;
-      list-style: none;
-
-      .category-warning {
-         margin-top: 0;
-         margin-bottom: 0;
-         margin-left: 20px;
-      }
-
-      .categories-name__button.active {
-         background-color: rgb(179, 129, 255);
-         color: aliceblue;
+      img {
+         width: 30px;
+         height: 30px;
       }
    }
 }

@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
+import './editManagement.scss';
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
+
 
 import pensil from '../../../../images/square-pen-solid.svg';
 import info from '../../../../images/info-solid.svg';

@@ -1,4 +1,6 @@
 import React from 'react';
+import './popupCategories.scss';
+
 import { useState } from 'react';
 import { useSelector, RootStateOrAny} from 'react-redux';
 import { Categories } from '../../../interfaces/Categories';
@@ -19,7 +21,6 @@ export const PopupCategories: React.FC<Props> = (props):JSX.Element => {
 
       if (checkActiveCategory) {
          setIsActiveCategories((arr) => {
-            // const elementDeleteCategory:string[] = [...arr];
             const categoriesWithoutDeleteElement:string[] = currentActiveCategories.filter(item => item !== targetValue);
             return categoriesWithoutDeleteElement;
          }); 

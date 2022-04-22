@@ -1,4 +1,5 @@
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
+import './popupName.scss';
 
 import { setPopup } from "../../../features/products/productSlice";
 import {

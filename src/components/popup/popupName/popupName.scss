@@ -1,0 +1,38 @@
+.popup__name {
+   display: flex;
+   justify-content: left;
+   margin-left: 10px;
+   padding-left: 10px;
+   margin-top: 10px;
+
+   button {
+      padding: 7px 10px 0px 0px;
+      width: fit-content;
+      height: 40px;
+      background: none;
+      border: 0;
+      cursor: pointer;
+
+      img {
+         width: 30px;
+         height: 30px;
+      }
+   }
+
+   h1 {
+      margin: 0;      
+      font-weight: 900;
+      font-size: 2em;
+   }
+}
+
+.popup__comments {
+   padding-left: 60px;
+   text-align: start;
+   color: gray;
+   font-size: 14px;
+   p {
+      margin-bottom: 0;
+   }
+   
+}
