@@ -65,7 +65,11 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
          <>
             <button onClick={chooseAllCategoriesForEdit}
                disabled={isAddNewCategory || editingCurrentCategory}
-               className={toChooseAll ? 'categories-change__buttonAll on' : 'categories-change__buttonAll off'}>All</button>
+               className={!(isAddNewCategory || editingCurrentCategory) ?
+                (toChooseAll ? 'categories-change__buttonAll on' : 'categories-change__buttonAll off') : 
+                 "categories-change__buttonAll"}>
+                  All
+            </button>
             <button className={!(isAddNewCategory || editingCurrentCategory) ? '' : "unactivated"}
                onClick={addNewCategory}
                disabled={isAddNewCategory || editingCurrentCategory}>
@@ -95,13 +99,20 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
       )
    }
 
+   const showInfo = ():void => {
+      console.log("here information");
+   }
+
       return (
          <div className='popup__categories-change'>
             <p>Categories</p>
             {toCorrect ? buttonsEdit() : buttonToEdit()}
-            <p className={!(isAddNewCategory || editingCurrentCategory) ? 'categories-change__info' : 'categories-change__info unactivated'}>
+            <button className={!(isAddNewCategory || editingCurrentCategory) ?
+                'categories-change__info' :
+                 'categories-change__info unactivated'} 
+                 onClick={showInfo}>
                <img src={info} alt="" />
-            </p>
+            </button>
          </div>
       )
 }
