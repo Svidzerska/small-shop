@@ -104,7 +104,7 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
       const categoriesInput = [...temporaryCategories];
       console.log(categoriesInput);
 
-      const a = categoriesInput.find((item) => item.name === isInputValue);
+      const a = categoriesInput.find((item) => item.name === isInputValue && item.id !== e.currentTarget.id);
       console.log(a);
 
       if (!a) {
@@ -120,7 +120,9 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
             return updateArr;
          })
       } else {
-         
+         dispatch(setTemporaryCategories(categoriesInput.filter((item) => item.id !== e.currentTarget.id)));
+         const deleteCategory = categoriesInput.find((item) => item.id === e.currentTarget.id);
+         setIsActiveCategories(isActiveCategories.filter((item) => item !== deleteCategory?.name));
       }
    
       setIsEditCategory("");
