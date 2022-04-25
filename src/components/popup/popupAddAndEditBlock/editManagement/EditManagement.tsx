@@ -3,12 +3,12 @@ import './editManagement.scss';
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 
 
-import pensil from '../../../../images/square-pen-solid.svg';
-import info from '../../../../images/info-solid.svg';
-import plus from '../../../../images/plusIcon.svg';
-import check from '../../../../images/square-check-solid.svg';
 
-import { ReactComponent as Plus } from '../../../images/plusIcon.svg';
+import { ReactComponent as Pensil } from '../../../../images/pensilIcon.svg';
+import { ReactComponent as Info } from '../../../../images/infoIcon.svg';
+import { ReactComponent as Plus } from '../../../../images/plusIcon.svg';
+import { ReactComponent as Check } from '../../../../images/checkIcon.svg';
+
 
 
 
@@ -76,12 +76,16 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
             <button className={!(isAddNewCategory || editingCurrentCategory) ? '' : "unactivated"}
                onClick={addNewCategory}
                disabled={isAddNewCategory || editingCurrentCategory}>
-                  <img src={plus} alt="" />
+                  <i>
+                     <Plus/>
+                  </i>
             </button>
             <button className={!(isAddNewCategory || editingCurrentCategory) ? '' : "unactivated"}
                onClick={doneNewCategory}
                disabled={isAddNewCategory || editingCurrentCategory}>
-                  <img src={check} alt="" />
+                  <i>
+                     <Check/>
+                  </i>
             </button>
          </>
       )
@@ -96,7 +100,9 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
       return (
          <>
             <button onClick={handleCorrect}>
-               <img src={pensil} alt="" />
+               <i>
+                  <Pensil/> 
+               </i>
             </button>
          </>
       )
@@ -114,7 +120,9 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
                 'categories-change__info' :
                  'categories-change__info unactivated'} 
                  onClick={showInfo}>
-               <img src={info} alt="" />
+               <i>
+                  <Info/>
+               </i>
             </button>
          </div>
       )

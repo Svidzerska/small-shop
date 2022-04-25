@@ -36,9 +36,15 @@
       background: none;
       cursor: pointer;
       
-      img {
+      i {
+         display: inline-block;
          width: 30px;
          height: 30px;
+         box-sizing: border-box;
+         svg {
+            width: 100%;
+            height: 100%;
+         }
       }
    }
 }

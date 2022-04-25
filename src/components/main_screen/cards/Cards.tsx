@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import './cards.scss';
-import plus from '../../../images/plus-square-fill.svg';
 
 import { ReactComponent as Plus } from '../../../images/plusIcon.svg';
 

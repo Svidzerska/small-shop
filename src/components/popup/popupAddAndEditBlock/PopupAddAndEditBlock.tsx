@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import './popupAddAndEditBlock.scss';
 
-import check from '../../../images/square-check-solid.svg';
-import xmark from '../../../images/square-xmark-solid.svg';
+
+import { ReactComponent as Check } from '../../../images/checkIcon.svg';
+import { ReactComponent as XMarkInSquare } from  '../../../images/squareXmarkIcon.svg';
+
 
 
 import { useDispatch, useSelector, RootStateOrAny} from 'react-redux';
@@ -70,10 +72,14 @@ const PopupAddAndEditBlock:React.FC = () => {
                   autoFocus />
             </button>
             <button className='addField__buttonResult' onClick={doneInputNewCategory}>
-               <img src={check} alt="" />
+               <i>
+                  <Check/>
+               </i>
             </button>
             <button className='addField__buttonResult' onClick={cancelInputNewCategory}>
-               <img src={xmark} alt="" />
+               <i>
+                  <XMarkInSquare/>
+               </i>
             </button>
          </div>
       )

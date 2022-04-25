@@ -9,8 +9,8 @@ import {
    setChooseAll
 } from "../../../features/products/categoriesSlice";
 
-import arrowRight from '../../../images/arrow-left-solid.svg';
-import cross from '../../../images/xmark-solid.svg';
+import {ReactComponent as ArrowLeft} from '../../../images/arrowLeftIcon.svg';
+import {ReactComponent as XMark} from '../../../images/xmarkIcon.svg';
 
 
 export const PopupName : React.FC = (): JSX.Element => {
@@ -34,7 +34,9 @@ const closeCorrection = ():void => {
       <>
          <div className='popup__name'>
             <button onClick={!toCorrect ? closePopup : closeCorrection}>
-               <img src={!toCorrect ? arrowRight : cross} alt="" />
+               <i>
+                  {!toCorrect ? <ArrowLeft/> : <XMark/>}
+               </i>
             </button>
             <h1>Filter</h1>
          </div>

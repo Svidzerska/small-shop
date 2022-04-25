@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './popupEditCategories.scss';
 
-import pensil from '../../../images/square-pen-solid.svg';
-import trash from '../../../images/trash-can-solid.svg';
-import check from '../../../images/square-check-solid.svg';
-import xmark from '../../../images/square-xmark-solid.svg';
-
+import { ReactComponent as Pensil } from '../../../images/pensilIcon.svg';
+import { ReactComponent as Trash } from '../../../images/trashIcon.svg';
+import { ReactComponent as Check } from '../../../images/checkIcon.svg';
+import { ReactComponent as XMarkInSquare } from  '../../../images/squareXmarkIcon.svg';
 
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { setTemporaryCategories, setEditingCategory, setChooseAll } from "../../../features/products/categoriesSlice";
@@ -123,10 +122,14 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
       return (
          <>
             <button onClick={editCurrentCategory} id={category.id} disabled={isAddNewCategory}>
-               <img className={!isAddNewCategory ? '' : "unactivated"} src={pensil} alt="" />
+               <i className={!isAddNewCategory ? '' : "unactivated"}>
+                  <Pensil/>
+               </i>
             </button>
             <button onClick={deleteCategory} id={category.id} disabled={isAddNewCategory}>
-               <img className={!isAddNewCategory ? '' : "unactivated"} src={trash} alt="" />
+               <i className={!isAddNewCategory ? '' : "unactivated"}>
+                  <Trash/>
+               </i>
             </button>
          </>
       )
@@ -136,10 +139,14 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
       return (
          <>
             <button onClick={doneInputCategory} id={category.id}>
-               <img src={check} alt="" />
+               <i>
+                  <Check/>
+               </i>
             </button>
             <button onClick={cancelEditCategory} id={category.id} >
-               <img src={xmark} alt="" />
+               <i>
+                  <XMarkInSquare/>
+               </i>
             </button>
          </>
       )
