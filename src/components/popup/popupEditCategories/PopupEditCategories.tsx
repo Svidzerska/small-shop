@@ -157,13 +157,21 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
       return (
          <li key={category.id}
             className={isActiveCategories.find(item => item === category.name) ? 'edit-component active' : 'edit-component'}>
-                  <button onClick={chooseCategory}
+                  <button
+                     onClick={chooseCategory}
                      className={isActiveCategories.find(item => item === category.name) ? 'categories-name__button active' : 'categories-name__button'}
                      value={category.name}
                      disabled={isAddNewCategory}
                      id={category.id}>
                      {isEditCategory === category.id ?
-                        <input id={category.id} defaultValue={category.name} onChange={editInputCategory} onBlur={stopEditInput} className="inputForEdit" autoFocus/> :
+                        <input
+                           id={category.id}
+                           // defaultValue={category.name}
+                           value={editInputField ? isInputValue : category.name}
+                           onChange={editInputCategory}
+                           onBlur={stopEditInput}
+                           className="inputForEdit"
+                           autoFocus /> :
                         category.name}
                   </button>
                   {isActiveCategories.find(item => item === category.name) ? 
