@@ -104,10 +104,9 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
       const categoriesInput = [...temporaryCategories];
       console.log(categoriesInput);
 
-      const a = categoriesInput.find((item) => item.name === isInputValue && item.id !== e.currentTarget.id);
-      console.log(a);
+      const secondElementCategory = categoriesInput.find((item) => item.name === isInputValue && item.id !== e.currentTarget.id);
 
-      if (!a) {
+      if (!secondElementCategory) {
          const currentCategory = categoriesInput.findIndex((item) => item.id === e.currentTarget.id);
          const indexActiveCategory = isActiveCategories.findIndex((item) => item === categoriesInput[currentCategory].name);
       
