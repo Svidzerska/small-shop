@@ -26,6 +26,7 @@ const PopupAddAndEditBlock:React.FC = () => {
 
    const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
    const [isInputValue, setIsInputValue] = useState<string>("New Category");
+   const [charAmountLeft, setCharAmountLeft] = useState<number>(20);
    
    const temporaryCategories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
    
@@ -40,13 +41,15 @@ const PopupAddAndEditBlock:React.FC = () => {
    }
  
    const editInputNewCategory = (e: any):void => {
-      setIsInputValue(e.currentTarget.value);
+      if (e.currentTarget.value.length <= 20) {
+         setIsInputValue(e.currentTarget.value);
+         setCharAmountLeft(20-e.currentTarget.value.length);
+      }
    }
 
    const doneInputNewCategory = ():void => {
       
       const existingCategories = [...temporaryCategories];
-
       const secondElementCategory = existingCategories.find((item) => item.name === isInputValue);
 
       if (isInputValue !== "" && isInputValue !== "New Category" && !secondElementCategory) {
@@ -67,23 +70,27 @@ const PopupAddAndEditBlock:React.FC = () => {
    const renderAddCategoryField = () => {
       return (
          <div className='addField'>
-            <button className='categories-name__button'>
-               <input value={isInputValue}
-                  onChange={editInputNewCategory}
-                  onFocus={selectRange}
-                  className="inputForEdit"
-                  autoFocus />
-            </button>
-            <button className='addField__buttonResult' onClick={doneInputNewCategory}>
-               <i>
-                  <Check/>
-               </i>
-            </button>
-            <button className='addField__buttonResult' onClick={cancelInputNewCategory}>
-               <i>
-                  <XMarkInSquare/>
-               </i>
-            </button>
+            <div>
+               <button className='categories-name__button'>
+                  <input value={isInputValue}
+                     onChange={editInputNewCategory}
+                     onFocus={selectRange}
+                     className="inputForEdit"
+                     autoFocus />
+               </button>
+               <button className='addField__buttonResult' onClick={doneInputNewCategory}>
+                  <i>
+                     <Check />
+                  </i>
+               </button>
+               <button className='addField__buttonResult' onClick={cancelInputNewCategory}>
+                  <i>
+                     <XMarkInSquare />
+                  </i>
+               </button>
+            </div>
+
+            <p className='addField__char-amount'>{charAmountLeft} char. left</p>
          </div>
       )
    }

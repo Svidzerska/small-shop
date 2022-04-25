@@ -84,7 +84,6 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
    }
 
    const editInputCategory = (e: any): void => {
-      // setEditInputField(true);
       if (e.currentTarget.value.length <= 20) {
          setIsInputValue(e.currentTarget.value);
          setCharAmountLeft(20-e.currentTarget.value.length);
