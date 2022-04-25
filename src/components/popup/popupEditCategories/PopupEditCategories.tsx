@@ -23,6 +23,7 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
    const [isEditCategory, setIsEditCategory] = useState<string>("");
    const [isInputValue, setIsInputValue] = useState<string>("");
    const [editInputField, setEditInputField] = useState<boolean>(false);
+   const [charAmountLeft, setCharAmountLeft] = useState<number>(0);
 
 
    useEffect(() => {
@@ -79,7 +80,12 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
    }
 
    const editInputCategory = (e: any): void => {
-      setIsInputValue(e.currentTarget.value);
+      
+      console.log(e.currentTarget.value.length);
+      if (e.currentTarget.value.length <= 20) {
+         setIsInputValue(e.currentTarget.value);
+         setCharAmountLeft(20-e.currentTarget.value.length);
+      }
       setEditInputField(true);
    }
 
@@ -157,28 +163,35 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
       return (
          <li key={category.id}
             className={isActiveCategories.find(item => item === category.name) ? 'edit-component active' : 'edit-component'}>
-                  <button
-                     onClick={chooseCategory}
-                     className={isActiveCategories.find(item => item === category.name) ? 'categories-name__button active' : 'categories-name__button'}
-                     value={category.name}
-                     disabled={isAddNewCategory}
-                     id={category.id}>
-                     {isEditCategory === category.id ?
-                        <input
-                           id={category.id}
-                           // defaultValue={category.name}
-                           value={editInputField ? isInputValue : category.name}
-                           onChange={editInputCategory}
-                           onBlur={stopEditInput}
-                           className="inputForEdit"
-                           autoFocus /> :
-                        category.name}
-                  </button>
-                  {isActiveCategories.find(item => item === category.name) ? 
-                  (isEditCategory !== "" && isEditCategory === category.id ? 
-                     renderDoneButtons(category) : 
-                     renderEditButtons(category)) : 
-                      null}
+                     <p>
+                        <button
+                           onClick={chooseCategory}
+                           className={isActiveCategories.find(item => item === category.name) ? 'categories-name__button active' : 'categories-name__button'}
+                           value={category.name}
+                           disabled={isAddNewCategory}
+                           id={category.id}>
+                           {isEditCategory === category.id ?
+                              <input
+                                 id={category.id}
+                                 // defaultValue={category.name}
+                                 value={editInputField ? isInputValue : category.name}
+                                 onChange={editInputCategory}
+                                 onBlur={stopEditInput}
+                                 className="inputForEdit"
+                                 autoFocus /> :
+                              category.name}
+                        </button>
+                           {isActiveCategories.find(item => item === category.name) &&
+                            editInputField &&
+                            isEditCategory === category.id ? 
+                           <p className='edit-component__char-amount'>{charAmountLeft} char. left</p> : 
+                           null}
+                     </p>
+                     {isActiveCategories.find(item => item === category.name) ? 
+                     (isEditCategory !== "" && isEditCategory === category.id ? 
+                        renderDoneButtons(category) : 
+                        renderEditButtons(category)) : 
+                        null}
          </li>
       )
    })
