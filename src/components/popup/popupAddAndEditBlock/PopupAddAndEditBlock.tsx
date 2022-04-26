@@ -27,7 +27,9 @@ const PopupAddAndEditBlock:React.FC = () => {
    const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
    const [isInputValue, setIsInputValue] = useState<string>("New Category");
    const [charAmountLeft, setCharAmountLeft] = useState<number>(20);
+   const [editInputField, setEditInputField] = useState<boolean>(false);
    
+
    const temporaryCategories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
    
 
@@ -41,6 +43,7 @@ const PopupAddAndEditBlock:React.FC = () => {
    }
  
    const editInputNewCategory = (e: any):void => {
+      setEditInputField(true);
       if (e.currentTarget.value.length <= 20) {
          setIsInputValue(e.currentTarget.value);
          setCharAmountLeft(20-e.currentTarget.value.length);
@@ -48,7 +51,6 @@ const PopupAddAndEditBlock:React.FC = () => {
    }
 
    const doneInputNewCategory = ():void => {
-      
       const existingCategories = [...temporaryCategories];
       const secondElementCategory = existingCategories.find((item) => item.name === isInputValue);
 
@@ -60,11 +62,13 @@ const PopupAddAndEditBlock:React.FC = () => {
       dispatch(setTemporaryCategories(existingCategories));
       dispatch(setToAddNewCategory(false));
       setIsInputValue("New Category");
+      setEditInputField(false);
    }
 
    const cancelInputNewCategory = ():void => {
       dispatch(setToAddNewCategory(false));
       setIsInputValue("New Category");
+      setEditInputField(false);
    }
 
    const renderAddCategoryField = () => {
@@ -89,8 +93,9 @@ const PopupAddAndEditBlock:React.FC = () => {
                   </i>
                </button>
             </div>
-
-            <p className='addField__char-amount'>{charAmountLeft} char. left</p>
+            {editInputField ? 
+            <p className='addField__char-amount'>{charAmountLeft} char. left</p> : 
+            null}
          </div>
       )
    }
