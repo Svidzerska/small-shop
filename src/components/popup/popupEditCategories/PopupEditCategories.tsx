@@ -77,6 +77,7 @@ const PopupEditCategories: React.FC = ():JSX.Element => {
 
       const existValue = temporaryCategories.find(item => item.id === e.currentTarget.id);
       if (existValue) {
+         setCharAmountLeft(20-existValue.name.length);
          setIsInputValue(existValue.name);
       }
 

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './popupAddAndEditBlock.scss';
 
 
@@ -32,17 +32,16 @@ const PopupAddAndEditBlock:React.FC = () => {
 
    const temporaryCategories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
    
-
    // set New Category after canceling of editing
    useEffect(() => {
       setIsInputValue("New Category");
    }, [isAddNewCategory]);
 
-   const selectRange = (e:any):void => {
+   const selectRange = (e: React.FocusEvent<HTMLInputElement>):void => {
       e.currentTarget.setSelectionRange(0,e.currentTarget.value.length,);
    }
  
-   const editInputNewCategory = (e: any):void => {
+   const editInputNewCategory = (e: React.FormEvent<HTMLInputElement>):void => {
       setEditInputField(true);
       if (e.currentTarget.value.length <= 20) {
          setIsInputValue(e.currentTarget.value);
@@ -51,9 +50,8 @@ const PopupAddAndEditBlock:React.FC = () => {
    }
 
    const doneInputNewCategory = ():void => {
-      const existingCategories = [...temporaryCategories];
-      const secondElementCategory = existingCategories.find((item) => item.name === isInputValue);
-
+      const existingCategories:Categories[] = [...temporaryCategories];
+      const secondElementCategory:Categories | undefined = existingCategories.find((item) => item.name === isInputValue);
       if (isInputValue !== "" && isInputValue !== "New Category" && !secondElementCategory) {
          existingCategories.unshift({id: `${Math.random()}`, name: isInputValue});
          dispatch(setChooseAll(false));
@@ -61,6 +59,7 @@ const PopupAddAndEditBlock:React.FC = () => {
 
       dispatch(setTemporaryCategories(existingCategories));
       dispatch(setToAddNewCategory(false));
+
       setIsInputValue("New Category");
       setEditInputField(false);
    }
@@ -71,7 +70,7 @@ const PopupAddAndEditBlock:React.FC = () => {
       setEditInputField(false);
    }
 
-   const renderAddCategoryField = () => {
+   const renderAddCategoryField = ():JSX.Element => {
       return (
          <div className='addField'>
             <div>
