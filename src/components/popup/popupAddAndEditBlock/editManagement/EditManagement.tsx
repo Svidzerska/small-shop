@@ -35,15 +35,6 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
    const temporaryCategories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
 
 
-   // useEffect(() => {
-   //    console.log(isAddNewCategory || editingCurrentCategory)
-   // }, [isAddNewCategory]);
-
-   // useEffect(() => {
-   //    console.log(editingCurrentCategory);
-   //    console.log(isAddNewCategory || editingCurrentCategory)
-   // }, [editingCurrentCategory]);
-
    const chooseAllCategoriesForEdit = ():void => {
       if (!toChooseAll) {
          dispatch(setChooseAll(true));
@@ -119,6 +110,7 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
             <button className={!(isAddNewCategory || editingCurrentCategory) ?
                 'categories-change__info' :
                  'categories-change__info unactivated'} 
+                 disabled={isAddNewCategory || editingCurrentCategory}
                  onClick={showInfo}>
                <i>
                   <Info/>

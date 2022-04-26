@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import './popupAddAndEditBlock.scss';
+import { useDispatch, useSelector, RootStateOrAny} from 'react-redux';
 
+import './popupAddAndEditBlock.scss';
 
 import { ReactComponent as Check } from '../../../images/checkIcon.svg';
 import { ReactComponent as XMarkInSquare } from  '../../../images/squareXmarkIcon.svg';
 
-
-
-import { useDispatch, useSelector, RootStateOrAny} from 'react-redux';
 import { Categories } from '../../../interfaces/Categories';
-
+import { EditManagement } from './editManagement/EditManagement';
 import {
    setToAddNewCategory, 
    setTemporaryCategories,
@@ -17,11 +15,7 @@ import {
 } from '../../../features/products/categoriesSlice';
 
 
-import { EditManagement } from './editManagement/EditManagement';
-
-
-
-const PopupAddAndEditBlock:React.FC = () => {
+const PopupAddAndEditBlock:React.FC = ():JSX.Element => {
    const dispatch = useDispatch();
 
    const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
@@ -29,7 +23,6 @@ const PopupAddAndEditBlock:React.FC = () => {
    const [charAmountLeft, setCharAmountLeft] = useState<number>(20);
    const [editInputField, setEditInputField] = useState<boolean>(false);
    
-
    const temporaryCategories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
    
    // set New Category after canceling of editing
