@@ -5,7 +5,7 @@ import { Products } from '../interfaces/Products';
 
 const products: Products[] = [
 {
-   id: "1a",
+   id: 1,
    name : "Product 1",
    picture: image1,
    price: "100.00",
@@ -13,7 +13,7 @@ const products: Products[] = [
    part: "item"
 },
 {
-   id: "2b",
+   id: 2,
    name : "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor, ",
    picture: image2,
    price: "100.00",
@@ -21,7 +21,7 @@ const products: Products[] = [
    part: "piece"
 },
 {
-   id: "3c",
+   id: 3,
    name : "Lorem ipsum dolor sit amet consectetur adipisicing.",
    picture: image2,
    price: "100.00",
@@ -29,7 +29,7 @@ const products: Products[] = [
    part: "item"
 },
 {
-   id: "4d",
+   id: 4,
    name : "Lorem ipsum dolor sit amet consectetur adipisicing. Lorem ipsum dolor sit amet consectetur,",
    picture: image2,
    price: "100.00",

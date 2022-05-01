@@ -1,4 +1,4 @@
-import { StrictMode } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
@@ -12,11 +12,11 @@ const container:HTMLElement | null = document.getElementById('root');
 const root = createRoot(container!);
 
 root.render(
-   <StrictMode>
+   <React.StrictMode>
       <Provider store={store}>
          <App />
       </Provider>
-   </StrictMode>
+   </React.StrictMode>
 );
 
 
