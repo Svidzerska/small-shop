@@ -5,40 +5,42 @@ import './cards.scss';
 
 import { Products } from "../../../interfaces/Products";
 
+import DisplayCards from "./displayCards/DisplayCards";
 import RenderAddCard from "./renderAddCard/RenderAddCard";
 
 const Cards:React.FC = ():JSX.Element => {
    const cards:Products[] = useSelector((state : RootStateOrAny) => state.products.cardArray);
 
-   const displayCards:JSX.Element[] = cards.map((card: Products) =>
-         <li key={card.id} className="card">
-            <p className="card__image">
-               <img src={card.picture} alt=""/>
-            </p>
-            <h5 className="card__name">{card.name}</h5>
-            <div className="card__price">
-               <p>{card.currency} {card.price}</p>
-               <p>{card.part}</p>
-            </div>
-         </li>
-   )
+   console.log(DisplayCards);
+   // const displayCards:JSX.Element[] = cards.map((card: Products) =>
+   //       <li key={card.id} className="card">
+   //          <p className="card__image">
+   //             <img src={card.picture} alt=""/>
+   //          </p>
+   //          <h5 className="card__name">{card.name}</h5>
+   //          <div className="card__price">
+   //             <p>{card.currency} {card.price}</p>
+   //             <p>{card.part}</p>
+   //          </div>
+   //       </li>
+   // )
 
-   const displayCardsEven:JSX.Element[] = displayCards.filter((_item, index) =>
-      index % 2 !== 0
-   )
+   // const displayCardsEven:JSX.Element[] = DisplayCards.filter((_item, index) =>
+   //    index % 2 !== 0
+   // )
 
-   const displayCardsOdd:JSX.Element[] = displayCards.filter((_item, index) =>
-      index % 2 === 0
-   )
+   // const displayCardsOdd:JSX.Element[] = DisplayCards.filter((_item, index) =>
+   //    index % 2 === 0
+   // )
 
    return (
       <section className="cards-element__row">
          <ul className="cards-element__column">
-            {displayCardsOdd}
+            {/* {displayCardsOdd} */}
             {cards.length % 2 === 0 && <RenderAddCard/>}
          </ul>
          <ul className="cards-element__column">
-            {displayCardsEven}
+            {/* {displayCardsEven} */}
             {cards.length % 2 !== 0 && <RenderAddCard/>}
          </ul>
       </section>
