@@ -6,7 +6,6 @@ import './cards.scss';
 import { Products } from "../../../interfaces/Products";
 
 import CardElement from "./cardElement/CardElement";
-
 import RenderAddCard from "./renderAddCard/RenderAddCard";
 
 const Cards:React.FC = ():JSX.Element => {

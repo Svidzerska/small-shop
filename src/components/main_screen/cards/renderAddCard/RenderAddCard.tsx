@@ -4,7 +4,6 @@ import './renderAddCard.scss';
 
 import { ReactComponent as PlusIcon } from '../../../../images/plusIcon.svg';
 
-
 const RenderAddCard:React.FC = ():JSX.Element => {
    return (
       <li className="card cards-element__add-card">

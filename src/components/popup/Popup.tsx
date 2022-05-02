@@ -6,8 +6,8 @@ import {useSelector, RootStateOrAny} from 'react-redux';
 import { Categories } from '../../interfaces/Categories';
 
 import PopupAddAndEditBlock from './popupAddAndEditBlock/PopupAddAndEditBlock';
-import { PopupName } from './popupName/PopupName';
-import { PopupCategories } from './popupCategories/PopupCategories';
+import PopupName from './popupName/PopupName';
+import PopupCategories from './popupCategories/PopupCategories';
 import PopupEditCategories from './popupEditCategories/PopupEditCategories';
 
 

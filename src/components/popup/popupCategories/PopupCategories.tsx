@@ -1,17 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
+
 import './popupCategories.scss';
 
-import { useState } from 'react';
-import { useSelector, RootStateOrAny} from 'react-redux';
 import { Categories } from '../../../interfaces/Categories';
-
 
 interface Props {
    categories: Categories[];
 }
 
-export const PopupCategories: React.FC<Props> = (props):JSX.Element => {
-   const [isActiveCategories, setIsActiveCategories] = useState<Array<string>>([]);  
+const PopupCategories:React.FC<Props> = (props):JSX.Element => {
+   const [isActiveCategories, setIsActiveCategories] = useState<string[]>([]);
 
    const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>):void => {
       const currentActiveCategories:string[] = [...isActiveCategories];
@@ -58,3 +56,5 @@ export const PopupCategories: React.FC<Props> = (props):JSX.Element => {
       </ul>
    )
 }
+
+export default PopupCategories;

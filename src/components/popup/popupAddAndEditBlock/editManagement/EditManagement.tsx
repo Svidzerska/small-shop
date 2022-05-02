@@ -1,39 +1,32 @@
-import React, { useEffect } from "react";
-import './editManagement.scss';
+import React from "react";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 
+import './editManagement.scss';
 
-
-import { ReactComponent as Pensil } from '../../../../images/pensilIcon.svg';
-import { ReactComponent as Info } from '../../../../images/infoIcon.svg';
-import { ReactComponent as Plus } from '../../../../images/plusIcon.svg';
-import { ReactComponent as Check } from '../../../../images/checkIcon.svg';
-
-
-
+import { ReactComponent as PensilIcon } from '../../../../images/pensilIcon.svg';
+import { ReactComponent as InfoIcon } from '../../../../images/infoIcon.svg';
+import { ReactComponent as PlusIcon } from '../../../../images/plusIcon.svg';
+import { ReactComponent as CheckIcon } from '../../../../images/checkIcon.svg';
 
 import { setCorrect } from "../../../../features/products/categoriesSlice";
 import { setToAddNewCategory, setCategories, setTemporaryCategories, setChooseAll } from "../../../../features/products/categoriesSlice";
-import { Categories } from "../../../../interfaces/Categories";
 
+import { Categories } from "../../../../interfaces/Categories";
 
 interface Props {
    inputValue: string
 }
 
-
-export const EditManagement : React.FC<Props> = (props):JSX.Element => {
-
+const EditManagement:React.FC<Props> = (props):JSX.Element => {
    const dispatch = useDispatch();
+
    const toCorrect:boolean = useSelector((state : RootStateOrAny) => state.categories.correct);
    const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
    const editingCurrentCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.editingCategory);
    const toChooseAll:boolean = useSelector((state: RootStateOrAny) => state.categories.chooseAll);
-   
 
-   const categories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
-   const temporaryCategories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
-
+   const categories:Categories[] = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
+   const temporaryCategories:Categories[] = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
 
    const chooseAllCategoriesForEdit = ():void => {
       if (!toChooseAll) {
@@ -53,7 +46,6 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
       alert('Your changes were saved');
    }
 
-
    const buttonsEdit = ():JSX.Element => {
       return (
          <>
@@ -68,14 +60,14 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
                onClick={addNewCategory}
                disabled={isAddNewCategory || editingCurrentCategory}>
                   <i>
-                     <Plus/>
+                     <PlusIcon/>
                   </i>
             </button>
             <button className={!(isAddNewCategory || editingCurrentCategory) ? '' : "unactivated"}
                onClick={doneNewCategory}
                disabled={isAddNewCategory || editingCurrentCategory}>
                   <i>
-                     <Check/>
+                     <CheckIcon/>
                   </i>
             </button>
          </>
@@ -92,7 +84,7 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
          <>
             <button onClick={handleCorrect}>
                <i>
-                  <Pensil/> 
+                  <PensilIcon/> 
                </i>
             </button>
          </>
@@ -103,19 +95,21 @@ export const EditManagement : React.FC<Props> = (props):JSX.Element => {
       console.log("here information");
    }
 
-      return (
-         <div className='popup__categories-change'>
-            <p>Categories</p>
-            {toCorrect ? buttonsEdit() : buttonToEdit()}
-            <button className={!(isAddNewCategory || editingCurrentCategory) ?
-                'categories-change__info' :
-                 'categories-change__info unactivated'} 
-                 disabled={isAddNewCategory || editingCurrentCategory}
-                 onClick={showInfo}>
-               <i>
-                  <Info/>
-               </i>
-            </button>
-         </div>
-      )
+   return (
+      <div className='popup__categories-change'>
+         <p>Categories</p>
+         {toCorrect ? buttonsEdit() : buttonToEdit()}
+         <button className={!(isAddNewCategory || editingCurrentCategory) ?
+               'categories-change__info' :
+               'categories-change__info unactivated'} 
+               disabled={isAddNewCategory || editingCurrentCategory}
+               onClick={showInfo}>
+            <i>
+               <InfoIcon/>
+            </i>
+         </button>
+      </div>
+   )
 }
+
+export default EditManagement;

@@ -3,7 +3,7 @@ import image2 from '../images/image2.jpg';
 import { Products } from '../interfaces/Products';
 
 
-const products: Products[] = [
+const products:Products[] = [
 {
    id: 1,
    name : "Product 1",
@@ -36,9 +36,7 @@ const products: Products[] = [
    currency: "USD",
    part: "piece"
 }
-
 ]
-
 
 export default products;
 

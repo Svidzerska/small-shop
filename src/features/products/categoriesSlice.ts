@@ -1,9 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
+
 import Api from '../../api/getCategories';
 
 import { Categories } from '../../interfaces/Categories';
-
-
 
 interface InitialState {
    categoriesArray: object,
@@ -18,17 +17,14 @@ interface Data {
    data: Categories[]
 }
 
-
-const initialState = {
+const initialState:InitialState = {
    categoriesArray: [],
    categoriesTemporaryArray: [],
    correct: false,
    editingCategory: false,
    toAddNewCategory: false,
    chooseAll: false
-} as InitialState
-
-
+}
 
 export const getCategories = createAsyncThunk<
 Data
@@ -40,7 +36,6 @@ Data
       }) as Promise<Data>;
    },
 )
-
 
 export const categoriesSlice = createSlice({
    name: 'categories',

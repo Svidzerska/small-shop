@@ -1,45 +1,38 @@
 import React, { useEffect } from "react";
-import './search.scss';
-import {ReactComponent as Sliders} from '../../../images/slidersIcon.svg';
+import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 
+import './search.scss';
+
+import {ReactComponent as SlidersIcon} from '../../../images/slidersIcon.svg';
+
+import { setPopup } from "../../../features/products/productSlice";
+
+import SearchInput from "./searchInput/SearchInput";
 import Popup from "../../popup/Popup";
 
-import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import { setPopup } from "../../../features/products/productSlice";
-import SearchInput from "./searchInput/SearchInput";
-
-const Search : React.FC = () => {
-
+const Search:React.FC = ():JSX.Element => {
    const dispatch = useDispatch();
    const isPopup = useSelector((state : RootStateOrAny) => state.products.popup);
-
 
    const showPopup = () => {
       dispatch(setPopup(true));
    }
 
    useEffect(() => {
-      if (isPopup) {
-         document.body.style.overflow = 'hidden';
-      } else {
-         document.body.style.overflow = 'auto';
-      }
+      document.body.style.overflow = isPopup ? 'hidden' : 'auto';
    }, [isPopup]);
-
-
 
    return (
       <section className="search-element">
          <SearchInput/>
          <button className="search-element__button-sliders" onClick={showPopup}>
             <i>
-               <Sliders/>
+               <SlidersIcon/>
             </i>
          </button>
-         {isPopup ? <Popup/> : null}
+         {isPopup && <Popup/>}
       </section>
    ) 
 };
-
 
 export default Search;

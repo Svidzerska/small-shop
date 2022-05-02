@@ -3,27 +3,28 @@ import { useDispatch, useSelector, RootStateOrAny} from 'react-redux';
 
 import './popupAddAndEditBlock.scss';
 
-import { ReactComponent as Check } from '../../../images/checkIcon.svg';
-import { ReactComponent as XMarkInSquare } from  '../../../images/squareXmarkIcon.svg';
+import { ReactComponent as CheckIcon } from '../../../images/checkIcon.svg';
+import { ReactComponent as XMarkInSquareIcon } from  '../../../images/squareXmarkIcon.svg';
 
-import { Categories } from '../../../interfaces/Categories';
-import { EditManagement } from './editManagement/EditManagement';
 import {
    setToAddNewCategory, 
    setTemporaryCategories,
    setChooseAll
 } from '../../../features/products/categoriesSlice';
 
+import { Categories } from '../../../interfaces/Categories';
+
+import EditManagement from './editManagement/EditManagement';
 
 const PopupAddAndEditBlock:React.FC = ():JSX.Element => {
    const dispatch = useDispatch();
 
    const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
+   const temporaryCategories:Categories[] = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
+   
    const [isInputValue, setIsInputValue] = useState<string>("New Category");
    const [charAmountLeft, setCharAmountLeft] = useState<number>(20);
    const [editInputField, setEditInputField] = useState<boolean>(false);
-   
-   const temporaryCategories:Array<Categories> = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
    
    // set New Category after canceling of editing
    useEffect(() => {
@@ -46,7 +47,7 @@ const PopupAddAndEditBlock:React.FC = ():JSX.Element => {
       const existingCategories:Categories[] = [...temporaryCategories];
       const secondElementCategory:Categories | undefined = existingCategories.find((item) => item.name === isInputValue);
       if (isInputValue !== "" && isInputValue !== "New Category" && !secondElementCategory) {
-         existingCategories.unshift({id: `${Math.random()}`, name: isInputValue});
+         existingCategories.unshift({id: Math.random(), name: isInputValue});
          dispatch(setChooseAll(false));
       }
 
@@ -76,12 +77,12 @@ const PopupAddAndEditBlock:React.FC = ():JSX.Element => {
                </button>
                <button className='addField__buttonResult' onClick={doneInputNewCategory}>
                   <i>
-                     <Check />
+                     <CheckIcon />
                   </i>
                </button>
                <button className='addField__buttonResult' onClick={cancelInputNewCategory}>
                   <i>
-                     <XMarkInSquare />
+                     <XMarkInSquareIcon />
                   </i>
                </button>
             </div>
