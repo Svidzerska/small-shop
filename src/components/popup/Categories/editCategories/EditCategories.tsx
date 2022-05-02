@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 
-import './popupEditCategories.scss';
+import './editCategories.scss';
 
-import { ReactComponent as PensilIcon } from '../../../images/pensilIcon.svg';
-import { ReactComponent as TrashIcon } from '../../../images/trashIcon.svg';
-import { ReactComponent as CheckIcon } from '../../../images/checkIcon.svg';
-import { ReactComponent as XMarkInSquareIcon } from  '../../../images/squareXmarkIcon.svg';
+import { ReactComponent as PensilIcon } from '../../../../images/pensilIcon.svg';
+import { ReactComponent as TrashIcon } from '../../../../images/trashIcon.svg';
+import { ReactComponent as CheckIcon } from '../../../../images/checkIcon.svg';
+import { ReactComponent as XMarkInSquareIcon } from  '../../../../images/squareXmarkIcon.svg';
 
-import { setTemporaryCategories, setEditingCategory, setChooseAll } from "../../../features/products/categoriesSlice";
+import { setTemporaryCategories, setEditingCategory, setChooseAll } from "../../../../features/products/categoriesSlice";
 
-import { Categories } from '../../../interfaces/Categories';
+import { Category } from '../../../../interfaces/Category';
 
-const PopupEditCategories:React.FC = ():JSX.Element => {
+const EditCategories:React.FC = ():JSX.Element => {
    const dispatch = useDispatch();
    
-   const temporaryCategories:Categories[] = useSelector((state: RootStateOrAny) => state.categories.categoriesTemporaryArray);
+   const temporaryCategories:Category[] = useSelector((state: RootStateOrAny) => state.categories.categoriesTemporaryArray);
    const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
    const toChooseAll:boolean = useSelector((state: RootStateOrAny) => state.categories.chooseAll);
    const editingCurrentCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.editingCategory);
@@ -78,7 +78,7 @@ const PopupEditCategories:React.FC = ():JSX.Element => {
    }
 
    const deleteCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
-      const currentCategories:Categories[] = [...temporaryCategories];
+      const currentCategories:Category[] = [...temporaryCategories];
       dispatch(setTemporaryCategories(currentCategories.filter((item) => item.id !== +e.currentTarget.id)));
       
       const deleteCategory = currentCategories.find((item) => item.id === +e.currentTarget.id);
@@ -86,7 +86,7 @@ const PopupEditCategories:React.FC = ():JSX.Element => {
    }
 
    const doneInputCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
-      const categoriesInput:Categories[] = [...temporaryCategories];
+      const categoriesInput:Category[] = [...temporaryCategories];
       const secondElementCategory = categoriesInput.find((item) => item.name === isInputValue && item.id !== +e.currentTarget.id);
 
       if (!secondElementCategory) {
@@ -115,7 +115,7 @@ const PopupEditCategories:React.FC = ():JSX.Element => {
       dispatch(setEditingCategory(false));
    }
 
-   const renderEditButtons = (category:Categories):JSX.Element => {
+   const renderEditButtons = (category:Category):JSX.Element => {
       return (
          <>
             <button onClick={editCurrentCategory} id={`${category.id}`} disabled={isAddNewCategory || editingCurrentCategory}>
@@ -132,7 +132,7 @@ const PopupEditCategories:React.FC = ():JSX.Element => {
       )
    }
 
-   const renderDoneButtons = (category:Categories):JSX.Element => {
+   const renderDoneButtons = (category:Category):JSX.Element => {
       return (
          <>
             <button onClick={doneInputCategory} id={`${category.id}`}>
@@ -149,7 +149,7 @@ const PopupEditCategories:React.FC = ():JSX.Element => {
       )
    }
 
-   const displayCategories: JSX.Element[] = temporaryCategories.map((category: Categories) => {
+   const displayCategories: JSX.Element[] = temporaryCategories.map((category: Category) => {
       return (
          <li key={category.id}
             className={isActiveCategories.find(item => item === category.name) ? 'edit-component active' : 'edit-component'}>
@@ -191,4 +191,4 @@ const PopupEditCategories:React.FC = ():JSX.Element => {
    )
 }
 
-export default PopupEditCategories;
+export default EditCategories;

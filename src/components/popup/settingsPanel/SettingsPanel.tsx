@@ -1,23 +1,19 @@
 import React from "react";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 
-import './editManagement.scss';
+import './settingsPanel.scss';
 
-import { ReactComponent as PensilIcon } from '../../../../images/pensilIcon.svg';
-import { ReactComponent as InfoIcon } from '../../../../images/infoIcon.svg';
-import { ReactComponent as PlusIcon } from '../../../../images/plusIcon.svg';
-import { ReactComponent as CheckIcon } from '../../../../images/checkIcon.svg';
+import { ReactComponent as PensilIcon } from '../../../images/pensilIcon.svg';
+import { ReactComponent as InfoIcon } from '../../../images/infoIcon.svg';
+import { ReactComponent as PlusIcon } from '../../../images/plusIcon.svg';
+import { ReactComponent as CheckIcon } from '../../../images/checkIcon.svg';
 
-import { setEditMode } from "../../../../features/products/categoriesSlice";
-import { setToAddNewCategory, setCategories, setTemporaryCategories, setChooseAll } from "../../../../features/products/categoriesSlice";
+import { setEditMode } from "../../../features/products/categoriesSlice";
+import { setToAddNewCategory, setCategories, setTemporaryCategories, setChooseAll } from "../../../features/products/categoriesSlice";
 
-import { Categories } from "../../../../interfaces/Categories";
+import { Category } from "../../../interfaces/Category";
 
-interface Props {
-   inputValue: string
-}
-
-const EditManagement:React.FC<Props> = (props):JSX.Element => {
+const EditManagement:React.FC = ():JSX.Element => {
    const dispatch = useDispatch();
 
    const isEditMode:boolean = useSelector((state : RootStateOrAny) => state.categories.editMode);
@@ -25,8 +21,8 @@ const EditManagement:React.FC<Props> = (props):JSX.Element => {
    const editingCurrentCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.editingCategory);
    const toChooseAll:boolean = useSelector((state: RootStateOrAny) => state.categories.chooseAll);
 
-   const categories:Categories[] = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
-   const temporaryCategories:Categories[] = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
+   const categories:Category[] = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
+   const temporaryCategories:Category[] = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
 
    const chooseAllCategoriesForEdit = ():void => {
       if (!toChooseAll) {

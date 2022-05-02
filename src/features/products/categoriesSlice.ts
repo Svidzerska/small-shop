@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
 
 import Api from '../../api/getCategories';
 
-import { Categories } from '../../interfaces/Categories';
+import { Category } from '../../interfaces/Category';
 
 interface InitialState {
    categoriesArray: object,
@@ -14,7 +14,7 @@ interface InitialState {
 }
 
 interface Data {
-   data: Categories[]
+   data: Category[]
 }
 
 const initialState:InitialState = {
@@ -44,10 +44,10 @@ export const categoriesSlice = createSlice({
       setEditMode: (state, action : PayloadAction<boolean>) => {
          state.editMode = action.payload;
       },
-      setCategories: (state, action : PayloadAction<Categories[]>) => {
+      setCategories: (state, action : PayloadAction<Category[]>) => {
          state.categoriesArray = action.payload;
       },
-      setTemporaryCategories: (state, action : PayloadAction<Categories[]>) => {
+      setTemporaryCategories: (state, action : PayloadAction<Category[]>) => {
          state.categoriesTemporaryArray = action.payload;
       },
       setEditingCategory: (state, action : PayloadAction<boolean>) => {

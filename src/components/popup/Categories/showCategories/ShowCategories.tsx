@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 
-import './popupCategories.scss';
+import './showCategories.scss';
 
-import { Categories } from '../../../interfaces/Categories';
+import { Category } from '../../../../interfaces/Category';
 
 interface Props {
-   categories: Categories[];
+   categories: Category[];
 }
 
-const PopupCategories:React.FC<Props> = (props):JSX.Element => {
+const ShowCategories:React.FC<Props> = (props):JSX.Element => {
    const [isActiveCategories, setIsActiveCategories] = useState<string[]>([]);
 
    const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>):void => {
@@ -27,7 +27,7 @@ const PopupCategories:React.FC<Props> = (props):JSX.Element => {
       }
    }
 
-   const displayCategories: JSX.Element[] = props.categories.map((category: Categories) => {
+   const displayCategories: JSX.Element[] = props.categories.map((category: Category) => {
       return (
          <li key={category.id}>
             <button
@@ -57,4 +57,4 @@ const PopupCategories:React.FC<Props> = (props):JSX.Element => {
    )
 }
 
-export default PopupCategories;
+export default ShowCategories;

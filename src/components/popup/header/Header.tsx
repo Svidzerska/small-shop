@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 
-import './popupName.scss';
+import './header.scss';
 
 import {ReactComponent as ArrowLeftIcon} from '../../../images/arrowLeftIcon.svg';
 import {ReactComponent as XMarkIcon} from '../../../images/xmarkIcon.svg';
@@ -14,7 +14,7 @@ import {
    setChooseAll
 } from "../../../features/products/categoriesSlice";
 
-const PopupName:React.FC = ():JSX.Element => {
+const Header:React.FC = ():JSX.Element => {
    const dispatch = useDispatch();
 
    const isEditMode:boolean = useSelector((state : RootStateOrAny) => state.categories.editMode);
@@ -49,4 +49,4 @@ const PopupName:React.FC = ():JSX.Element => {
    )
 }
 
-export default PopupName;
+export default Header;

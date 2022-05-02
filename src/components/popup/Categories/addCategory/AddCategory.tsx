@@ -1,31 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, RootStateOrAny} from 'react-redux';
 
-import './popupAddAndEditBlock.scss';
+import './addCategory.scss';
 
-import { ReactComponent as CheckIcon } from '../../../images/checkIcon.svg';
-import { ReactComponent as XMarkInSquareIcon } from  '../../../images/squareXmarkIcon.svg';
+import { ReactComponent as CheckIcon } from '../../../../images/checkIcon.svg';
+import { ReactComponent as XMarkInSquareIcon } from  '../../../../images/squareXmarkIcon.svg';
 
 import {
-   setToAddNewCategory, 
+   setToAddNewCategory,
    setTemporaryCategories,
    setChooseAll
-} from '../../../features/products/categoriesSlice';
+} from '../../../../features/products/categoriesSlice';
 
-import { Categories } from '../../../interfaces/Categories';
+import { Category } from '../../../../interfaces/Category';
 
-import EditManagement from './editManagement/EditManagement';
-
-const PopupAddAndEditBlock:React.FC = ():JSX.Element => {
+const AddCategory:React.FC = ():JSX.Element => {
    const dispatch = useDispatch();
 
    const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
-   const temporaryCategories:Categories[] = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
-   
+   const temporaryCategories:Category[] = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
+
    const [isInputValue, setIsInputValue] = useState<string>("New Category");
    const [charAmountLeft, setCharAmountLeft] = useState<number>(20);
    const [editInputField, setEditInputField] = useState<boolean>(false);
-   
+
    // set New Category after canceling of editing
    useEffect(() => {
       setIsInputValue("New Category");
@@ -34,7 +32,7 @@ const PopupAddAndEditBlock:React.FC = ():JSX.Element => {
    const selectRange = (e: React.FocusEvent<HTMLInputElement>):void => {
       e.currentTarget.setSelectionRange(0,e.currentTarget.value.length,);
    }
- 
+
    const editInputNewCategory = (e: React.FormEvent<HTMLInputElement>):void => {
       setEditInputField(true);
       if (e.currentTarget.value.length <= 20) {
@@ -44,8 +42,8 @@ const PopupAddAndEditBlock:React.FC = ():JSX.Element => {
    }
 
    const doneInputNewCategory = ():void => {
-      const existingCategories:Categories[] = [...temporaryCategories];
-      const secondElementCategory:Categories | undefined = existingCategories.find((item) => item.name === isInputValue);
+      const existingCategories:Category[] = [...temporaryCategories];
+      const secondElementCategory:Category | undefined = existingCategories.find((item) => item.name === isInputValue);
       if (isInputValue !== "" && isInputValue !== "New Category" && !secondElementCategory) {
          existingCategories.unshift({id: Math.random(), name: isInputValue});
          dispatch(setChooseAll(false));
@@ -86,19 +84,17 @@ const PopupAddAndEditBlock:React.FC = ():JSX.Element => {
                   </i>
                </button>
             </div>
-            {editInputField ? 
-            <p className='addField__char-amount'>{charAmountLeft} char. left</p> : 
-            null}
+            {editInputField &&
+            <p className='addField__char-amount'>{charAmountLeft} char. left</p>}
          </div>
       )
    }
 
    return (
       <>
-         <EditManagement inputValue={isInputValue}/>
-         {isAddNewCategory ? renderAddCategoryField() : null}
+         {isAddNewCategory && renderAddCategoryField()}
       </>
    )
 }
 
-export default PopupAddAndEditBlock;
+export default AddCategory;
