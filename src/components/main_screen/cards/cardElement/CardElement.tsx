@@ -1,24 +1,23 @@
 import { Products } from "../../../../interfaces/Products";
 
-const CardElement:React.FC<Products> = (props):JSX.Element => {
+interface Props {
+   card:Products,
+}
+
+const CardElement:React.FC<Props> = (props):JSX.Element => {
    const {
-      id,
-      name,
-      picture,
-      currency,
-      price,
-      part,
+      card,
    } = props;
 
    return (
       <li className="card">
          <p className="card__image">
-            <img src={picture} alt=""/>
+            <img src={card.picture} alt=""/>
          </p>
-         <h5 className="card__name">{name}</h5>
+         <h5 className="card__name">{card.name}</h5>
          <div className="card__price">
-            <p>{currency} {price}</p>
-            <p>{part}</p>
+            <p>{card.currency} {card.price}</p>
+            <p>{card.part}</p>
          </div>
       </li>
    )

@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import './menu.scss';
+import './header.scss';
 
 import { ReactComponent as BurgerIcon } from "../../../images/burgerIcon.svg";
 
 import { getProducts } from "../../../features/products/productSlice";
 import { getCategories } from "../../../features/products/categoriesSlice";
 
-const Menu:React.FC = ():JSX.Element => {
+const Header:React.FC = ():JSX.Element => {
    const dispatch = useDispatch();
 
    useEffect(() => {
@@ -32,4 +32,4 @@ const Menu:React.FC = ():JSX.Element => {
 };
 
 
-export default Menu;
+export default Header;

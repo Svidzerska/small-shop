@@ -13,12 +13,7 @@ const Cards:React.FC = ():JSX.Element => {
 
    const displayCards:JSX.Element[] = cards.map((card: Products) =>
       <CardElement key={card.id}
-         id={card.id}
-         picture={card.picture}
-         name={card.name}
-         currency={card.currency}
-         price={card.price}
-         part={card.part}
+         card={card}
       />
    )
 

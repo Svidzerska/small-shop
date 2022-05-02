@@ -1,28 +1,32 @@
-import React, {KeyboardEventHandler, useState} from "react";
+import React, { useState } from "react";
 
 import './searchInput.scss';
 
 import {ReactComponent as GlassIcon} from '../../../../images/glassIcon.svg';
 
 const SearchInput:React.FC = ():JSX.Element => {
-   const [isInputValue, setIsInputValue] = useState<string>("");
+   const [value, setValue] = useState<string>("");
 
    const setValues = (e: React.FormEvent<HTMLInputElement>):void => {
-      setIsInputValue(e.currentTarget.value);
+      setValue(e.currentTarget.value);
    }
 
-   const searchStart = ():void => {
-      console.log(isInputValue);
+   const searchDone = (value:string):void => {
+      console.log(value);
+   }
+
+   const searchStart = (e: React.MouseEvent<HTMLButtonElement>):void => {
+      searchDone(value);
    }
 
    const searchStartEnter = (e: React.KeyboardEvent<HTMLInputElement>):void => {
-      e.key === 'Enter' && console.log(isInputValue);
+      e.key === 'Enter' && searchDone(value);
    }
 
    return (
       <div className="search-field">
          <input placeholder="Search"
-            value={isInputValue}
+            value={value}
             onChange={setValues}
             onKeyDown={searchStartEnter} />
          <button className="search-element__button-glass" onClick={searchStart}>
