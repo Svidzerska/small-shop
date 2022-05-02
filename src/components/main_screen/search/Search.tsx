@@ -1,38 +1,41 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
+import React, { useState } from "react";
 
 import './search.scss';
 
-import {ReactComponent as SlidersIcon} from '../../../images/slidersIcon.svg';
-
-import { setPopup } from "../../../features/products/productSlice";
-
-import SearchInput from "./searchInput/SearchInput";
-import Popup from "../../popup/Popup";
+import {ReactComponent as GlassIcon} from '../../../images/glassIcon.svg';
 
 const Search:React.FC = ():JSX.Element => {
-   const dispatch = useDispatch();
-   const isPopup = useSelector((state : RootStateOrAny) => state.products.popup);
+   const [value, setValue] = useState<string>("");
 
-   const showPopup = () => {
-      dispatch(setPopup(true));
+   const setValues = (e: React.FormEvent<HTMLInputElement>):void => {
+      setValue(e.currentTarget.value);
    }
 
-   useEffect(() => {
-      document.body.style.overflow = isPopup ? 'hidden' : 'auto';
-   }, [isPopup]);
+   const searchDone = (value:string):void => {
+      console.log(value);
+   }
+
+   const searchStart = (e: React.MouseEvent<HTMLButtonElement>):void => {
+      searchDone(value);
+   }
+
+   const searchStartEnter = (e: React.KeyboardEvent<HTMLInputElement>):void => {
+      e.key === 'Enter' && searchDone(value);
+   }
 
    return (
-      <section className="search-element">
-         <SearchInput/>
-         <button className="search-element__button-sliders" onClick={showPopup}>
+      <div className="search-field">
+         <input placeholder="Search"
+            value={value}
+            onChange={setValues}
+            onKeyDown={searchStartEnter} />
+         <button className="search-element__button-glass" onClick={searchStart}>
             <i>
-               <SlidersIcon/>
+               <GlassIcon/>
             </i>
          </button>
-         {isPopup && <Popup/>}
-      </section>
-   ) 
+      </div>
+   )
 };
 
 export default Search;

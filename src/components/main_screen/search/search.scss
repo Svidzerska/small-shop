@@ -1,20 +1,27 @@
-.search-element  {
-   margin-left: 10px;
-   margin-right: 10px;
+.search-field {
    display: flex;
    justify-content: space-between;
-
+   width: 85%;
    
-
-   .search-element__button-sliders {
+   input {
+      width: 100%;
+      border-radius: 20px;
+      border: 0;
+      background-color: rgb(236, 236, 236);
+      padding-left: 10px;
+   }
+   
+   .search-element__button-glass {
       cursor: pointer;
       padding: 0;
       width: fit-content;
       height: fit-content;
-      background-color: black;
+      background: none;
       border: none;
       text-align: center;
       border-radius: 7px;
+      transform: translateX(-30px);
+
 
       i {
          display: inline-block;
@@ -22,7 +29,7 @@
          height: 20px;
          padding: 5px;
          vertical-align: middle;
-         transform: rotateZ(-90deg);
+         transform: rotateZ(90deg);
       }
    }
 }
