@@ -8,7 +8,7 @@ import { ReactComponent as InfoIcon } from '../../../../images/infoIcon.svg';
 import { ReactComponent as PlusIcon } from '../../../../images/plusIcon.svg';
 import { ReactComponent as CheckIcon } from '../../../../images/checkIcon.svg';
 
-import { setCorrect } from "../../../../features/products/categoriesSlice";
+import { setEditMode } from "../../../../features/products/categoriesSlice";
 import { setToAddNewCategory, setCategories, setTemporaryCategories, setChooseAll } from "../../../../features/products/categoriesSlice";
 
 import { Categories } from "../../../../interfaces/Categories";
@@ -20,7 +20,7 @@ interface Props {
 const EditManagement:React.FC<Props> = (props):JSX.Element => {
    const dispatch = useDispatch();
 
-   const toCorrect:boolean = useSelector((state : RootStateOrAny) => state.categories.correct);
+   const isEditMode:boolean = useSelector((state : RootStateOrAny) => state.categories.editMode);
    const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
    const editingCurrentCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.editingCategory);
    const toChooseAll:boolean = useSelector((state: RootStateOrAny) => state.categories.chooseAll);
@@ -75,7 +75,7 @@ const EditManagement:React.FC<Props> = (props):JSX.Element => {
    }
 
    const handleCorrect = ():void => {
-      dispatch(setCorrect(true));
+      dispatch(setEditMode(true));
       dispatch(setTemporaryCategories([...categories]));
    }
 
@@ -98,7 +98,7 @@ const EditManagement:React.FC<Props> = (props):JSX.Element => {
    return (
       <div className='popup__categories-change'>
          <p>Categories</p>
-         {toCorrect ? buttonsEdit() : buttonToEdit()}
+         {isEditMode ? buttonsEdit() : buttonToEdit()}
          <button className={!(isAddNewCategory || editingCurrentCategory) ?
                'categories-change__info' :
                'categories-change__info unactivated'} 

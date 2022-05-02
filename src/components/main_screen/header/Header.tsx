@@ -20,7 +20,7 @@ const Header:React.FC = ():JSX.Element => {
    }, []);
 
    return (
-      <header className="menu-element">
+      <header className="header">
          <h1>Shop</h1>
          <button onClick={getProducts}>
             <i>

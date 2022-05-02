@@ -14,6 +14,7 @@ import { Categories } from '../../../interfaces/Categories';
 
 const PopupEditCategories:React.FC = ():JSX.Element => {
    const dispatch = useDispatch();
+   
    const temporaryCategories:Categories[] = useSelector((state: RootStateOrAny) => state.categories.categoriesTemporaryArray);
    const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
    const toChooseAll:boolean = useSelector((state: RootStateOrAny) => state.categories.chooseAll);

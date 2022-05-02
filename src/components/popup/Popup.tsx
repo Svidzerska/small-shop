@@ -15,13 +15,13 @@ import PopupEditCategories from './popupEditCategories/PopupEditCategories';
 const Popup:React.FC = ():JSX.Element => {
 
    const categories:Categories[] = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
-   const toCorrect:boolean = useSelector((state : RootStateOrAny) => state.categories.correct);
+   const isEditMode:boolean = useSelector((state : RootStateOrAny) => state.categories.editMode);
 
    return (
       <div className="popup">
          <PopupName/>
          <PopupAddAndEditBlock/>
-         {!toCorrect ? <PopupCategories categories={categories}/> : <PopupEditCategories/>}
+         {!isEditMode ? <PopupCategories categories={categories}/> : <PopupEditCategories/>}
       </div>
    )
 }

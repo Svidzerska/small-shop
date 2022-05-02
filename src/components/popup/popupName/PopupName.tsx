@@ -8,7 +8,7 @@ import {ReactComponent as XMarkIcon} from '../../../images/xmarkIcon.svg';
 
 import { setPopup } from "../../../features/products/productSlice";
 import {
-   setCorrect,
+   setEditMode,
    setEditingCategory,
    setToAddNewCategory,
    setChooseAll
@@ -17,14 +17,14 @@ import {
 const PopupName:React.FC = ():JSX.Element => {
    const dispatch = useDispatch();
 
-   const toCorrect:boolean = useSelector((state : RootStateOrAny) => state.categories.correct);
+   const isEditMode:boolean = useSelector((state : RootStateOrAny) => state.categories.editMode);
 
    const closePopup = ():void => {
       dispatch(setPopup(false));
    }
 
    const closeCorrection = ():void => {
-      dispatch(setCorrect(false));
+      dispatch(setEditMode(false));
       dispatch(setToAddNewCategory(false));
       dispatch(setEditingCategory(false));
       dispatch(setChooseAll(false));
@@ -34,14 +34,14 @@ const PopupName:React.FC = ():JSX.Element => {
    return (
       <>
          <div className='popup__name'>
-            <button onClick={!toCorrect ? closePopup : closeCorrection}>
+            <button onClick={!isEditMode ? closePopup : closeCorrection}>
                <i>
-                  {!toCorrect ? <ArrowLeftIcon/> : <XMarkIcon/>}
+                  {!isEditMode ? <ArrowLeftIcon/> : <XMarkIcon/>}
                </i>
             </button>
             <h1>Filter</h1>
          </div>
-         {toCorrect &&
+         {isEditMode &&
          <div className='popup__comments'>
             <p>Categories editing</p>
          </div>}

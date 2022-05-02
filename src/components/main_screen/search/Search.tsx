@@ -15,7 +15,7 @@ const Search:React.FC = ():JSX.Element => {
       console.log(value);
    }
 
-   const searchStart = (e: React.MouseEvent<HTMLButtonElement>):void => {
+   const searchStartButton = (e: React.MouseEvent<HTMLButtonElement>):void => {
       searchDone(value);
    }
 
@@ -29,7 +29,7 @@ const Search:React.FC = ():JSX.Element => {
             value={value}
             onChange={setValues}
             onKeyDown={searchStartEnter} />
-         <button className="search-element__button-glass" onClick={searchStart}>
+         <button className="search-field__button-glass" onClick={searchStartButton}>
             <i>
                <GlassIcon/>
             </i>
