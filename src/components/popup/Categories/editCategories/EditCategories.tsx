@@ -5,8 +5,6 @@ import './editCategories.scss';
 
 import { ReactComponent as PensilIcon } from '../../../../images/pensilIcon.svg';
 import { ReactComponent as TrashIcon } from '../../../../images/trashIcon.svg';
-import { ReactComponent as CheckIcon } from '../../../../images/checkIcon.svg';
-import { ReactComponent as XMarkInSquareIcon } from  '../../../../images/squareXmarkIcon.svg';
 
 import {
    setTemporaryCategories,
@@ -15,6 +13,8 @@ import {
 } from "../../../../features/categories/categoriesSlice";
 
 import { Category } from '../../../../interfaces/Category';
+
+import ConfirmButtons from './confirmButtons/ConfirmButtons';
 
 const EditCategories: React.FC = (): JSX.Element => {
    const dispatch = useDispatch();
@@ -137,23 +137,6 @@ const EditCategories: React.FC = (): JSX.Element => {
       )
    }
 
-   const renderDoneButtons = (category: Category): JSX.Element => {
-      return (
-         <>
-            <button onClick={(e) => doneCategory(e, category.id)}>
-               <i>
-                  <CheckIcon/>
-               </i>
-            </button>
-            <button onClick={cancelEditCategory}>
-               <i>
-                  <XMarkInSquareIcon/>
-               </i>
-            </button>
-         </>
-      )
-   }
-
    const displayCategories: JSX.Element[] = temporaryCategories.map((category: Category) => {
       return (
          <li key={category.id}
@@ -180,7 +163,7 @@ const EditCategories: React.FC = (): JSX.Element => {
             </div>
             {activeCategories.find(item => item === category.name) ?
                (editedCategory === category.id ?
-                  renderDoneButtons(category) :
+                  <ConfirmButtons category={category} check={doneCategory} cancel={cancelEditCategory}/> :
                   renderEditButtons(category)) :
                null}
          </li>
