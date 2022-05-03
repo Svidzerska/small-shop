@@ -92,7 +92,7 @@ const EditCategories: React.FC = (): JSX.Element => {
       const currentCategories: Category[] = [...temporaryCategories];
       const secondElementCategory = currentCategories.find((item) => item.name === value && item.id !== id);
 
-      if (!secondElementCategory) {
+      if (!secondElementCategory && value !== "") {
          const currentCategory = currentCategories.findIndex((item) => item.id === id);
          const indexActiveCategory = activeCategories.findIndex((item) => item === currentCategories[currentCategory].name);
       
