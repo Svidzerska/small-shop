@@ -1,6 +1,6 @@
 import { Category } from "../interfaces/Category";
 
-const categories:Category[] = [
+const categories: Category[] = [
 {
    id: 1,
    name: "category_1"

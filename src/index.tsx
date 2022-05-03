@@ -8,7 +8,7 @@ import { store } from './app/store';
 
 import App from './App';
 
-const container:HTMLElement | null = document.getElementById('root');
+const container: HTMLElement | null = document.getElementById('root');
 const root = createRoot(container!);
 
 root.render(

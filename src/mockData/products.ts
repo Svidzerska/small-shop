@@ -3,7 +3,7 @@ import image2 from '../images/image2.jpg';
 import { Product } from '../interfaces/Product';
 
 
-const products:Product[] = [
+const products: Product[] = [
 {
    id: 1,
    name : "Product 1",

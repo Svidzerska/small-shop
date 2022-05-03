@@ -7,7 +7,7 @@ import Search from './components/main_screen/search/Search';
 import Filter from './components/main_screen/filter/Filter';
 import Cards from './components/main_screen/cards/Cards';
 
-const App:React.FC = ():JSX.Element => {
+const App: React.FC = (): JSX.Element => {
    return (
       <>
          <Header />
