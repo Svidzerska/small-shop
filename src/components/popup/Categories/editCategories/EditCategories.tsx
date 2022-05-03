@@ -15,6 +15,7 @@ import {
 import { Category } from '../../../../interfaces/Category';
 
 import ConfirmButtons from '../buttonsComponents/confirmButtons/ConfirmButtons';
+import EditButtons from '../buttonsComponents/editButtons/EditButtons';
 
 const EditCategories: React.FC = (): JSX.Element => {
    const dispatch = useDispatch();
@@ -120,20 +121,17 @@ const EditCategories: React.FC = (): JSX.Element => {
       dispatch(setEditingCategory(false));
    }
 
-   const renderEditButtons = (category: Category): JSX.Element => {
+   const renderButtons = (category: Category): JSX.Element => {
       return (
-         <>
-            <button onClick={(e) => editCategory(e, category.id)} disabled={isAddingNewCategory || isEditingCategory}>
-               <i className={!(isAddingNewCategory || isEditingCategory) ? '' : "unactivated"}>
-                  <PensilIcon/>
-               </i>
-            </button>
-            <button onClick={(e) => deleteCategory(e, category.id)} disabled={isAddingNewCategory || isEditingCategory}>
-               <i className={!(isAddingNewCategory || isEditingCategory) ? '' : "unactivated"}>
-                  <TrashIcon/>
-               </i>
-            </button>
-         </>
+         editedCategory === category.id ?
+            <ConfirmButtons category={category}
+               check={doneCategory}
+               cancel={cancelEditCategory} /> :
+            <EditButtons category={category}
+               edit={editCategory}
+               deleteElement={deleteCategory}
+               className={!(isAddingNewCategory || isEditingCategory) ? '' : "unactivated"}
+               isDisabled={isAddingNewCategory || isEditingCategory} />
       )
    }
 
@@ -161,11 +159,8 @@ const EditCategories: React.FC = (): JSX.Element => {
                   <p className='edit-component__char-amount'>{charAmountLeft} char. left</p> :
                   null}
             </div>
-            {activeCategories.find(item => item === category.name) ?
-               (editedCategory === category.id ?
-                  <ConfirmButtons category={category} check={doneCategory} cancel={cancelEditCategory}/> :
-                  renderEditButtons(category)) :
-               null}
+            {activeCategories.find(item => item === category.name) &&
+             renderButtons(category)}
          </li>
       )
    })
