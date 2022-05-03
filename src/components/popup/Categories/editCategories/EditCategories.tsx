@@ -3,9 +3,6 @@ import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 
 import './editCategories.scss';
 
-import { ReactComponent as PensilIcon } from '../../../../images/pensilIcon.svg';
-import { ReactComponent as TrashIcon } from '../../../../images/trashIcon.svg';
-
 import {
    setTemporaryCategories,
    setEditingCategory,
@@ -121,6 +118,17 @@ const EditCategories: React.FC = (): JSX.Element => {
       dispatch(setEditingCategory(false));
    }
 
+   const renderCharLeft = (category: Category): JSX.Element => {
+      return (
+         <>
+         {activeCategories.find(item => item === category.name) &&
+         isEditingCategory &&
+         editedCategory === category.id &&
+            <p className='edit-component__char-amount'>{charAmountLeft} char. left</p>}
+         </>
+      )
+   }
+
    const renderButtons = (category: Category): JSX.Element => {
       return (
          editedCategory === category.id ?
@@ -144,20 +152,15 @@ const EditCategories: React.FC = (): JSX.Element => {
                   onClick={chooseCategory}
                   className={activeCategories.find(item => item === category.name) ? 'categories-name__button active' : 'categories-name__button'}
                   value={category.name}
-                  disabled={isAddingNewCategory || isEditingCategory}
-                  >
-                  {editedCategory === category.id ?
-                     <input value={isEditingCategory ? value : category.name}
-                        onChange={editCategoryInputField}
-                        className="inputForEdit"
-                        autoFocus /> :
-                     category.name}
+                  disabled={isAddingNewCategory || isEditingCategory}>
+                     {editedCategory === category.id ?
+                        <input value={isEditingCategory ? value : category.name}
+                           onChange={editCategoryInputField}
+                           className="inputForEdit"
+                           autoFocus /> :
+                        category.name}
                </button>
-               {activeCategories.find(item => item === category.name) &&
-                  isEditingCategory &&
-                  editedCategory === category.id ?
-                  <p className='edit-component__char-amount'>{charAmountLeft} char. left</p> :
-                  null}
+               {renderCharLeft(category)}
             </div>
             {activeCategories.find(item => item === category.name) &&
              renderButtons(category)}
