@@ -1,10 +1,10 @@
 import { Product } from "../../../../interfaces/Product";
 
 interface Props {
-   card:Product,
+   card: Product,
 }
 
-const CardElement:React.FC<Props> = (props):JSX.Element => {
+const CardElement: React.FC<Props> = (props): JSX.Element => {
    const {
       card,
    } = props;

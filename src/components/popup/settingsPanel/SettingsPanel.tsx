@@ -18,18 +18,18 @@ import {
 
 import { Category } from "../../../interfaces/Category";
 
-const EditManagement:React.FC = ():JSX.Element => {
+const EditManagement: React.FC = (): JSX.Element => {
    const dispatch = useDispatch();
 
-   const isEditMode:boolean = useSelector((state : RootStateOrAny) => state.categories.isEditMode);
-   const isAddingNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.addingNewCategory);
-   const isEditingCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.editingCategory);
-   const isChooseAllCategories:boolean = useSelector((state: RootStateOrAny) => state.categories.chooseAllCategories);
+   const isEditMode: boolean = useSelector((state: RootStateOrAny) => state.categories.isEditMode);
+   const isAddingNewCategory: boolean = useSelector((state: RootStateOrAny) => state.categories.addingNewCategory);
+   const isEditingCategory: boolean = useSelector((state: RootStateOrAny) => state.categories.editingCategory);
+   const isChooseAllCategories: boolean = useSelector((state: RootStateOrAny) => state.categories.chooseAllCategories);
 
-   const categories:Category[] = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
-   const temporaryCategories:Category[] = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
+   const categories: Category[] = useSelector((state: RootStateOrAny) => state.categories.categoriesArray);
+   const temporaryCategories: Category[] = useSelector((state: RootStateOrAny) => state.categories.categoriesTemporaryArray);
 
-   const chooseAllCategoriesForEdit = ():void => {
+   const chooseAllCategoriesForEdit = () :void => {
       if (!isChooseAllCategories) {
          dispatch(setChooseAllCategories(true));
       } else if (isChooseAllCategories) {
@@ -37,17 +37,17 @@ const EditManagement:React.FC = ():JSX.Element => {
       }
    }
 
-   const addNewCategory = ():void => {
+   const addNewCategory = (): void => {
       dispatch(setAddingNewCategory(true));
    }
 
-   const doneNewCategory = ():void => {
+   const doneNewCategory = (): void => {
       dispatch(setAddingNewCategory(false));
       dispatch(setCategories([...temporaryCategories]));
       alert('Your changes were saved');
    }
 
-   const buttonsEdit = ():JSX.Element => {
+   const buttonsEdit = (): JSX.Element => {
       return (
          <>
             <button onClick={chooseAllCategoriesForEdit}
@@ -75,7 +75,7 @@ const EditManagement:React.FC = ():JSX.Element => {
       )
    }
 
-   const handleCorrect = ():void => {
+   const handleCorrect = (): void => {
       dispatch(setEditMode(true));
       dispatch(setTemporaryCategories([...categories]));
    }
@@ -92,7 +92,7 @@ const EditManagement:React.FC = ():JSX.Element => {
       )
    }
 
-   const showInfo = ():void => {
+   const showInfo = (): void => {
       console.log("here information");
    }
 

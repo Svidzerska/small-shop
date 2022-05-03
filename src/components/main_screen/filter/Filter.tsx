@@ -9,11 +9,11 @@ import { setPopup } from "../../../features/products/productsSlice";
 
 import Popup from "../../popup/Popup";
 
-const Filter:React.FC = ():JSX.Element => {
+const Filter: React.FC = (): JSX.Element => {
    const dispatch = useDispatch();
-   const isPopup:boolean = useSelector((state:RootStateOrAny) => state.products.popup);
+   const isPopup: boolean = useSelector((state: RootStateOrAny) => state.products.isPopup);
 
-   const showPopup = () => {
+   const showPopup = (): void => {
       dispatch(setPopup(true));
    }
 

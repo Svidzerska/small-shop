@@ -4,22 +4,22 @@ import './search.scss';
 
 import {ReactComponent as GlassIcon} from '../../../images/glassIcon.svg';
 
-const Search:React.FC = ():JSX.Element => {
+const Search: React.FC = (): JSX.Element => {
    const [value, setValue] = useState<string>("");
 
-   const changeValue = (e: React.FormEvent<HTMLInputElement>):void => {
+   const changeValue = (e: React.FormEvent<HTMLInputElement>): void => {
       setValue(e.currentTarget.value);
    }
 
-   const searchDone = (value:string):void => {
+   const searchDone = (value: string): void => {
       console.log(value);
    }
 
-   const searchStartButton = (e: React.MouseEvent<HTMLButtonElement>):void => {
+   const searchStartButton = (e: React.MouseEvent<HTMLButtonElement>): void => {
       searchDone(value);
    }
 
-   const searchStartEnter = (e: React.KeyboardEvent<HTMLInputElement>):void => {
+   const searchStartEnter = (e: React.KeyboardEvent<HTMLInputElement>): void => {
       e.key === 'Enter' && searchDone(value);
    }
 

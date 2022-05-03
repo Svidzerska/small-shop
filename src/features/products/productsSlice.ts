@@ -7,7 +7,7 @@ import Api from '../../api/getProducts';
 
 interface InitialState {
    cardArray: object,
-   popup : boolean
+   isPopup : boolean
 }
 
 interface Data {
@@ -16,7 +16,7 @@ interface Data {
  
 const initialState:InitialState = {
    cardArray: [],
-   popup: false
+   isPopup: false
 }
 
 export const getProducts = createAsyncThunk<
@@ -35,7 +35,7 @@ export const productsSlice = createSlice({
    initialState,
    reducers: { 
       setPopup: (state, action : PayloadAction<boolean>) => {
-         state.popup = action.payload
+         state.isPopup = action.payload
       }
    },
    extraReducers: (builder) => {

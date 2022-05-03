@@ -14,16 +14,16 @@ import {
    setChooseAllCategories
 } from "../../../features/categories/categoriesSlice";
 
-const Header:React.FC = ():JSX.Element => {
+const Header: React.FC = (): JSX.Element => {
    const dispatch = useDispatch();
 
-   const isEditMode:boolean = useSelector((state : RootStateOrAny) => state.categories.isEditMode);
+   const isEditMode: boolean = useSelector((state: RootStateOrAny) => state.categories.isEditMode);
 
-   const closePopup = ():void => {
+   const closePopup = (): void => {
       dispatch(setPopup(false));
    }
 
-   const closeCorrection = ():void => {
+   const closeCorrection = (): void => {
       dispatch(setEditMode(false));
       dispatch(setAddingNewCategory(false));
       dispatch(setEditingCategory(false));

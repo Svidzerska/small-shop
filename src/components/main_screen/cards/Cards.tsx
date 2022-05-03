@@ -8,20 +8,20 @@ import { Product } from "../../../interfaces/Product";
 import CardElement from "./cardElement/CardElement";
 import RenderAddCard from "./renderAddCard/RenderAddCard";
 
-const Cards:React.FC = ():JSX.Element => {
-   const cards:Product[] = useSelector((state : RootStateOrAny) => state.products.cardArray);
+const Cards: React.FC = (): JSX.Element => {
+   const cards: Product[] = useSelector((state: RootStateOrAny) => state.products.cardArray);
 
-   const displayCards:JSX.Element[] = cards.map((card: Product) =>
+   const displayCards: JSX.Element[] = cards.map((card: Product) =>
       <CardElement key={card.id}
          card={card}
       />
    )
 
-   const displayCardsEven:JSX.Element[] = displayCards.filter((_item, index) =>
+   const displayCardsEven: JSX.Element[] = displayCards.filter((_item, index) =>
       index % 2 !== 0
    )
 
-   const displayCardsOdd:JSX.Element[] = displayCards.filter((_item, index) =>
+   const displayCardsOdd: JSX.Element[] = displayCards.filter((_item, index) =>
       index % 2 === 0
    )
 

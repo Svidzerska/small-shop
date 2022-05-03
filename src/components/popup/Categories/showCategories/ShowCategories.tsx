@@ -5,20 +5,20 @@ import './showCategories.scss';
 
 import { Category } from '../../../../interfaces/Category';
 
-const ShowCategories:React.FC = ():JSX.Element => {
-   const categories:Category[] = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
+const ShowCategories: React.FC = (): JSX.Element => {
+   const categories: Category[] = useSelector((state: RootStateOrAny) => state.categories.categoriesArray);
 
    const [isActiveCategories, setIsActiveCategories] = useState<string[]>([]);
 
-   const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>):void => {
-      const currentActiveCategories:string[] = [...isActiveCategories];
-      const targetValue:string = e.currentTarget.value;
+   const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
+      const currentActiveCategories: string[] = [...isActiveCategories];
+      const targetValue: string = e.currentTarget.value;
 
       const checkActiveCategory = currentActiveCategories.includes(e.currentTarget.value);
 
       if (checkActiveCategory) {
          setIsActiveCategories((arr) => {
-            const categoriesWithoutDeleteElement:string[] = currentActiveCategories.filter(item => item !== targetValue);
+            const categoriesWithoutDeleteElement: string[] = currentActiveCategories.filter(item => item !== targetValue);
             return categoriesWithoutDeleteElement;
          }); 
       } else {
