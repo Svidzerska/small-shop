@@ -21,7 +21,7 @@ const EditCategories: React.FC = (): JSX.Element => {
    const isEditingCategory: boolean = useSelector((state: RootStateOrAny) => state.categories.isEditingCategory);
 
    const [activeCategories, setActiveCategories] = useState<string[]>([temporaryCategories[0]?.name]);
-   const [isEditCategory, setIsEditCategory] = useState<string>("");
+   const [editedCategory, setEditedCategory] = useState<string>(""); //??
    const [isInputValue, setIsInputValue] = useState<string>("");
    const [charAmountLeft, setCharAmountLeft] = useState<number>(0);
 
@@ -59,7 +59,7 @@ const EditCategories: React.FC = (): JSX.Element => {
    }
 
    const editCurrentCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
-      setIsEditCategory(e.currentTarget.id);
+      setEditedCategory(e.currentTarget.id);
 
       const existValue = temporaryCategories.find(item => item.id === +e.currentTarget.id);
       if (existValue) {
@@ -106,12 +106,12 @@ const EditCategories: React.FC = (): JSX.Element => {
          const deleteCategory = categoriesInput.find((item) => item.id === +e.currentTarget.id);
          setActiveCategories(activeCategories.filter((item) => item !== deleteCategory?.name));
       }
-      setIsEditCategory("");
+      setEditedCategory("");
       dispatch(setEditingCategory(false));
    }
 
    const cancelEditCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
-      setIsEditCategory("");
+      setEditedCategory("");
       dispatch(setEditingCategory(false));
    }
 
@@ -160,7 +160,7 @@ const EditCategories: React.FC = (): JSX.Element => {
                   value={category.name}
                   disabled={isAddingNewCategory || isEditingCategory}
                   id={`${category.id}`}>
-                  {+isEditCategory === category.id ?
+                  {+editedCategory === category.id ?
                      <input
                         id={`${category.id}`}
                         value={isEditingCategory ? isInputValue : category.name}
@@ -171,12 +171,12 @@ const EditCategories: React.FC = (): JSX.Element => {
                </button>
                {activeCategories.find(item => item === category.name) &&
                   isEditingCategory &&
-                  +isEditCategory === category.id ?
+                  +editedCategory === category.id ?
                   <p className='edit-component__char-amount'>{charAmountLeft} char. left</p> :
                   null}
             </div>
             {activeCategories.find(item => item === category.name) ?
-               (isEditCategory !== "" && +isEditCategory === category.id ?
+               (editedCategory !== "" && +editedCategory === category.id ?
                   renderDoneButtons(category) :
                   renderEditButtons(category)) :
                null}
