@@ -6,7 +6,7 @@ import './header.scss';
 import {ReactComponent as ArrowLeftIcon} from '../../../images/arrowLeftIcon.svg';
 import {ReactComponent as XMarkIcon} from '../../../images/xmarkIcon.svg';
 
-import { setPopup } from "../../../features/products/productSlice";
+import { setPopup } from "../../../features/products/productsSlice";
 import {
    setEditMode,
    setEditingCategory,

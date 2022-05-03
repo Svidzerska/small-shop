@@ -5,13 +5,13 @@ import './filter.scss';
 
 import {ReactComponent as SlidersIcon} from '../../../images/slidersIcon.svg';
 
-import { setPopup } from "../../../features/products/productSlice";
+import { setPopup } from "../../../features/products/productsSlice";
 
 import Popup from "../../popup/Popup";
 
 const Filter:React.FC = ():JSX.Element => {
    const dispatch = useDispatch();
-   const isPopup:boolean = useSelector((state : RootStateOrAny) => state.products.popup);
+   const isPopup:boolean = useSelector((state:RootStateOrAny) => state.products.popup);
 
    const showPopup = () => {
       dispatch(setPopup(true));
@@ -23,7 +23,7 @@ const Filter:React.FC = ():JSX.Element => {
 
    return (
       <>    
-         <button className="search-element__button-sliders" onClick={showPopup}>
+         <button className="button-sliders" onClick={showPopup}>
             <i>
                <SlidersIcon/>
             </i>

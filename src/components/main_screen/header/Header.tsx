@@ -5,7 +5,7 @@ import './header.scss';
 
 import { ReactComponent as BurgerIcon } from "../../../images/burgerIcon.svg";
 
-import { getProducts } from "../../../features/products/productSlice";
+import { getProducts } from "../../../features/products/productsSlice";
 import { getCategories } from "../../../features/products/categoriesSlice";
 
 const Header:React.FC = ():JSX.Element => {

@@ -1,9 +1,9 @@
 import image1 from '../images/image1.jpg';
 import image2 from '../images/image2.jpg';
-import { Products } from '../interfaces/Products';
+import { Product } from '../interfaces/Product';
 
 
-const products:Products[] = [
+const products:Product[] = [
 {
    id: 1,
    name : "Product 1",

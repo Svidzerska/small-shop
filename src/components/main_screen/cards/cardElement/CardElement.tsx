@@ -1,7 +1,7 @@
-import { Products } from "../../../../interfaces/Products";
+import { Product } from "../../../../interfaces/Product";
 
 interface Props {
-   card:Products,
+   card:Product,
 }
 
 const CardElement:React.FC<Props> = (props):JSX.Element => {

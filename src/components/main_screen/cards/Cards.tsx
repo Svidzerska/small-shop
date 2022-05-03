@@ -3,15 +3,15 @@ import { useSelector, RootStateOrAny } from "react-redux";
 
 import './cards.scss';
 
-import { Products } from "../../../interfaces/Products";
+import { Product } from "../../../interfaces/Product";
 
 import CardElement from "./cardElement/CardElement";
 import RenderAddCard from "./renderAddCard/RenderAddCard";
 
 const Cards:React.FC = ():JSX.Element => {
-   const cards:Products[] = useSelector((state : RootStateOrAny) => state.products.cardArray);
+   const cards:Product[] = useSelector((state : RootStateOrAny) => state.products.cardArray);
 
-   const displayCards:JSX.Element[] = cards.map((card: Products) =>
+   const displayCards:JSX.Element[] = cards.map((card: Product) =>
       <CardElement key={card.id}
          card={card}
       />

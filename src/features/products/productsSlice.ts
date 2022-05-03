@@ -1,5 +1,9 @@
 import { createSlice, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
+
+import { Product } from "../../interfaces/Product";
+
 import Api from '../../api/getProducts';
+
 
 interface InitialState {
    cardArray: object,
@@ -7,7 +11,7 @@ interface InitialState {
 }
 
 interface Data {
-   data: object[],
+   data: Product[],
 }
  
 const initialState:InitialState = {
@@ -26,8 +30,8 @@ Data
    },
 )
 
-export const productSlice = createSlice({
-   name: 'product',
+export const productsSlice = createSlice({
+   name: 'products',
    initialState,
    reducers: { 
       setPopup: (state, action : PayloadAction<boolean>) => {
@@ -38,14 +42,14 @@ export const productSlice = createSlice({
       builder.addCase(getProducts.fulfilled, (state, action) => {
          state.cardArray = action.payload;
       });
-      builder.addCase(getProducts.pending, (state) => {
+      builder.addCase(getProducts.pending, (_state) => {
          console.log('pending')});
-      builder.addCase(getProducts.rejected, (state) => {
+      builder.addCase(getProducts.rejected, (_state) => {
          console.log('rejected')
       })
    }
 },
 )
 
-export const { setPopup } = productSlice.actions;
-export default productSlice.reducer;
+export const { setPopup } = productsSlice.actions;
+export default productsSlice.reducer;
