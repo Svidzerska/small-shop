@@ -8,7 +8,7 @@ import { ReactComponent as TrashIcon } from '../../../../images/trashIcon.svg';
 import { ReactComponent as CheckIcon } from '../../../../images/checkIcon.svg';
 import { ReactComponent as XMarkInSquareIcon } from  '../../../../images/squareXmarkIcon.svg';
 
-import { setTemporaryCategories, setEditingCategory, setChooseAll } from "../../../../features/products/categoriesSlice";
+import { setTemporaryCategories, setEditingCategory, setChooseAll } from "../../../../features/categories/categoriesSlice";
 
 import { Category } from '../../../../interfaces/Category';
 

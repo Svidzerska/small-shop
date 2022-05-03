@@ -12,7 +12,7 @@ import {
    setEditingCategory,
    setToAddNewCategory,
    setChooseAll
-} from "../../../features/products/categoriesSlice";
+} from "../../../features/categories/categoriesSlice";
 
 const Header:React.FC = ():JSX.Element => {
    const dispatch = useDispatch();

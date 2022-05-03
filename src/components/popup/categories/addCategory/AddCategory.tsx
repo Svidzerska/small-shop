@@ -10,7 +10,7 @@ import {
    setToAddNewCategory,
    setTemporaryCategories,
    setChooseAll
-} from '../../../../features/products/categoriesSlice';
+} from '../../../../features/categories/categoriesSlice';
 
 import { Category } from '../../../../interfaces/Category';
 

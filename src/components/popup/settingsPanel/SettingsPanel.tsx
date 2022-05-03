@@ -8,8 +8,8 @@ import { ReactComponent as InfoIcon } from '../../../images/infoIcon.svg';
 import { ReactComponent as PlusIcon } from '../../../images/plusIcon.svg';
 import { ReactComponent as CheckIcon } from '../../../images/checkIcon.svg';
 
-import { setEditMode } from "../../../features/products/categoriesSlice";
-import { setToAddNewCategory, setCategories, setTemporaryCategories, setChooseAll } from "../../../features/products/categoriesSlice";
+import { setEditMode } from "../../../features/categories/categoriesSlice";
+import { setToAddNewCategory, setCategories, setTemporaryCategories, setChooseAll } from "../../../features/categories/categoriesSlice";
 
 import { Category } from "../../../interfaces/Category";
 
