@@ -17,7 +17,7 @@ import {
 const Header:React.FC = ():JSX.Element => {
    const dispatch = useDispatch();
 
-   const isEditMode:boolean = useSelector((state : RootStateOrAny) => state.categories.editMode);
+   const isEditMode:boolean = useSelector((state : RootStateOrAny) => state.categories.isEditMode);
 
    const closePopup = ():void => {
       dispatch(setPopup(false));

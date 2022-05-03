@@ -7,7 +7,7 @@ import { Category } from '../../interfaces/Category';
 interface InitialState {
    categoriesArray: object,
    categoriesTemporaryArray: object,
-   editMode:boolean,
+   isEditMode:boolean,
    editingCategory:boolean,
    addingNewCategory: boolean,
    chooseAllCategories: boolean
@@ -20,7 +20,7 @@ interface Data {
 const initialState:InitialState = {
    categoriesArray: [],
    categoriesTemporaryArray: [],
-   editMode: false,
+   isEditMode: false,
    editingCategory: false,
    addingNewCategory: false,
    chooseAllCategories: false
@@ -42,7 +42,7 @@ export const categoriesSlice = createSlice({
    initialState,
    reducers: {
       setEditMode: (state, action : PayloadAction<boolean>) => {
-         state.editMode = action.payload;
+         state.isEditMode = action.payload;
       },
       setCategories: (state, action : PayloadAction<Category[]>) => {
          state.categoriesArray = action.payload;

@@ -5,8 +5,8 @@ import AddCategory from './addCategory/AddCategory';
 import ShowCategories from './showCategories/ShowCategories';
 import EditCategories from './editCategories/EditCategories';
 
-const Categories:React.FC = ():JSX.Element => {
-   const isEditMode:boolean = useSelector((state : RootStateOrAny) => state.categories.editMode);
+const Categories: React.FC = (): JSX.Element => {
+   const isEditMode: boolean = useSelector((state: RootStateOrAny) => state.categories.isEditMode);
 
    return (
       <>

@@ -18,7 +18,7 @@ const EditCategories:React.FC = ():JSX.Element => {
    const temporaryCategories:Category[] = useSelector((state: RootStateOrAny) => state.categories.categoriesTemporaryArray);
    const isAddingNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.addingNewCategory);
    const isChooseAllCategories:boolean = useSelector((state: RootStateOrAny) => state.categories.chooseAllCategories);
-   const editingCurrentCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.editingCategory);
+   const isEditingCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.editingCategory);
 
    const [isActiveCategories, setIsActiveCategories] = useState<string[]>([temporaryCategories[0]?.name]);  
    const [isEditCategory, setIsEditCategory] = useState<string>("");
@@ -40,7 +40,7 @@ const EditCategories:React.FC = ():JSX.Element => {
    },[isChooseAllCategories]);
 
    const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>):void => {
-      if (!editingCurrentCategory) { 
+      if (!isEditingCategory) { 
          const currentActiveCategories:string[] = [...isActiveCategories];
          const targetValue:string = e.currentTarget.value;
 
@@ -118,13 +118,13 @@ const EditCategories:React.FC = ():JSX.Element => {
    const renderEditButtons = (category:Category):JSX.Element => {
       return (
          <>
-            <button onClick={editCurrentCategory} id={`${category.id}`} disabled={isAddingNewCategory || editingCurrentCategory}>
-               <i className={!(isAddingNewCategory || editingCurrentCategory) ? '' : "unactivated"}>
+            <button onClick={editCurrentCategory} id={`${category.id}`} disabled={isAddingNewCategory || isEditingCategory}>
+               <i className={!(isAddingNewCategory || isEditingCategory) ? '' : "unactivated"}>
                   <PensilIcon/>
                </i>
             </button>
-            <button onClick={deleteCategory} id={`${category.id}`} disabled={isAddingNewCategory || editingCurrentCategory}>
-               <i className={!(isAddingNewCategory || editingCurrentCategory) ? '' : "unactivated"}>
+            <button onClick={deleteCategory} id={`${category.id}`} disabled={isAddingNewCategory || isEditingCategory}>
+               <i className={!(isAddingNewCategory || isEditingCategory) ? '' : "unactivated"}>
                   <TrashIcon/>
                </i>
             </button>
@@ -158,19 +158,19 @@ const EditCategories:React.FC = ():JSX.Element => {
                   onClick={chooseCategory}
                   className={isActiveCategories.find(item => item === category.name) ? 'categories-name__button active' : 'categories-name__button'}
                   value={category.name}
-                  disabled={isAddingNewCategory || editingCurrentCategory}
+                  disabled={isAddingNewCategory || isEditingCategory}
                   id={`${category.id}`}>
                   {+isEditCategory === category.id ?
                      <input
                         id={`${category.id}`}
-                        value={editingCurrentCategory ? isInputValue : category.name}
+                        value={isEditingCategory ? isInputValue : category.name}
                         onChange={editInputCategory}
                         className="inputForEdit"
                         autoFocus /> :
                      category.name}
                </button>
                {isActiveCategories.find(item => item === category.name) &&
-                  editingCurrentCategory &&
+                  isEditingCategory &&
                   +isEditCategory === category.id ?
                   <p className='edit-component__char-amount'>{charAmountLeft} char. left</p> :
                   null}
