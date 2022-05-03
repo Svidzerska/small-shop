@@ -16,7 +16,7 @@ const EditCategories:React.FC = ():JSX.Element => {
    const dispatch = useDispatch();
    
    const temporaryCategories:Category[] = useSelector((state: RootStateOrAny) => state.categories.categoriesTemporaryArray);
-   const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
+   const isAddingNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.addingNewCategory);
    const isChooseAllCategories:boolean = useSelector((state: RootStateOrAny) => state.categories.chooseAllCategories);
    const editingCurrentCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.editingCategory);
 
@@ -118,13 +118,13 @@ const EditCategories:React.FC = ():JSX.Element => {
    const renderEditButtons = (category:Category):JSX.Element => {
       return (
          <>
-            <button onClick={editCurrentCategory} id={`${category.id}`} disabled={isAddNewCategory || editingCurrentCategory}>
-               <i className={!(isAddNewCategory || editingCurrentCategory) ? '' : "unactivated"}>
+            <button onClick={editCurrentCategory} id={`${category.id}`} disabled={isAddingNewCategory || editingCurrentCategory}>
+               <i className={!(isAddingNewCategory || editingCurrentCategory) ? '' : "unactivated"}>
                   <PensilIcon/>
                </i>
             </button>
-            <button onClick={deleteCategory} id={`${category.id}`} disabled={isAddNewCategory || editingCurrentCategory}>
-               <i className={!(isAddNewCategory || editingCurrentCategory) ? '' : "unactivated"}>
+            <button onClick={deleteCategory} id={`${category.id}`} disabled={isAddingNewCategory || editingCurrentCategory}>
+               <i className={!(isAddingNewCategory || editingCurrentCategory) ? '' : "unactivated"}>
                   <TrashIcon/>
                </i>
             </button>
@@ -158,7 +158,7 @@ const EditCategories:React.FC = ():JSX.Element => {
                   onClick={chooseCategory}
                   className={isActiveCategories.find(item => item === category.name) ? 'categories-name__button active' : 'categories-name__button'}
                   value={category.name}
-                  disabled={isAddNewCategory || editingCurrentCategory}
+                  disabled={isAddingNewCategory || editingCurrentCategory}
                   id={`${category.id}`}>
                   {+isEditCategory === category.id ?
                      <input

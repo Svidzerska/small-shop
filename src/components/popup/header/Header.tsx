@@ -10,7 +10,7 @@ import { setPopup } from "../../../features/products/productsSlice";
 import {
    setEditMode,
    setEditingCategory,
-   setToAddNewCategory,
+   setAddingNewCategory,
    setChooseAllCategories
 } from "../../../features/categories/categoriesSlice";
 
@@ -25,7 +25,7 @@ const Header:React.FC = ():JSX.Element => {
 
    const closeCorrection = ():void => {
       dispatch(setEditMode(false));
-      dispatch(setToAddNewCategory(false));
+      dispatch(setAddingNewCategory(false));
       dispatch(setEditingCategory(false));
       dispatch(setChooseAllCategories(false));
    }

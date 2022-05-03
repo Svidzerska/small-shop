@@ -7,7 +7,7 @@ import {ReactComponent as GlassIcon} from '../../../images/glassIcon.svg';
 const Search:React.FC = ():JSX.Element => {
    const [value, setValue] = useState<string>("");
 
-   const setValues = (e: React.FormEvent<HTMLInputElement>):void => {
+   const changeValue = (e: React.FormEvent<HTMLInputElement>):void => {
       setValue(e.currentTarget.value);
    }
 
@@ -27,7 +27,7 @@ const Search:React.FC = ():JSX.Element => {
       <div className="search-field">
          <input placeholder="Search"
             value={value}
-            onChange={setValues}
+            onChange={changeValue}
             onKeyDown={searchStartEnter} />
          <button className="search-field__button-glass" onClick={searchStartButton}>
             <i>

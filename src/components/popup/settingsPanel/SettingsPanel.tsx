@@ -9,7 +9,7 @@ import { ReactComponent as PlusIcon } from '../../../images/plusIcon.svg';
 import { ReactComponent as CheckIcon } from '../../../images/checkIcon.svg';
 
 import { setEditMode } from "../../../features/categories/categoriesSlice";
-import { setToAddNewCategory, setCategories, setTemporaryCategories, setChooseAllCategories } from "../../../features/categories/categoriesSlice";
+import { setAddingNewCategory, setCategories, setTemporaryCategories, setChooseAllCategories } from "../../../features/categories/categoriesSlice";
 
 import { Category } from "../../../interfaces/Category";
 
@@ -17,7 +17,7 @@ const EditManagement:React.FC = ():JSX.Element => {
    const dispatch = useDispatch();
 
    const isEditMode:boolean = useSelector((state : RootStateOrAny) => state.categories.editMode);
-   const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
+   const isAddingNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.addingNewCategory);
    const editingCurrentCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.editingCategory);
    const isChooseAllCategories:boolean = useSelector((state: RootStateOrAny) => state.categories.chooseAllCategories);
 
@@ -33,11 +33,11 @@ const EditManagement:React.FC = ():JSX.Element => {
    }
 
    const addNewCategory = ():void => {
-      dispatch(setToAddNewCategory(true));
+      dispatch(setAddingNewCategory(true));
    }
 
    const doneNewCategory = ():void => {
-      dispatch(setToAddNewCategory(false));
+      dispatch(setAddingNewCategory(false));
       dispatch(setCategories([...temporaryCategories]));
       alert('Your changes were saved');
    }
@@ -46,22 +46,22 @@ const EditManagement:React.FC = ():JSX.Element => {
       return (
          <>
             <button onClick={chooseAllCategoriesForEdit}
-               disabled={isAddNewCategory || editingCurrentCategory}
-               className={!(isAddNewCategory || editingCurrentCategory) ?
+               disabled={isAddingNewCategory || editingCurrentCategory}
+               className={!(isAddingNewCategory || editingCurrentCategory) ?
                 (isChooseAllCategories ? 'categories-change__buttonAll on' : 'categories-change__buttonAll off') : 
                  "categories-change__buttonAll"}>
                   All
             </button>
-            <button className={!(isAddNewCategory || editingCurrentCategory) ? '' : "unactivated"}
+            <button className={!(isAddingNewCategory || editingCurrentCategory) ? '' : "unactivated"}
                onClick={addNewCategory}
-               disabled={isAddNewCategory || editingCurrentCategory}>
+               disabled={isAddingNewCategory || editingCurrentCategory}>
                   <i>
                      <PlusIcon/>
                   </i>
             </button>
-            <button className={!(isAddNewCategory || editingCurrentCategory) ? '' : "unactivated"}
+            <button className={!(isAddingNewCategory || editingCurrentCategory) ? '' : "unactivated"}
                onClick={doneNewCategory}
-               disabled={isAddNewCategory || editingCurrentCategory}>
+               disabled={isAddingNewCategory || editingCurrentCategory}>
                   <i>
                      <CheckIcon/>
                   </i>
@@ -95,10 +95,10 @@ const EditManagement:React.FC = ():JSX.Element => {
       <div className='popup__categories-change'>
          <p>Categories</p>
          {isEditMode ? buttonsEdit() : buttonToEdit()}
-         <button className={!(isAddNewCategory || editingCurrentCategory) ?
+         <button className={!(isAddingNewCategory || editingCurrentCategory) ?
                'categories-change__info' :
                'categories-change__info unactivated'} 
-               disabled={isAddNewCategory || editingCurrentCategory}
+               disabled={isAddingNewCategory || editingCurrentCategory}
                onClick={showInfo}>
             <i>
                <InfoIcon/>

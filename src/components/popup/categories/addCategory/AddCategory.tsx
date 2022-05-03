@@ -7,7 +7,7 @@ import { ReactComponent as CheckIcon } from '../../../../images/checkIcon.svg';
 import { ReactComponent as XMarkInSquareIcon } from  '../../../../images/squareXmarkIcon.svg';
 
 import {
-   setToAddNewCategory,
+   setAddingNewCategory,
    setTemporaryCategories,
    setChooseAllCategories
 } from '../../../../features/categories/categoriesSlice';
@@ -17,7 +17,7 @@ import { Category } from '../../../../interfaces/Category';
 const AddCategory:React.FC = ():JSX.Element => {
    const dispatch = useDispatch();
 
-   const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
+   const isAddingNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.addingNewCategory);
    const temporaryCategories:Category[] = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
 
    const [isInputValue, setIsInputValue] = useState<string>("New Category");
@@ -27,7 +27,7 @@ const AddCategory:React.FC = ():JSX.Element => {
    // set New Category after canceling of editing
    useEffect(() => {
       setIsInputValue("New Category");
-   }, [isAddNewCategory]);
+   }, [isAddingNewCategory]);
 
    const selectRange = (e: React.FocusEvent<HTMLInputElement>):void => {
       e.currentTarget.setSelectionRange(0,e.currentTarget.value.length,);
@@ -50,14 +50,14 @@ const AddCategory:React.FC = ():JSX.Element => {
       }
 
       dispatch(setTemporaryCategories(existingCategories));
-      dispatch(setToAddNewCategory(false));
+      dispatch(setAddingNewCategory(false));
 
       setIsInputValue("New Category");
       setEditInputField(false);
    }
 
    const cancelInputNewCategory = ():void => {
-      dispatch(setToAddNewCategory(false));
+      dispatch(setAddingNewCategory(false));
       setIsInputValue("New Category");
       setEditInputField(false);
    }
@@ -92,7 +92,7 @@ const AddCategory:React.FC = ():JSX.Element => {
 
    return (
       <>
-         {isAddNewCategory && renderAddCategoryField()}
+         {isAddingNewCategory && renderAddCategoryField()}
       </>
    )
 }
