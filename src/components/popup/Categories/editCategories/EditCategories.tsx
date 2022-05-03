@@ -18,7 +18,7 @@ const EditCategories: React.FC = (): JSX.Element => {
    const temporaryCategories: Category[] = useSelector((state: RootStateOrAny) => state.categories.categoriesTemporaryArray);
    const isAddingNewCategory: boolean = useSelector((state: RootStateOrAny) => state.categories.addingNewCategory);
    const isChooseAllCategories: boolean = useSelector((state: RootStateOrAny) => state.categories.chooseAllCategories);
-   const isEditingCategory: boolean = useSelector((state: RootStateOrAny) => state.categories.editingCategory);
+   const isEditingCategory: boolean = useSelector((state: RootStateOrAny) => state.categories.isEditingCategory);
 
    const [isActiveCategories, setIsActiveCategories] = useState<string[]>([temporaryCategories[0]?.name]);  
    const [isEditCategory, setIsEditCategory] = useState<string>("");

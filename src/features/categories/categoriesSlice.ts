@@ -8,7 +8,7 @@ interface InitialState {
    categoriesArray: object,
    categoriesTemporaryArray: object,
    isEditMode:boolean,
-   editingCategory:boolean,
+   isEditingCategory:boolean,
    addingNewCategory: boolean,
    chooseAllCategories: boolean
 }
@@ -21,7 +21,7 @@ const initialState:InitialState = {
    categoriesArray: [],
    categoriesTemporaryArray: [],
    isEditMode: false,
-   editingCategory: false,
+   isEditingCategory: false,
    addingNewCategory: false,
    chooseAllCategories: false
 }
@@ -51,7 +51,7 @@ export const categoriesSlice = createSlice({
          state.categoriesTemporaryArray = action.payload;
       },
       setEditingCategory: (state, action : PayloadAction<boolean>) => {
-         state.editingCategory = action.payload;
+         state.isEditingCategory = action.payload;
       },
       setAddingNewCategory: (state, action : PayloadAction<boolean>) => {
          state.addingNewCategory = action.payload;
