@@ -21,7 +21,7 @@ const EditCategories: React.FC = (): JSX.Element => {
    const isEditingCategory: boolean = useSelector((state: RootStateOrAny) => state.categories.isEditingCategory);
 
    const [activeCategories, setActiveCategories] = useState<string[]>([temporaryCategories[0]?.name]);
-   const [editedCategory, setEditedCategory] = useState<string>(""); //??
+   const [editedCategory, setEditedCategory] = useState<number>(0); //??
    const [value, setValue] = useState<string>("");
    const [charAmountLeft, setCharAmountLeft] = useState<number>(0);
 
@@ -39,7 +39,7 @@ const EditCategories: React.FC = (): JSX.Element => {
       }
    },[isChooseAllCategories]);
 
-   const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>):void => {
+   const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
       if (!isEditingCategory) { 
          const currentActiveCategories: string[] = [...activeCategories];
          const targetValue: string = e.currentTarget.value;
@@ -58,10 +58,11 @@ const EditCategories: React.FC = (): JSX.Element => {
       }
    }
 
-   const editCurrentCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
-      setEditedCategory(e.currentTarget.id);
+   const editCategory = (e: React.MouseEvent<HTMLButtonElement>, id: number): void => {
+      setEditedCategory(id);
 
-      const existValue = temporaryCategories.find(item => item.id === +e.currentTarget.id);
+      const existValue = temporaryCategories.find(item => item.id === id);
+
       if (existValue) {
          setCharAmountLeft(20-existValue.name.length);
          setValue(existValue.name);
@@ -70,31 +71,31 @@ const EditCategories: React.FC = (): JSX.Element => {
       dispatch(setEditingCategory(true));
    }
 
-   const editInputCategory = (e: React.FormEvent<HTMLInputElement>): void => {
+   const editCategoryInputField = (e: React.FormEvent<HTMLInputElement>): void => {
       if (e.currentTarget.value.length <= 20) {
          setValue(e.currentTarget.value);
          setCharAmountLeft(20-e.currentTarget.value.length);
       }
    }
 
-   const deleteCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
+   const deleteCategory = (e: React.MouseEvent<HTMLButtonElement>, id: number): void => {
       const currentCategories: Category[] = [...temporaryCategories];
-      dispatch(setTemporaryCategories(currentCategories.filter((item) => item.id !== +e.currentTarget.id)));
+      dispatch(setTemporaryCategories(currentCategories.filter((item) => item.id !== id)));
       
-      const deleteCategory = currentCategories.find((item) => item.id === +e.currentTarget.id);
+      const deleteCategory = currentCategories.find((item) => item.id === id);
       setActiveCategories(activeCategories.filter((item) => item !== deleteCategory?.name));
    }
 
-   const doneInputCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
-      const categoriesInput: Category[] = [...temporaryCategories];
-      const secondElementCategory = categoriesInput.find((item) => item.name === value && item.id !== +e.currentTarget.id);
+   const doneCategory = (e: React.MouseEvent<HTMLButtonElement>, id: number): void => {
+      const currentCategories: Category[] = [...temporaryCategories];
+      const secondElementCategory = currentCategories.find((item) => item.name === value && item.id !== id);
 
       if (!secondElementCategory) {
-         const currentCategory = categoriesInput.findIndex((item) => item.id === +e.currentTarget.id);
-         const indexActiveCategory = activeCategories.findIndex((item) => item === categoriesInput[currentCategory].name);
+         const currentCategory = currentCategories.findIndex((item) => item.id === id);
+         const indexActiveCategory = activeCategories.findIndex((item) => item === currentCategories[currentCategory].name);
       
-         categoriesInput[currentCategory] = {...categoriesInput[currentCategory], name: value};
-         dispatch(setTemporaryCategories(categoriesInput)); 
+         currentCategories[currentCategory] = {...currentCategories[currentCategory], name: value};
+         dispatch(setTemporaryCategories(currentCategories)); 
 
          setActiveCategories((arr) => {
             const updateArr = [...arr];
@@ -102,28 +103,28 @@ const EditCategories: React.FC = (): JSX.Element => {
             return updateArr;
          })
       } else {
-         dispatch(setTemporaryCategories(categoriesInput.filter((item) => item.id !== +e.currentTarget.id)));
-         const deleteCategory = categoriesInput.find((item) => item.id === +e.currentTarget.id);
+         dispatch(setTemporaryCategories(currentCategories.filter((item) => item.id !== id)));
+         const deleteCategory = currentCategories.find((item) => item.id === id);
          setActiveCategories(activeCategories.filter((item) => item !== deleteCategory?.name));
       }
-      setEditedCategory("");
+      setEditedCategory(0);
       dispatch(setEditingCategory(false));
    }
 
    const cancelEditCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
-      setEditedCategory("");
+      setEditedCategory(0);
       dispatch(setEditingCategory(false));
    }
 
    const renderEditButtons = (category: Category): JSX.Element => {
       return (
          <>
-            <button onClick={editCurrentCategory} id={`${category.id}`} disabled={isAddingNewCategory || isEditingCategory}>
+            <button onClick={(e) => editCategory(e, category.id)} disabled={isAddingNewCategory || isEditingCategory}>
                <i className={!(isAddingNewCategory || isEditingCategory) ? '' : "unactivated"}>
                   <PensilIcon/>
                </i>
             </button>
-            <button onClick={deleteCategory} id={`${category.id}`} disabled={isAddingNewCategory || isEditingCategory}>
+            <button onClick={(e) => deleteCategory(e, category.id)} disabled={isAddingNewCategory || isEditingCategory}>
                <i className={!(isAddingNewCategory || isEditingCategory) ? '' : "unactivated"}>
                   <TrashIcon/>
                </i>
@@ -135,12 +136,12 @@ const EditCategories: React.FC = (): JSX.Element => {
    const renderDoneButtons = (category: Category): JSX.Element => {
       return (
          <>
-            <button onClick={doneInputCategory} id={`${category.id}`}>
+            <button onClick={(e) => doneCategory(e, category.id)}>
                <i>
                   <CheckIcon/>
                </i>
             </button>
-            <button onClick={cancelEditCategory} id={`${category.id}`} >
+            <button onClick={cancelEditCategory}>
                <i>
                   <XMarkInSquareIcon/>
                </i>
@@ -159,24 +160,22 @@ const EditCategories: React.FC = (): JSX.Element => {
                   className={activeCategories.find(item => item === category.name) ? 'categories-name__button active' : 'categories-name__button'}
                   value={category.name}
                   disabled={isAddingNewCategory || isEditingCategory}
-                  id={`${category.id}`}>
-                  {+editedCategory === category.id ?
-                     <input
-                        id={`${category.id}`}
-                        value={isEditingCategory ? value : category.name}
-                        onChange={editInputCategory}
+                  >
+                  {editedCategory === category.id ?
+                     <input value={isEditingCategory ? value : category.name}
+                        onChange={editCategoryInputField}
                         className="inputForEdit"
                         autoFocus /> :
                      category.name}
                </button>
                {activeCategories.find(item => item === category.name) &&
                   isEditingCategory &&
-                  +editedCategory === category.id ?
+                  editedCategory === category.id ?
                   <p className='edit-component__char-amount'>{charAmountLeft} char. left</p> :
                   null}
             </div>
             {activeCategories.find(item => item === category.name) ?
-               (editedCategory !== "" && +editedCategory === category.id ?
+               (editedCategory === category.id ?
                   renderDoneButtons(category) :
                   renderEditButtons(category)) :
                null}
