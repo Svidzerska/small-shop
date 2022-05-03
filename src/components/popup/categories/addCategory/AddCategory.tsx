@@ -3,9 +3,6 @@ import { useDispatch, useSelector, RootStateOrAny} from 'react-redux';
 
 import './addCategory.scss';
 
-import { ReactComponent as CheckIcon } from '../../../../images/checkIcon.svg';
-import { ReactComponent as XMarkInSquareIcon } from  '../../../../images/squareXmarkIcon.svg';
-
 import {
    setAddingNewCategory,
    setTemporaryCategories,
@@ -13,6 +10,8 @@ import {
 } from '../../../../features/categories/categoriesSlice';
 
 import { Category } from '../../../../interfaces/Category';
+
+import ConfirmButtons from '../buttonsComponents/confirmButtons/ConfirmButtons';
 
 const AddCategory: React.FC = (): JSX.Element => {
    const dispatch = useDispatch();
@@ -73,16 +72,7 @@ const AddCategory: React.FC = (): JSX.Element => {
                      className="inputForEdit"
                      autoFocus />
                </div>
-               <button className='addField__buttonResult' onClick={doneNewCategory}>
-                  <i>
-                     <CheckIcon />
-                  </i>
-               </button>
-               <button className='addField__buttonResult' onClick={cancelNewCategory}>
-                  <i>
-                     <XMarkInSquareIcon />
-                  </i>
-               </button>
+               <ConfirmButtons className='addField__buttonResult' check={doneNewCategory} cancel={cancelNewCategory}/>
             </div>
             {isEditInputField &&
                <p className='addField__char-amount'>

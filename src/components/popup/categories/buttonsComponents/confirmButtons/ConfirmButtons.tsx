@@ -6,7 +6,8 @@ import { ReactComponent as XMarkInSquareIcon } from  '../../../../../images/squa
 import { Category } from '../../../../../interfaces/Category';
 
 interface Props {
-   category: Category,
+   category?: Category,
+   className?: string,
    check: Function,
    cancel: Function,
 }
@@ -14,18 +15,19 @@ interface Props {
 const ConfirmButtons: React.FC<Props> = (props): JSX.Element => {
    const {
       category,
+      className,
       check,
       cancel
    } = props;
 
    return (
       <>
-         <button onClick={(e) => check(e, category.id)}>
+         <button className={className} onClick={(e) => check(e, category?.id)}>
             <i>
                <CheckIcon/>
             </i>
          </button>
-         <button onClick={(e) => cancel(e)}>
+         <button className={className} onClick={(e) => cancel(e)}>
             <i>
                <XMarkInSquareIcon/>
             </i>

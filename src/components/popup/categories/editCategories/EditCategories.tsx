@@ -14,7 +14,7 @@ import {
 
 import { Category } from '../../../../interfaces/Category';
 
-import ConfirmButtons from './confirmButtons/ConfirmButtons';
+import ConfirmButtons from '../buttonsComponents/confirmButtons/ConfirmButtons';
 
 const EditCategories: React.FC = (): JSX.Element => {
    const dispatch = useDispatch();
