@@ -11,6 +11,7 @@ import Popup from "../../popup/Popup";
 
 const Filter: React.FC = (): JSX.Element => {
    const dispatch = useDispatch();
+   
    const isPopup: boolean = useSelector((state: RootStateOrAny) => state.products.isPopup);
 
    const showPopup = (): void => {

@@ -8,7 +8,11 @@ import { ReactComponent as TrashIcon } from '../../../../images/trashIcon.svg';
 import { ReactComponent as CheckIcon } from '../../../../images/checkIcon.svg';
 import { ReactComponent as XMarkInSquareIcon } from  '../../../../images/squareXmarkIcon.svg';
 
-import { setTemporaryCategories, setEditingCategory, setChooseAllCategories } from "../../../../features/categories/categoriesSlice";
+import {
+   setTemporaryCategories,
+   setEditingCategory,
+   setChooseAllCategories
+} from "../../../../features/categories/categoriesSlice";
 
 import { Category } from '../../../../interfaces/Category';
 
@@ -21,7 +25,7 @@ const EditCategories: React.FC = (): JSX.Element => {
    const isEditingCategory: boolean = useSelector((state: RootStateOrAny) => state.categories.isEditingCategory);
 
    const [activeCategories, setActiveCategories] = useState<string[]>([temporaryCategories[0]?.name]);
-   const [editedCategory, setEditedCategory] = useState<number>(0); //??
+   const [editedCategory, setEditedCategory] = useState<number>(0);
    const [value, setValue] = useState<string>("");
    const [charAmountLeft, setCharAmountLeft] = useState<number>(0);
 

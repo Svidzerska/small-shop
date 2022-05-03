@@ -16,8 +16,12 @@ const CardElement: React.FC<Props> = (props): JSX.Element => {
          </p>
          <h5 className="card__name">{card.name}</h5>
          <div className="card__price">
-            <p>{card.currency} {card.price}</p>
-            <p>{card.part}</p>
+            <p>
+               {card.currency} {card.price}
+            </p>
+            <p>
+               {card.part}
+            </p>
          </div>
       </li>
    )

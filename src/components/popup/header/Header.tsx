@@ -23,7 +23,7 @@ const Header: React.FC = (): JSX.Element => {
       dispatch(setPopup(false));
    }
 
-   const closeCorrection = (): void => {
+   const closeEditMode = (): void => {
       dispatch(setEditMode(false));
       dispatch(setAddingNewCategory(false));
       dispatch(setEditingCategory(false));
@@ -34,7 +34,7 @@ const Header: React.FC = (): JSX.Element => {
    return (
       <>
          <div className='popup__name'>
-            <button onClick={!isEditMode ? closePopup : closeCorrection}>
+            <button onClick={!isEditMode ? closePopup : closeEditMode}>
                <i>
                   {!isEditMode ? <ArrowLeftIcon/> : <XMarkIcon/>}
                </i>

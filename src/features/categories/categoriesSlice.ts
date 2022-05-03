@@ -41,14 +41,14 @@ export const categoriesSlice = createSlice({
    name: 'categories',
    initialState,
    reducers: {
-      setEditMode: (state, action : PayloadAction<boolean>) => {
-         state.isEditMode = action.payload;
-      },
       setCategories: (state, action : PayloadAction<Category[]>) => {
          state.categoriesArray = action.payload;
       },
       setTemporaryCategories: (state, action : PayloadAction<Category[]>) => {
          state.categoriesTemporaryArray = action.payload;
+      },
+      setEditMode: (state, action : PayloadAction<boolean>) => {
+         state.isEditMode = action.payload;
       },
       setEditingCategory: (state, action : PayloadAction<boolean>) => {
          state.isEditingCategory = action.payload;
@@ -64,9 +64,9 @@ export const categoriesSlice = createSlice({
       builder.addCase(getCategories.fulfilled, (state, action) => {
          state.categoriesArray = action.payload;
       });
-      builder.addCase(getCategories.pending, (state) => {
+      builder.addCase(getCategories.pending, (_state) => {
          console.log('pending')});
-      builder.addCase(getCategories.rejected, (state) => {
+      builder.addCase(getCategories.rejected, (_state) => {
          console.log('rejected')});
    }
 },

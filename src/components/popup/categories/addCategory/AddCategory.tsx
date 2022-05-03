@@ -85,7 +85,10 @@ const AddCategory: React.FC = (): JSX.Element => {
                </button>
             </div>
             {isEditInputField &&
-            <p className='addField__char-amount'>{charAmountLeft} char. left</p>}
+               <p className='addField__char-amount'>
+                  {charAmountLeft} char. left
+               </p>
+            }
          </div>
       )
    }
