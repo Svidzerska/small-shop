@@ -17,7 +17,7 @@ import { Category } from '../../../../interfaces/Category';
 const AddCategory: React.FC = (): JSX.Element => {
    const dispatch = useDispatch();
 
-   const isAddingNewCategory: boolean = useSelector((state: RootStateOrAny) => state.categories.addingNewCategory);
+   const isAddingNewCategory: boolean = useSelector((state: RootStateOrAny) => state.categories.isAddingNewCategory);
    const temporaryCategories: Category[] = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
 
    const [isInputValue, setIsInputValue] = useState<string>("New Category");

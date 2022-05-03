@@ -16,11 +16,11 @@ const EditCategories: React.FC = (): JSX.Element => {
    const dispatch = useDispatch();
    
    const temporaryCategories: Category[] = useSelector((state: RootStateOrAny) => state.categories.categoriesTemporaryArray);
-   const isAddingNewCategory: boolean = useSelector((state: RootStateOrAny) => state.categories.addingNewCategory);
-   const isChooseAllCategories: boolean = useSelector((state: RootStateOrAny) => state.categories.chooseAllCategories);
+   const isAddingNewCategory: boolean = useSelector((state: RootStateOrAny) => state.categories.isAddingNewCategory);
+   const isChooseAllCategories: boolean = useSelector((state: RootStateOrAny) => state.categories.isChooseAllCategories);
    const isEditingCategory: boolean = useSelector((state: RootStateOrAny) => state.categories.isEditingCategory);
 
-   const [isActiveCategories, setIsActiveCategories] = useState<string[]>([temporaryCategories[0]?.name]);  
+   const [isActiveCategories, setIsActiveCategories] = useState<string[]>([temporaryCategories[0]?.name]);
    const [isEditCategory, setIsEditCategory] = useState<string>("");
    const [isInputValue, setIsInputValue] = useState<string>("");
    const [charAmountLeft, setCharAmountLeft] = useState<number>(0);

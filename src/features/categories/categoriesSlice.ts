@@ -9,8 +9,8 @@ interface InitialState {
    categoriesTemporaryArray: object,
    isEditMode:boolean,
    isEditingCategory:boolean,
-   addingNewCategory: boolean,
-   chooseAllCategories: boolean
+   isAddingNewCategory: boolean,
+   isChooseAllCategories: boolean
 }
 
 interface Data {
@@ -22,8 +22,8 @@ const initialState:InitialState = {
    categoriesTemporaryArray: [],
    isEditMode: false,
    isEditingCategory: false,
-   addingNewCategory: false,
-   chooseAllCategories: false
+   isAddingNewCategory: false,
+   isChooseAllCategories: false
 }
 
 export const getCategories = createAsyncThunk<
@@ -54,10 +54,10 @@ export const categoriesSlice = createSlice({
          state.isEditingCategory = action.payload;
       },
       setAddingNewCategory: (state, action : PayloadAction<boolean>) => {
-         state.addingNewCategory = action.payload;
+         state.isAddingNewCategory = action.payload;
       },
       setChooseAllCategories: (state, action : PayloadAction<boolean>) => {
-         state.chooseAllCategories = action.payload;
+         state.isChooseAllCategories = action.payload;
       },
    },
    extraReducers: (builder) => {

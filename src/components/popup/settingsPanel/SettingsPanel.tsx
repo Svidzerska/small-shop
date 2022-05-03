@@ -22,9 +22,9 @@ const EditManagement: React.FC = (): JSX.Element => {
    const dispatch = useDispatch();
 
    const isEditMode: boolean = useSelector((state: RootStateOrAny) => state.categories.isEditMode);
-   const isAddingNewCategory: boolean = useSelector((state: RootStateOrAny) => state.categories.addingNewCategory);
+   const isAddingNewCategory: boolean = useSelector((state: RootStateOrAny) => state.categories.isAddingNewCategory);
    const isEditingCategory: boolean = useSelector((state: RootStateOrAny) => state.categories.isEditingCategory);
-   const isChooseAllCategories: boolean = useSelector((state: RootStateOrAny) => state.categories.chooseAllCategories);
+   const isChooseAllCategories: boolean = useSelector((state: RootStateOrAny) => state.categories.isChooseAllCategories);
 
    const categories: Category[] = useSelector((state: RootStateOrAny) => state.categories.categoriesArray);
    const temporaryCategories: Category[] = useSelector((state: RootStateOrAny) => state.categories.categoriesTemporaryArray);
