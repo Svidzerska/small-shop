@@ -22,7 +22,7 @@ const EditCategories: React.FC = (): JSX.Element => {
 
    const [activeCategories, setActiveCategories] = useState<string[]>([temporaryCategories[0]?.name]);
    const [editedCategory, setEditedCategory] = useState<string>(""); //??
-   const [isInputValue, setIsInputValue] = useState<string>("");
+   const [value, setValue] = useState<string>("");
    const [charAmountLeft, setCharAmountLeft] = useState<number>(0);
 
    useEffect(() => {
@@ -64,7 +64,7 @@ const EditCategories: React.FC = (): JSX.Element => {
       const existValue = temporaryCategories.find(item => item.id === +e.currentTarget.id);
       if (existValue) {
          setCharAmountLeft(20-existValue.name.length);
-         setIsInputValue(existValue.name);
+         setValue(existValue.name);
       }
 
       dispatch(setEditingCategory(true));
@@ -72,7 +72,7 @@ const EditCategories: React.FC = (): JSX.Element => {
 
    const editInputCategory = (e: React.FormEvent<HTMLInputElement>): void => {
       if (e.currentTarget.value.length <= 20) {
-         setIsInputValue(e.currentTarget.value);
+         setValue(e.currentTarget.value);
          setCharAmountLeft(20-e.currentTarget.value.length);
       }
    }
@@ -87,18 +87,18 @@ const EditCategories: React.FC = (): JSX.Element => {
 
    const doneInputCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
       const categoriesInput: Category[] = [...temporaryCategories];
-      const secondElementCategory = categoriesInput.find((item) => item.name === isInputValue && item.id !== +e.currentTarget.id);
+      const secondElementCategory = categoriesInput.find((item) => item.name === value && item.id !== +e.currentTarget.id);
 
       if (!secondElementCategory) {
          const currentCategory = categoriesInput.findIndex((item) => item.id === +e.currentTarget.id);
          const indexActiveCategory = activeCategories.findIndex((item) => item === categoriesInput[currentCategory].name);
       
-         categoriesInput[currentCategory] = {...categoriesInput[currentCategory], name: isInputValue};
+         categoriesInput[currentCategory] = {...categoriesInput[currentCategory], name: value};
          dispatch(setTemporaryCategories(categoriesInput)); 
 
          setActiveCategories((arr) => {
             const updateArr = [...arr];
-            updateArr.splice(indexActiveCategory,1,isInputValue);
+            updateArr.splice(indexActiveCategory,1,value);
             return updateArr;
          })
       } else {
@@ -163,7 +163,7 @@ const EditCategories: React.FC = (): JSX.Element => {
                   {+editedCategory === category.id ?
                      <input
                         id={`${category.id}`}
-                        value={isEditingCategory ? isInputValue : category.name}
+                        value={isEditingCategory ? value : category.name}
                         onChange={editInputCategory}
                         className="inputForEdit"
                         autoFocus /> :
