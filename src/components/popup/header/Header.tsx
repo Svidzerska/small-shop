@@ -11,7 +11,7 @@ import {
    setEditMode,
    setEditingCategory,
    setToAddNewCategory,
-   setChooseAll
+   setChooseAllCategories
 } from "../../../features/categories/categoriesSlice";
 
 const Header:React.FC = ():JSX.Element => {
@@ -27,7 +27,7 @@ const Header:React.FC = ():JSX.Element => {
       dispatch(setEditMode(false));
       dispatch(setToAddNewCategory(false));
       dispatch(setEditingCategory(false));
-      dispatch(setChooseAll(false));
+      dispatch(setChooseAllCategories(false));
    }
 
 

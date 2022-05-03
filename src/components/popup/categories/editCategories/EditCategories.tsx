@@ -8,7 +8,7 @@ import { ReactComponent as TrashIcon } from '../../../../images/trashIcon.svg';
 import { ReactComponent as CheckIcon } from '../../../../images/checkIcon.svg';
 import { ReactComponent as XMarkInSquareIcon } from  '../../../../images/squareXmarkIcon.svg';
 
-import { setTemporaryCategories, setEditingCategory, setChooseAll } from "../../../../features/categories/categoriesSlice";
+import { setTemporaryCategories, setEditingCategory, setChooseAllCategories } from "../../../../features/categories/categoriesSlice";
 
 import { Category } from '../../../../interfaces/Category';
 
@@ -17,7 +17,7 @@ const EditCategories:React.FC = ():JSX.Element => {
    
    const temporaryCategories:Category[] = useSelector((state: RootStateOrAny) => state.categories.categoriesTemporaryArray);
    const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
-   const toChooseAll:boolean = useSelector((state: RootStateOrAny) => state.categories.chooseAll);
+   const isChooseAllCategories:boolean = useSelector((state: RootStateOrAny) => state.categories.chooseAllCategories);
    const editingCurrentCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.editingCategory);
 
    const [isActiveCategories, setIsActiveCategories] = useState<string[]>([temporaryCategories[0]?.name]);  
@@ -27,17 +27,17 @@ const EditCategories:React.FC = ():JSX.Element => {
 
    useEffect(() => {
       if (isActiveCategories.length === temporaryCategories.length) {
-         dispatch(setChooseAll(true));
+         dispatch(setChooseAllCategories(true));
       }
    }, [isActiveCategories.length]);
 
    useEffect(() => {
-      if (toChooseAll) {
+      if (isChooseAllCategories) {
          setIsActiveCategories([...temporaryCategories].map(item => item.name));
-      } else if (!toChooseAll && isActiveCategories.length === temporaryCategories.length) {
+      } else if (!isChooseAllCategories && isActiveCategories.length === temporaryCategories.length) {
          setIsActiveCategories([]);
       }
-   },[toChooseAll]);
+   },[isChooseAllCategories]);
 
    const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>):void => {
       if (!editingCurrentCategory) { 
@@ -54,7 +54,7 @@ const EditCategories:React.FC = ():JSX.Element => {
             } else {
                setIsActiveCategories(arr => [...arr, `${targetValue}`]);
             }
-         dispatch(setChooseAll(false));
+         dispatch(setChooseAllCategories(false));
       }
    }
 

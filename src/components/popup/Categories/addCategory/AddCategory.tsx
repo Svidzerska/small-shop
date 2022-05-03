@@ -9,7 +9,7 @@ import { ReactComponent as XMarkInSquareIcon } from  '../../../../images/squareX
 import {
    setToAddNewCategory,
    setTemporaryCategories,
-   setChooseAll
+   setChooseAllCategories
 } from '../../../../features/categories/categoriesSlice';
 
 import { Category } from '../../../../interfaces/Category';
@@ -46,7 +46,7 @@ const AddCategory:React.FC = ():JSX.Element => {
       const secondElementCategory:Category | undefined = existingCategories.find((item) => item.name === isInputValue);
       if (isInputValue !== "" && isInputValue !== "New Category" && !secondElementCategory) {
          existingCategories.unshift({id: Math.random(), name: isInputValue});
-         dispatch(setChooseAll(false));
+         dispatch(setChooseAllCategories(false));
       }
 
       dispatch(setTemporaryCategories(existingCategories));

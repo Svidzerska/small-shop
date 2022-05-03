@@ -10,7 +10,7 @@ interface InitialState {
    editMode:boolean,
    editingCategory:boolean,
    toAddNewCategory: boolean,
-   chooseAll: boolean
+   chooseAllCategories: boolean
 }
 
 interface Data {
@@ -23,7 +23,7 @@ const initialState:InitialState = {
    editMode: false,
    editingCategory: false,
    toAddNewCategory: false,
-   chooseAll: false
+   chooseAllCategories: false
 }
 
 export const getCategories = createAsyncThunk<
@@ -56,8 +56,8 @@ export const categoriesSlice = createSlice({
       setToAddNewCategory: (state, action : PayloadAction<boolean>) => {
          state.toAddNewCategory = action.payload;
       },
-      setChooseAll: (state, action : PayloadAction<boolean>) => {
-         state.chooseAll = action.payload;
+      setChooseAllCategories: (state, action : PayloadAction<boolean>) => {
+         state.chooseAllCategories = action.payload;
       },
    },
    extraReducers: (builder) => {
@@ -77,7 +77,7 @@ export const { setEditMode,
    setTemporaryCategories,
    setEditingCategory,
    setToAddNewCategory,
-   setChooseAll
+   setChooseAllCategories
    } = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;

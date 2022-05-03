@@ -9,7 +9,7 @@ import { ReactComponent as PlusIcon } from '../../../images/plusIcon.svg';
 import { ReactComponent as CheckIcon } from '../../../images/checkIcon.svg';
 
 import { setEditMode } from "../../../features/categories/categoriesSlice";
-import { setToAddNewCategory, setCategories, setTemporaryCategories, setChooseAll } from "../../../features/categories/categoriesSlice";
+import { setToAddNewCategory, setCategories, setTemporaryCategories, setChooseAllCategories } from "../../../features/categories/categoriesSlice";
 
 import { Category } from "../../../interfaces/Category";
 
@@ -19,16 +19,16 @@ const EditManagement:React.FC = ():JSX.Element => {
    const isEditMode:boolean = useSelector((state : RootStateOrAny) => state.categories.editMode);
    const isAddNewCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.toAddNewCategory);
    const editingCurrentCategory:boolean = useSelector((state: RootStateOrAny) => state.categories.editingCategory);
-   const toChooseAll:boolean = useSelector((state: RootStateOrAny) => state.categories.chooseAll);
+   const isChooseAllCategories:boolean = useSelector((state: RootStateOrAny) => state.categories.chooseAllCategories);
 
    const categories:Category[] = useSelector((state : RootStateOrAny) => state.categories.categoriesArray);
    const temporaryCategories:Category[] = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
 
    const chooseAllCategoriesForEdit = ():void => {
-      if (!toChooseAll) {
-         dispatch(setChooseAll(true));
-      } else if (toChooseAll) {
-         dispatch(setChooseAll(false));
+      if (!isChooseAllCategories) {
+         dispatch(setChooseAllCategories(true));
+      } else if (isChooseAllCategories) {
+         dispatch(setChooseAllCategories(false));
       }
    }
 
@@ -48,7 +48,7 @@ const EditManagement:React.FC = ():JSX.Element => {
             <button onClick={chooseAllCategoriesForEdit}
                disabled={isAddNewCategory || editingCurrentCategory}
                className={!(isAddNewCategory || editingCurrentCategory) ?
-                (toChooseAll ? 'categories-change__buttonAll on' : 'categories-change__buttonAll off') : 
+                (isChooseAllCategories ? 'categories-change__buttonAll on' : 'categories-change__buttonAll off') : 
                  "categories-change__buttonAll"}>
                   All
             </button>
