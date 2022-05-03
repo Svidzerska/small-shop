@@ -18,73 +18,73 @@ const AddCategory: React.FC = (): JSX.Element => {
    const dispatch = useDispatch();
 
    const isAddingNewCategory: boolean = useSelector((state: RootStateOrAny) => state.categories.isAddingNewCategory);
-   const temporaryCategories: Category[] = useSelector((state : RootStateOrAny) => state.categories.categoriesTemporaryArray);
+   const temporaryCategories: Category[] = useSelector((state: RootStateOrAny) => state.categories.categoriesTemporaryArray);
 
-   const [isInputValue, setIsInputValue] = useState<string>("New Category");
+   const [value, setValue] = useState<string>("New Category");
    const [charAmountLeft, setCharAmountLeft] = useState<number>(20);
-   const [editInputField, setEditInputField] = useState<boolean>(false);
+   const [isEditInputField, setEditInputField] = useState<boolean>(false);
 
    // set New Category after canceling of editing
    useEffect(() => {
-      setIsInputValue("New Category");
+      setValue("New Category");
    }, [isAddingNewCategory]);
 
-   const selectRange = (e: React.FocusEvent<HTMLInputElement>):void => {
+   const selectRange = (e: React.FocusEvent<HTMLInputElement>): void => {
       e.currentTarget.setSelectionRange(0,e.currentTarget.value.length,);
    }
 
-   const editInputNewCategory = (e: React.FormEvent<HTMLInputElement>):void => {
+   const editNewCategoryInputField = (e: React.FormEvent<HTMLInputElement>): void => {
       setEditInputField(true);
       if (e.currentTarget.value.length <= 20) {
-         setIsInputValue(e.currentTarget.value);
+         setValue(e.currentTarget.value);
          setCharAmountLeft(20-e.currentTarget.value.length);
       }
    }
 
-   const doneInputNewCategory = ():void => {
-      const existingCategories:Category[] = [...temporaryCategories];
-      const secondElementCategory:Category | undefined = existingCategories.find((item) => item.name === isInputValue);
-      if (isInputValue !== "" && isInputValue !== "New Category" && !secondElementCategory) {
-         existingCategories.unshift({id: Math.random(), name: isInputValue});
+   const doneNewCategory = (): void => {
+      const currentCategories: Category[] = [...temporaryCategories];
+      const secondElementCategory: Category | undefined = currentCategories.find((item) => item.name === value);
+      if (value !== "" && value !== "New Category" && !secondElementCategory) {
+         currentCategories.unshift({id: Math.random(), name: value});
          dispatch(setChooseAllCategories(false));
       }
 
-      dispatch(setTemporaryCategories(existingCategories));
+      dispatch(setTemporaryCategories(currentCategories));
       dispatch(setAddingNewCategory(false));
 
-      setIsInputValue("New Category");
+      setValue("New Category");
       setEditInputField(false);
    }
 
-   const cancelInputNewCategory = ():void => {
+   const cancelNewCategory = (): void => {
       dispatch(setAddingNewCategory(false));
-      setIsInputValue("New Category");
+      setValue("New Category");
       setEditInputField(false);
    }
 
-   const renderAddCategoryField = ():JSX.Element => {
+   const renderAddCategoryField = (): JSX.Element => {
       return (
          <div className='addField'>
             <div>
-               <button className='categories-name__button'>
-                  <input value={isInputValue}
-                     onChange={editInputNewCategory}
+               <div className='addField__inputField'>
+                  <input value={value}
+                     onChange={editNewCategoryInputField}
                      onFocus={selectRange}
                      className="inputForEdit"
                      autoFocus />
-               </button>
-               <button className='addField__buttonResult' onClick={doneInputNewCategory}>
+               </div>
+               <button className='addField__buttonResult' onClick={doneNewCategory}>
                   <i>
                      <CheckIcon />
                   </i>
                </button>
-               <button className='addField__buttonResult' onClick={cancelInputNewCategory}>
+               <button className='addField__buttonResult' onClick={cancelNewCategory}>
                   <i>
                      <XMarkInSquareIcon />
                   </i>
                </button>
             </div>
-            {editInputField &&
+            {isEditInputField &&
             <p className='addField__char-amount'>{charAmountLeft} char. left</p>}
          </div>
       )
