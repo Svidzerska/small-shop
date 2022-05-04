@@ -108,6 +108,23 @@ const EditCategories: React.FC = (): JSX.Element => {
       dispatch(setEditingCategory(false));
    }
 
+   const renderButtonWithInputField = (category: Category): JSX.Element => {
+      return (
+         <button
+            onClick={chooseCategory}
+            className={activeCategories.find(item => item === category.name) ? 'categories-name__button active' : 'categories-name__button'}
+            value={category.name}
+            disabled={isAddingNewCategory || isEditingCategory}>
+               {editedCategory === category.id ?
+                  <input value={isEditingCategory ? value : category.name}
+                     onChange={editCategoryInputField}
+                     className="inputForEdit"
+                     autoFocus /> :
+                  category.name}
+         </button>
+      )
+   }
+
    const renderCharLeft = (category: Category): JSX.Element => {
       return (
          <>
@@ -138,22 +155,11 @@ const EditCategories: React.FC = (): JSX.Element => {
          <li key={category.id}
             className={activeCategories.find(item => item === category.name) ? 'edit-component active' : 'edit-component'}>
             <div>
-               <button
-                  onClick={chooseCategory}
-                  className={activeCategories.find(item => item === category.name) ? 'categories-name__button active' : 'categories-name__button'}
-                  value={category.name}
-                  disabled={isAddingNewCategory || isEditingCategory}>
-                     {editedCategory === category.id ?
-                        <input value={isEditingCategory ? value : category.name}
-                           onChange={editCategoryInputField}
-                           className="inputForEdit"
-                           autoFocus /> :
-                        category.name}
-               </button>
+               {renderButtonWithInputField(category)}
                {renderCharLeft(category)}
             </div>
             {activeCategories.find(item => item === category.name) &&
-             renderButtons(category)}
+               renderButtons(category)}
          </li>
       )
    })
