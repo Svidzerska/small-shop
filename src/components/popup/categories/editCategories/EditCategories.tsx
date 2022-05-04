@@ -28,9 +28,8 @@ const EditCategories: React.FC = (): JSX.Element => {
    const [charAmountLeft, setCharAmountLeft] = useState<number>(0);
 
    useEffect(() => {
-      if (activeCategories.length === temporaryCategories.length) {
+      activeCategories.length === temporaryCategories.length &&  
          dispatch(setChooseAllCategories(true));
-      }
    }, [activeCategories.length]);
 
    useEffect(() => {
