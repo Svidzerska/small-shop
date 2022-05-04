@@ -11,7 +11,7 @@ const Categories: React.FC = (): JSX.Element => {
    return (
       <>
          <AddCategory/>
-         {!isEditMode ? <ShowCategories/> : <EditCategories/>}
+         {isEditMode ? <EditCategories/> : <ShowCategories/>}
       </>
    )
 }
