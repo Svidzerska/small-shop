@@ -29,21 +29,19 @@ const EditManagement: React.FC = (): JSX.Element => {
    const categories: Category[] = useSelector((state: RootStateOrAny) => state.categories.categoriesArray);
    const temporaryCategories: Category[] = useSelector((state: RootStateOrAny) => state.categories.categoriesTemporaryArray);
 
-   const chooseAllCategoriesForEdit = () :void => {
-      if (!isChooseAllCategories) {
+   const chooseAllCategoriesForEdit = (): void => {
+      isChooseAllCategories ?
+         dispatch(setChooseAllCategories(false)) : 
          dispatch(setChooseAllCategories(true));
-      } else if (isChooseAllCategories) {
-         dispatch(setChooseAllCategories(false));
-      }
    }
 
    const addNewCategory = (): void => {
       dispatch(setAddingNewCategory(true));
    }
 
-   const doneNewCategory = (): void => {
+   const checkChanges = (): void => {
       dispatch(setAddingNewCategory(false));
-      dispatch(setCategories([...temporaryCategories]));
+      dispatch(setCategories(temporaryCategories));
       alert('Your changes were saved');
    }
 
@@ -65,7 +63,7 @@ const EditManagement: React.FC = (): JSX.Element => {
                   </i>
             </button>
             <button className={!(isAddingNewCategory || isEditingCategory) ? '' : "unactivated"}
-               onClick={doneNewCategory}
+               onClick={checkChanges}
                disabled={isAddingNewCategory || isEditingCategory}>
                   <i>
                      <CheckIcon/>
@@ -75,15 +73,15 @@ const EditManagement: React.FC = (): JSX.Element => {
       )
    }
 
-   const handleCorrect = (): void => {
+   const editModeOn = (): void => {
       dispatch(setEditMode(true));
       dispatch(setTemporaryCategories([...categories]));
    }
 
-   const buttonToEdit = (): JSX.Element => {
+   const buttonEditModeOn = (): JSX.Element => {
       return (
          <>
-            <button onClick={handleCorrect}>
+            <button onClick={editModeOn}>
                <i>
                   <PensilIcon/> 
                </i>
@@ -99,7 +97,7 @@ const EditManagement: React.FC = (): JSX.Element => {
    return (
       <div className='popup__categories-change'>
          <p>Categories</p>
-         {isEditMode ? buttonsEdit() : buttonToEdit()}
+         {isEditMode ? buttonsEdit() : buttonEditModeOn()}
          <button className={!(isAddingNewCategory || isEditingCategory) ?
                'categories-change__info' :
                'categories-change__info unactivated'} 

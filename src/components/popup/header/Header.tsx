@@ -34,9 +34,9 @@ const Header: React.FC = (): JSX.Element => {
    return (
       <>
          <div className='popup__name'>
-            <button onClick={!isEditMode ? closePopup : closeEditMode}>
+            <button onClick={isEditMode ? closeEditMode : closePopup}>
                <i>
-                  {!isEditMode ? <ArrowLeftIcon/> : <XMarkIcon/>}
+                  {isEditMode ? <XMarkIcon/> : <ArrowLeftIcon/>}
                </i>
             </button>
             <h1>Filter</h1>
