@@ -11,19 +11,12 @@ const ShowCategories: React.FC = (): JSX.Element => {
    const [activeCategories, setActiveCategories] = useState<string[]>([]);
 
    const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
-      const currentActiveCategories: string[] = [...activeCategories];
       const targetValue: string = e.currentTarget.value;
 
-      const checkActiveCategory = currentActiveCategories.includes(e.currentTarget.value);
-
-      if (checkActiveCategory) {
-         setActiveCategories((arr) => {
-            const categoriesWithoutDeleteElement: string[] = currentActiveCategories.filter(item => item !== targetValue);
-            return categoriesWithoutDeleteElement;
-         }); 
-      } else {
+      const checkActiveCategory = activeCategories.includes(e.currentTarget.value);
+      checkActiveCategory ?
+         setActiveCategories(activeCategories.filter(item => item !== targetValue)) :
          setActiveCategories(arr => [...arr, `${targetValue}`]);
-      }
    }
 
    const displayCategories: JSX.Element[] = categories.map((category: Category) => {
@@ -49,7 +42,9 @@ const ShowCategories: React.FC = (): JSX.Element => {
       <ul className='popup__categories-name'>
          <li>
             <button onClick={chooseAll}
-               className={activeCategories.length === 0 ? 'categories-name__button active' : 'categories-name__button'}>All</button>
+               className={activeCategories.length === 0 ? 'categories-name__button active' : 'categories-name__button'}>
+               All
+            </button>
          </li>
          {displayCategories}
       </ul>
