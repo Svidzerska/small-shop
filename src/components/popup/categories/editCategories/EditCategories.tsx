@@ -63,12 +63,9 @@ const EditCategories: React.FC = (): JSX.Element => {
    const editCategory = (e: React.MouseEvent<HTMLButtonElement>, id: number): void => {
       setEditedCategory(id);
 
-      const existValue = temporaryCategories.find(item => item.id === id);
-
-      if (existValue) {
-         setCharAmountLeft(20-existValue.name.length);
-         setValue(existValue.name);
-      }
+      const existingCategory: Category = temporaryCategories.find(item => item.id === id)!;
+      setCharAmountLeft(20-existingCategory.name.length);
+      setValue(existingCategory.name);
 
       dispatch(setEditingCategory(true));
    }
@@ -82,7 +79,7 @@ const EditCategories: React.FC = (): JSX.Element => {
 
    const deleteCategory = (e: React.MouseEvent<HTMLButtonElement>, id: number): void => {
       dispatch(setTemporaryCategories(temporaryCategories.filter((item) => item.id !== id)));
-      
+
       const deleteCategory = temporaryCategories.find((item) => item.id === id);
       setActiveCategories(activeCategories.filter((item) => item !== deleteCategory?.name));
    }
