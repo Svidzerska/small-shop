@@ -81,31 +81,32 @@ const EditCategories: React.FC = (): JSX.Element => {
    }
 
    const deleteCategory = (e: React.MouseEvent<HTMLButtonElement>, id: number): void => {
-      const currentCategories: Category[] = [...temporaryCategories];
-      dispatch(setTemporaryCategories(currentCategories.filter((item) => item.id !== id)));
+      dispatch(setTemporaryCategories(temporaryCategories.filter((item) => item.id !== id)));
       
-      const deleteCategory = currentCategories.find((item) => item.id === id);
+      const deleteCategory = temporaryCategories.find((item) => item.id === id);
       setActiveCategories(activeCategories.filter((item) => item !== deleteCategory?.name));
    }
 
    const doneCategory = (e: React.MouseEvent<HTMLButtonElement>, id: number): void => {
       const currentCategories: Category[] = [...temporaryCategories];
+
       const secondElementCategory = currentCategories.find((item) => item.name === value && item.id !== id);
 
       if (!secondElementCategory && value !== "") {
          const currentCategory = currentCategories.findIndex((item) => item.id === id);
-         const indexActiveCategory = activeCategories.findIndex((item) => item === currentCategories[currentCategory].name);
-      
+         const currentCategoryAsActive = activeCategories.findIndex((item) => item === currentCategories[currentCategory].name);
+         
          currentCategories[currentCategory] = {...currentCategories[currentCategory], name: value};
-         dispatch(setTemporaryCategories(currentCategories)); 
-
+         dispatch(setTemporaryCategories(currentCategories));
+      
          setActiveCategories((arr) => {
             const updateArr = [...arr];
-            updateArr.splice(indexActiveCategory,1,value);
+            updateArr.splice(currentCategoryAsActive,1,value);
             return updateArr;
          })
       } else {
          dispatch(setTemporaryCategories(currentCategories.filter((item) => item.id !== id)));
+
          const deleteCategory = currentCategories.find((item) => item.id === id);
          setActiveCategories(activeCategories.filter((item) => item !== deleteCategory?.name));
       }
