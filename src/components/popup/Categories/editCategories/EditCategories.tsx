@@ -35,7 +35,7 @@ const EditCategories: React.FC = (): JSX.Element => {
 
    useEffect(() => {
       if (isChooseAllCategories) {
-         setActiveCategories([...temporaryCategories].map(item => item.name));
+         setActiveCategories(temporaryCategories.map(item => item.name));
       } else if (!isChooseAllCategories && activeCategories.length === temporaryCategories.length) {
          setActiveCategories([]);
       }
