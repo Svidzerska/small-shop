@@ -43,19 +43,13 @@ const EditCategories: React.FC = (): JSX.Element => {
 
    const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
       if (!isEditingCategory) { 
-         const currentActiveCategories: string[] = [...activeCategories];
          const targetValue: string = e.currentTarget.value;
+         const checkIsActiveCategory: boolean = activeCategories.includes(e.currentTarget.value);
 
-         const checkActiveCategory: boolean = currentActiveCategories.includes(e.currentTarget.value);
-
-            if (checkActiveCategory) {
-               setActiveCategories(() => {
-                  const categoriesWithoutDeleteElement: string[] = currentActiveCategories.filter(item => item !== targetValue);
-                  return categoriesWithoutDeleteElement;
-               });
-            } else {
+            checkIsActiveCategory ? 
+               setActiveCategories(activeCategories.filter(item => item !== targetValue)) :
                setActiveCategories(arr => [...arr, `${targetValue}`]);
-            }
+
          dispatch(setChooseAllCategories(false));
       }
    }
