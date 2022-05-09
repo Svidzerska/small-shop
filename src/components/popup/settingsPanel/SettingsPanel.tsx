@@ -50,19 +50,17 @@ const EditManagement: React.FC = (): JSX.Element => {
          <>
             <button onClick={chooseAllCategoriesForEdit}
                disabled={isAddingNewCategory || isEditingCategory}
-               className={!(isAddingNewCategory || isEditingCategory) ?
-                (isChooseAllCategories ? 'categories-change__buttonAll on' : 'categories-change__buttonAll off') : 
-                 "categories-change__buttonAll"}>
+               className={`settingsPanel__buttonAll ${isChooseAllCategories ? 'on' : 'off'}`}>
                   All
             </button>
-            <button className={!(isAddingNewCategory || isEditingCategory) ? '' : "unactivated"}
+            <button className={(isAddingNewCategory || isEditingCategory) ? "unactivated" : ""}
                onClick={addNewCategory}
                disabled={isAddingNewCategory || isEditingCategory}>
                   <i>
                      <PlusIcon/>
                   </i>
             </button>
-            <button className={!(isAddingNewCategory || isEditingCategory) ? '' : "unactivated"}
+            <button className={(isAddingNewCategory || isEditingCategory) ? "unactivated" : ""}
                onClick={checkChanges}
                disabled={isAddingNewCategory || isEditingCategory}>
                   <i>
@@ -95,12 +93,10 @@ const EditManagement: React.FC = (): JSX.Element => {
    }
 
    return (
-      <div className='popup__categories-change'>
+      <div className='popup__settingsPanel'>
          <p>Categories</p>
          {isEditMode ? buttonsEdit() : buttonEditModeOn()}
-         <button className={!(isAddingNewCategory || isEditingCategory) ?
-               'categories-change__info' :
-               'categories-change__info unactivated'} 
+         <button className={`settingsPanel__info ${(isAddingNewCategory || isEditingCategory) ? "unactivated" : ""}`} 
                disabled={isAddingNewCategory || isEditingCategory}
                onClick={showInfo}>
             <i>
