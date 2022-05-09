@@ -1,3 +1,5 @@
+import React from "react";
+
 import { Product } from "../../../../interfaces/Product";
 
 interface Props {

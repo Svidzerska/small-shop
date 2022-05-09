@@ -12,27 +12,17 @@ const Cards: React.FC = (): JSX.Element => {
    const cards: Product[] = useSelector((state: RootStateOrAny) => state.products.cardArray);
 
    const displayCards: JSX.Element[] = cards.map((card: Product) =>
-      <CardElement key={card.id}
-         card={card}
-      />
-   )
-
-   const displayCardsEven: JSX.Element[] = displayCards.filter((_item, index) =>
-      index % 2 !== 0
-   )
-
-   const displayCardsOdd: JSX.Element[] = displayCards.filter((_item, index) =>
-      index % 2 === 0
+      (<CardElement key={card.id} card={card}/>)
    )
 
    return (
       <section className="cards-element__row">
          <ul className="cards-element__column">
-            {displayCardsOdd}
+            {displayCards.filter((_item, index) => index % 2 === 0)}
             {cards.length % 2 === 0 && <RenderAddCard/>}
          </ul>
          <ul className="cards-element__column">
-            {displayCardsEven}
+            {displayCards.filter((_item, index) => index % 2 !== 0)}
             {cards.length % 2 !== 0 && <RenderAddCard/>}
          </ul>
       </section>
