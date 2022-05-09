@@ -10,30 +10,28 @@ import { setPopup } from "../../../features/products/productsSlice";
 import Popup from "../../popup/Popup";
 
 const Filter: React.FC = (): JSX.Element => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const isPopup: boolean = useSelector(
-        (state: RootStateOrAny) => state.products.isPopup
-    );
+  const isPopup: boolean = useSelector((state: RootStateOrAny) => state.products.isPopup);
 
-    const showPopup = (): void => {
-        dispatch(setPopup(true));
-    };
+  const showPopup = (): void => {
+    dispatch(setPopup(true));
+  };
 
-    useEffect(() => {
-        document.body.style.overflow = isPopup ? "hidden" : "auto";
-    }, [isPopup]);
+  useEffect(() => {
+    document.body.style.overflow = isPopup ? "hidden" : "auto";
+  }, [isPopup]);
 
-    return (
-        <>
-            <button className="button-sliders" onClick={showPopup}>
-                <i>
-                    <SlidersIcon />
-                </i>
-            </button>
-            {isPopup && <Popup />}
-        </>
-    );
+  return (
+    <>
+      <button className="button-sliders" onClick={showPopup}>
+        <i>
+          <SlidersIcon />
+        </i>
+      </button>
+      {isPopup && <Popup />}
+    </>
+  );
 };
 
 export default Filter;

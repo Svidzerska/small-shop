@@ -9,26 +9,26 @@ import { getProducts } from "../../../features/products/productsSlice";
 import { getCategories } from "../../../features/categories/categoriesSlice";
 
 const Header: React.FC = (): JSX.Element => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getProducts());
-    }, []);
+  useEffect(() => {
+    dispatch(getProducts());
+  }, []);
 
-    useEffect(() => {
-        dispatch(getCategories());
-    }, []);
+  useEffect(() => {
+    dispatch(getCategories());
+  }, []);
 
-    return (
-        <header className="header">
-            <h1>Shop</h1>
-            <button onClick={getProducts}>
-                <i>
-                    <BurgerIcon />
-                </i>
-            </button>
-        </header>
-    );
+  return (
+    <header className="header">
+      <h1>Shop</h1>
+      <button onClick={getProducts}>
+        <i>
+          <BurgerIcon />
+        </i>
+      </button>
+    </header>
+  );
 };
 
 export default Header;

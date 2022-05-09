@@ -1,36 +1,36 @@
 @import "../../../utils/variables.scss";
 
 .search-field {
-    display: flex;
-    justify-content: space-between;
-    width: 85%;
+  display: flex;
+  justify-content: space-between;
+  width: 85%;
 
-    input {
-        width: 100%;
-        border-radius: 20px;
-        border: 0;
-        background-color: $light-gray;
-        padding-left: 10px;
+  input {
+    width: 100%;
+    border-radius: 20px;
+    border: 0;
+    background-color: $light-gray;
+    padding-left: 10px;
+  }
+
+  .search-field__button-glass {
+    cursor: pointer;
+    padding: 0;
+    width: fit-content;
+    height: fit-content;
+    background: none;
+    border: none;
+    text-align: center;
+    border-radius: 7px;
+    transform: translateX(-30px);
+
+    i {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      padding: 5px;
+      vertical-align: middle;
+      transform: rotateZ(90deg);
     }
-
-    .search-field__button-glass {
-        cursor: pointer;
-        padding: 0;
-        width: fit-content;
-        height: fit-content;
-        background: none;
-        border: none;
-        text-align: center;
-        border-radius: 7px;
-        transform: translateX(-30px);
-
-        i {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            padding: 5px;
-            vertical-align: middle;
-            transform: rotateZ(90deg);
-        }
-    }
+  }
 }

@@ -8,45 +8,43 @@ import { ReactComponent as XMarkIcon } from "../../../images/xmarkIcon.svg";
 
 import { setPopup } from "../../../features/products/productsSlice";
 import {
-    setEditMode,
-    setEditingCategory,
-    setAddingNewCategory,
-    setChooseAllCategories,
+  setEditMode,
+  setEditingCategory,
+  setAddingNewCategory,
+  setChooseAllCategories,
 } from "../../../features/categories/categoriesSlice";
 
 const Header: React.FC = (): JSX.Element => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const isEditMode: boolean = useSelector(
-        (state: RootStateOrAny) => state.categories.isEditMode
-    );
+  const isEditMode: boolean = useSelector((state: RootStateOrAny) => state.categories.isEditMode);
 
-    const closePopup = (): void => {
-        dispatch(setPopup(false));
-    };
+  const closePopup = (): void => {
+    dispatch(setPopup(false));
+  };
 
-    const closeEditMode = (): void => {
-        dispatch(setEditMode(false));
-        dispatch(setAddingNewCategory(false));
-        dispatch(setEditingCategory(false));
-        dispatch(setChooseAllCategories(false));
-    };
+  const closeEditMode = (): void => {
+    dispatch(setEditMode(false));
+    dispatch(setAddingNewCategory(false));
+    dispatch(setEditingCategory(false));
+    dispatch(setChooseAllCategories(false));
+  };
 
-    return (
-        <>
-            <div className="popup__name">
-                <button onClick={isEditMode ? closeEditMode : closePopup}>
-                    <i>{isEditMode ? <XMarkIcon /> : <ArrowLeftIcon />}</i>
-                </button>
-                <h1>Filter</h1>
-            </div>
-            {isEditMode && (
-                <div className="popup__comments">
-                    <p>Categories editing</p>
-                </div>
-            )}
-        </>
-    );
+  return (
+    <>
+      <div className="popup__name">
+        <button onClick={isEditMode ? closeEditMode : closePopup}>
+          <i>{isEditMode ? <XMarkIcon /> : <ArrowLeftIcon />}</i>
+        </button>
+        <h1>Filter</h1>
+      </div>
+      {isEditMode && (
+        <div className="popup__comments">
+          <p>Categories editing</p>
+        </div>
+      )}
+    </>
+  );
 };
 
 export default Header;

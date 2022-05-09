@@ -1,63 +1,63 @@
 @import "../../../../utils/variables.scss";
 
 .addField {
-    margin-left: 60px;
+  margin-left: 60px;
 
-    div {
-        display: flex;
-        align-items: center;
-        margin-top: 10px;
+  div {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
 
-        .addField__inputField {
-            border: 2px solid $violet;
-            width: max-content;
-            cursor: pointer;
-            background-color: $light-gray;
-            border-radius: 10px;
-            padding: 5px;
-            margin: 0;
-            height: 30px;
-            box-sizing: border-box;
+    .addField__inputField {
+      border: 2px solid $violet;
+      width: max-content;
+      cursor: pointer;
+      background-color: $light-gray;
+      border-radius: 10px;
+      padding: 5px;
+      margin: 0;
+      height: 30px;
+      box-sizing: border-box;
 
-            .inputForEdit {
-                width: 100px;
-                border: none;
-                background: none;
-                outline: none;
-                border-radius: 0;
-            }
+      .inputForEdit {
+        width: 100px;
+        border: none;
+        background: none;
+        outline: none;
+        border-radius: 0;
+      }
 
-            .inputForEdit::selection {
-                background-color: $yellow;
-            }
-        }
-
-        .addField__buttonResult {
-            border: none;
-            background: none;
-            cursor: pointer;
-            margin-left: 0;
-            height: 30px;
-
-            i {
-                display: inline-block;
-                width: 30px;
-                height: 30px;
-                box-sizing: border-box;
-
-                svg {
-                    width: 100%;
-                    height: 100%;
-                }
-            }
-        }
+      .inputForEdit::selection {
+        background-color: $yellow;
+      }
     }
 
-    .addField__char-amount {
-        font-size: 12px;
-        margin: 0;
-        text-align: left;
-        padding: 0 5px 5px 7px;
+    .addField__buttonResult {
+      border: none;
+      background: none;
+      cursor: pointer;
+      margin-left: 0;
+      height: 30px;
+
+      i {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
         box-sizing: border-box;
+
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
     }
+  }
+
+  .addField__char-amount {
+    font-size: 12px;
+    margin: 0;
+    text-align: left;
+    padding: 0 5px 5px 7px;
+    box-sizing: border-box;
+  }
 }
