@@ -12,14 +12,13 @@ interface Props {
    cancel: Function,
 }
 
-const ConfirmButtons: React.FC<Props> = (props): JSX.Element => {
-   const {
-      category,
-      className,
-      check,
-      cancel
-   } = props;
-
+const ConfirmButtons: React.FC<Props> = ({
+   category,
+   className,
+   check,
+   cancel
+}): JSX.Element => {
+   
    return (
       <>
          <button className={className} onClick={(e) => check(e, category?.id)}>
