@@ -3,10 +3,7 @@ import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 
 import './settingsPanel.scss';
 
-import { ReactComponent as PensilIcon } from '../../../images/pensilIcon.svg';
 import { ReactComponent as InfoIcon } from '../../../images/infoIcon.svg';
-import { ReactComponent as PlusIcon } from '../../../images/plusIcon.svg';
-import { ReactComponent as CheckIcon } from '../../../images/checkIcon.svg';
 
 import {
    setEditMode,
@@ -17,6 +14,9 @@ import {
 } from "../../../features/categories/categoriesSlice";
 
 import { Category } from "../../../interfaces/Category";
+
+import ButtonEditModeOn from "./buttonEditModeOn/ButtonEditModeOn";
+import ButtonsEdit from "./buttonsEdit/ButtonsEdit";
 
 const EditManagement: React.FC = (): JSX.Element => {
    const dispatch = useDispatch();
@@ -45,45 +45,22 @@ const EditManagement: React.FC = (): JSX.Element => {
       alert('Your changes were saved');
    }
 
-   const buttonsEdit = (): JSX.Element => {
-      return (
-         <>
-            <button onClick={chooseAllCategoriesForEdit}
-               disabled={isAddingNewCategory || isEditingCategory}
-               className={`settingsPanel__buttonAll ${isChooseAllCategories ? 'on' : 'off'}`}>
-                  All
-            </button>
-            <button className={(isAddingNewCategory || isEditingCategory) ? "unactivated" : ""}
-               onClick={addNewCategory}
-               disabled={isAddingNewCategory || isEditingCategory}>
-                  <i>
-                     <PlusIcon/>
-                  </i>
-            </button>
-            <button className={(isAddingNewCategory || isEditingCategory) ? "unactivated" : ""}
-               onClick={checkChanges}
-               disabled={isAddingNewCategory || isEditingCategory}>
-                  <i>
-                     <CheckIcon/>
-                  </i>
-            </button>
-         </>
-      )
-   }
-
    const editModeOn = (): void => {
       dispatch(setEditMode(true));
       dispatch(setTemporaryCategories([...categories]));
    }
 
-   const buttonEditModeOn = (): JSX.Element => {
+   const renderEditButtons = (): JSX.Element => {
       return (
          <>
-            <button onClick={editModeOn}>
-               <i>
-                  <PensilIcon/> 
-               </i>
-            </button>
+            {isEditMode ?
+               <ButtonsEdit 
+                  allButtonToDo={chooseAllCategoriesForEdit}
+                  isDisabled={isAddingNewCategory || isEditingCategory} 
+                  switcher={isChooseAllCategories} 
+                  plus={addNewCategory} 
+                  check={checkChanges}/> : 
+               <ButtonEditModeOn onClickToDo={editModeOn}/>}
          </>
       )
    }
@@ -95,7 +72,7 @@ const EditManagement: React.FC = (): JSX.Element => {
    return (
       <div className='popup__settingsPanel'>
          <p>Categories</p>
-         {isEditMode ? buttonsEdit() : buttonEditModeOn()}
+         {renderEditButtons()}
          <button className={`settingsPanel__info ${(isAddingNewCategory || isEditingCategory) ? "unactivated" : ""}`} 
                disabled={isAddingNewCategory || isEditingCategory}
                onClick={showInfo}>
