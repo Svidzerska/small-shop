@@ -1,0 +1,75 @@
+.popup__edit-place {
+   display: flex;
+   flex-direction: row;
+   padding-left: 60px;
+   flex-wrap: wrap;
+   
+      .edit-component {
+         display: flex;
+         align-items: flex-start;
+
+         p {
+            margin: 0;
+         }
+
+         p.edit-component__char-amount {
+            font-size: 12px;
+            margin-bottom: 10px;
+            text-align: left;
+            padding-left: 5px;
+         }
+
+         .inputForEdit {
+         width: 100px;
+         border: none;
+         background: none;
+         outline: none;
+         border-radius: 0;
+         }
+      }
+
+      .edit-component.active {
+         margin-right: 100%;
+      }
+
+      button {
+         cursor: pointer;
+         background: none;
+         border: 0;
+         height: 30px;
+      }
+
+      .categories-name__button { 
+         width: max-content;
+         cursor: pointer;
+         background-color: rgb(237, 237, 237);
+         border: 0;
+         border-radius: 10px;
+         padding: 5px;
+         margin: 5px;
+         margin-left: 0;
+         margin-top: 0;
+      }
+
+      .categories-name__button.active {
+         border: 2px solid rgb(179, 129, 255);
+      }
+
+      i {
+         display: inline-block;
+         width: 30px;
+         height: 30px;
+         box-sizing: border-box;
+         
+         svg {
+            width: 100%;
+            height: 100%;
+         }
+      }
+
+      i.unactivated {
+         opacity: 40%;
+      }
+
+      
+}
