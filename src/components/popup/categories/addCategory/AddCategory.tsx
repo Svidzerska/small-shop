@@ -24,9 +24,7 @@ const AddCategory: React.FC = (): JSX.Element => {
    const [isEditInputField, setEditInputField] = useState<boolean>(false);
 
    // set New Category after canceling of editing
-   useEffect(() => {
-      setValue("New Category");
-   }, [isAddingNewCategory]);
+   useEffect(() => {setValue("New Category")}, [isAddingNewCategory]);
 
    const selectRange = (e: React.FocusEvent<HTMLInputElement>): void => {
       e.currentTarget.setSelectionRange(0,e.currentTarget.value.length,);
