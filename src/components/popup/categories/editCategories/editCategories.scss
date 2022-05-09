@@ -1,3 +1,5 @@
+@import '../../../../utils/variables.scss';
+
 .popup__edit-place {
    display: flex;
    flex-direction: row;
@@ -42,7 +44,7 @@
       .categories-name__button { 
          width: max-content;
          cursor: pointer;
-         background-color: rgb(237, 237, 237);
+         background-color: $light-gray;
          border: 0;
          border-radius: 10px;
          padding: 5px;
@@ -52,7 +54,7 @@
       }
 
       .categories-name__button.active {
-         border: 2px solid rgb(179, 129, 255);
+         border: 2px solid $violet;
       }
 
       i {
@@ -70,6 +72,4 @@
       i.unactivated {
          opacity: 40%;
       }
-
-      
 }

@@ -1,3 +1,5 @@
+@import '../../../../utils/variables.scss';
+
 .addField {
    margin-left: 60px;
 
@@ -7,10 +9,10 @@
       margin-top: 10px;
 
       .addField__inputField {
-         border: 2px solid rgb(179, 129, 255);
+         border: 2px solid $violet;
          width: max-content;
          cursor: pointer;
-         background-color: rgb(237, 237, 237);
+         background-color: $light-gray;
          border-radius: 10px;
          padding: 5px;
          margin: 0;
@@ -26,7 +28,7 @@
          }
 
          .inputForEdit::selection {
-            background-color: yellow;
+            background-color: $yellow;
          }
       }
 
