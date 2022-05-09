@@ -16,4 +16,4 @@ const Categories: React.FC = (): JSX.Element => {
    )
 }
 
-export default Categories;
+export default Categories; 
