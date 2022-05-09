@@ -15,21 +15,14 @@ const Search: React.FC = (): JSX.Element => {
       console.log(value);
    }
 
-   const searchStartButton = (e: React.MouseEvent<HTMLButtonElement>): void => {
-      searchDone(value);
-   }
-
-   const searchStartEnter = (e: React.KeyboardEvent<HTMLInputElement>): void => {
-      e.key === 'Enter' && searchDone(value);
-   }
-
    return (
       <div className="search-field">
          <input placeholder="Search"
             value={value}
             onChange={changeValue}
-            onKeyDown={searchStartEnter} />
-         <button className="search-field__button-glass" onClick={searchStartButton}>
+            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>): void | false =>
+                         e.key === 'Enter' && searchDone(value)} />
+         <button className="search-field__button-glass" onClick={(): void => searchDone(value)}>
             <i>
                <GlassIcon/>
             </i>
