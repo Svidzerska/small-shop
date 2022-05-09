@@ -11,12 +11,12 @@ const Search: React.FC = (): JSX.Element => {
       setValue(e.currentTarget.value);
    }
 
-   const searchDone = (value: string): void => {
+   const searchDone = (): void => {
       console.log(value);
    }
 
    const searchStartEnter = (e: React.KeyboardEvent<HTMLInputElement>): void => {
-      e.key === 'Enter' && searchDone(value);
+      e.key === 'Enter' && searchDone();
    }
 
    return (
@@ -25,7 +25,7 @@ const Search: React.FC = (): JSX.Element => {
             value={value}
             onChange={changeValue}
             onKeyDown={searchStartEnter} />
-         <button className="search-field__button-glass" onClick={(): void => searchDone(value)}>
+         <button className="search-field__button-glass" onClick={searchDone}>
             <i>
                <GlassIcon/>
             </i>
