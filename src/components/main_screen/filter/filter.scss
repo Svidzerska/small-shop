@@ -1,21 +1,21 @@
-@import '../../../utils/variables.scss';
+@import "../../../utils/variables.scss";
 
 .button-sliders {
-   cursor: pointer;
-   padding: 0;
-   width: fit-content;
-   height: fit-content;
-   background-color: $black;
-   border: none;
-   text-align: center;
-   border-radius: 7px;
+    cursor: pointer;
+    padding: 0;
+    width: fit-content;
+    height: fit-content;
+    background-color: $black;
+    border: none;
+    text-align: center;
+    border-radius: 7px;
 
-   i {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      padding: 5px;
-      vertical-align: middle;
-      transform: rotateZ(-90deg);
-   }
+    i {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        padding: 5px;
+        vertical-align: middle;
+        transform: rotateZ(-90deg);
+    }
 }

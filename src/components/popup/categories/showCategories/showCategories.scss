@@ -1,31 +1,31 @@
-@import '../../../../utils/variables.scss';
+@import "../../../../utils/variables.scss";
 
 .popup__categories-name {
-   display: flex;
-   flex-direction: row;
-   padding-left: 60px;
-   flex-wrap: wrap;
-   align-items: center;
-   list-style: none;
+    display: flex;
+    flex-direction: row;
+    padding-left: 60px;
+    flex-wrap: wrap;
+    align-items: center;
+    list-style: none;
 
-   .category-warning {
-      margin-top: 0;
-      margin-bottom: 0;
-      margin-left: 20px;
-   }
+    .category-warning {
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-left: 20px;
+    }
 
-   .categories-name__button {
-      width: max-content;
-      cursor: pointer;
-      background-color: $light-gray;
-      border-radius: 10px;
-      border: 0;
-      padding: 5px;
-      margin: 5px;
-   }
+    .categories-name__button {
+        width: max-content;
+        cursor: pointer;
+        background-color: $light-gray;
+        border-radius: 10px;
+        border: 0;
+        padding: 5px;
+        margin: 5px;
+    }
 
-   .categories-name__button.active {
-      background-color: $violet;
-      color: $light-blue;
-   }
+    .categories-name__button.active {
+        background-color: $violet;
+        color: $light-blue;
+    }
 }

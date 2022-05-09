@@ -1,37 +1,39 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 
-import './filter.scss';
+import "./filter.scss";
 
-import {ReactComponent as SlidersIcon} from '../../../images/slidersIcon.svg';
+import { ReactComponent as SlidersIcon } from "../../../images/slidersIcon.svg";
 
 import { setPopup } from "../../../features/products/productsSlice";
 
 import Popup from "../../popup/Popup";
 
 const Filter: React.FC = (): JSX.Element => {
-   const dispatch = useDispatch();
-   
-   const isPopup: boolean = useSelector((state: RootStateOrAny) => state.products.isPopup);
+    const dispatch = useDispatch();
 
-   const showPopup = (): void => {
-      dispatch(setPopup(true));
-   }
+    const isPopup: boolean = useSelector(
+        (state: RootStateOrAny) => state.products.isPopup
+    );
 
-   useEffect(() => {
-      document.body.style.overflow = isPopup ? 'hidden' : 'auto';
-   }, [isPopup]);
+    const showPopup = (): void => {
+        dispatch(setPopup(true));
+    };
 
-   return (
-      <>    
-         <button className="button-sliders" onClick={showPopup}>
-            <i>
-               <SlidersIcon/>
-            </i>
-         </button>
-         {isPopup && <Popup/>}
-      </>
-   ) 
+    useEffect(() => {
+        document.body.style.overflow = isPopup ? "hidden" : "auto";
+    }, [isPopup]);
+
+    return (
+        <>
+            <button className="button-sliders" onClick={showPopup}>
+                <i>
+                    <SlidersIcon />
+                </i>
+            </button>
+            {isPopup && <Popup />}
+        </>
+    );
 };
 
 export default Filter;

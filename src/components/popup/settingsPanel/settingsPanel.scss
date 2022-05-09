@@ -1,78 +1,76 @@
-@import '../../../utils/variables.scss';
+@import "../../../utils/variables.scss";
 
 .popup__settingsPanel {
-   display: flex;
-   flex-direction: row;
-   padding-left: 60px;
-   align-items: center;
+    display: flex;
+    flex-direction: row;
+    padding-left: 60px;
+    align-items: center;
 
-   p:first-child {
-      font-size: 14px;
-      font-weight: 700;
-      margin-right: 15px;
-   }
+    p:first-child {
+        font-size: 14px;
+        font-weight: 700;
+        margin-right: 15px;
+    }
 
-   button {
-      cursor: pointer;
-      padding-top: 5px;
-      background: none;
-      border: 0;
+    button {
+        cursor: pointer;
+        padding-top: 5px;
+        background: none;
+        border: 0;
 
-      i {
-         display: inline-block;
-         width: 30px;
-         height: 30px;
-         
-         svg {
-            width: 100%;
-            height: 100%;
-         }
+        i {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
 
-         .bi-plus-square-fill {
-            padding: 2px;
+            svg {
+                width: 100%;
+                height: 100%;
+            }
+
+            .bi-plus-square-fill {
+                padding: 2px;
+                box-sizing: border-box;
+            }
+        }
+    }
+
+    .settingsPanel__buttonAll {
+        cursor: pointer;
+        background-color: $light-gray;
+        border: 0;
+        border-radius: 10px;
+        padding: 5px;
+        margin: 5px;
+    }
+
+    .settingsPanel__buttonAll.on {
+        background-color: $black;
+        color: $white;
+    }
+
+    .settingsPanel__info {
+        background-color: $white;
+        border: 2px solid $light-gray;
+        border-radius: 15px;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+
+        i {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            padding: 5px;
             box-sizing: border-box;
-         }
-      }
 
-
-   }
-
-   .settingsPanel__buttonAll {
-      cursor: pointer;
-      background-color: $light-gray;
-      border: 0;
-      border-radius: 10px;
-      padding: 5px;
-      margin: 5px;
-   }
-
-   .settingsPanel__buttonAll.on {
-      background-color: $black;
-      color:$white;
-   }
-
-   .settingsPanel__info {
-      background-color: $white;
-      border: 2px solid $light-gray;
-      border-radius: 15px;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0;
-
-      i {
-         display: inline-block;
-         width: 30px;
-         height: 30px;
-         padding: 5px;
-         box-sizing: border-box;
-
-         svg {
-            width: 100%;
-            height: 100%;
-         }
-      }
-   }
+            svg {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
 }

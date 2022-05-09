@@ -1,29 +1,29 @@
 .header {
-   margin-left: 10px;
-   margin-right: 10px;
-   padding-top: 30px;
-   padding-bottom: 30px;
-   display: flex;
-   justify-content: space-between;
-   align-items: flex-end;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 
-   h1 {
-      margin: 0;
-      font-weight: 900;
-   }
+    h1 {
+        margin: 0;
+        font-weight: 900;
+    }
 
-   button {
-      cursor: pointer;
-      padding: 0;
-      width: fit-content;
-      height: fit-content;
-      background: none;
-      border: none;
+    button {
+        cursor: pointer;
+        padding: 0;
+        width: fit-content;
+        height: fit-content;
+        background: none;
+        border: none;
 
-      i {
-         display: inline-block;
-         width: 30px;
-         height: 30px;
-      }
-   }
+        i {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+        }
+    }
 }
