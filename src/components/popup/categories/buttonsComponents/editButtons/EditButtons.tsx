@@ -13,14 +13,13 @@ interface Props {
    isDisabled: boolean
 }
 
-const EditButtons: React.FC<Props> = (props): JSX.Element => {
-   const {
-      category,
-      edit,
-      deleteElement,
-      className,
-      isDisabled
-   } = props;
+const EditButtons: React.FC<Props> = ({
+   category,
+   edit,
+   deleteElement,
+   className,
+   isDisabled
+}): JSX.Element => {
 
    return (
       <>

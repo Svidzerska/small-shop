@@ -42,9 +42,9 @@ const Header: React.FC = (): JSX.Element => {
             <h1>Filter</h1>
          </div>
          {isEditMode &&
-         <div className='popup__comments'>
-            <p>Categories editing</p>
-         </div>}
+            (<div className='popup__comments'>
+               <p>Categories editing</p>
+            </div>)}
       </>
    )
 }

@@ -4,11 +4,7 @@ interface Props {
    card: Product,
 }
 
-const CardElement: React.FC<Props> = (props): JSX.Element => {
-   const {
-      card,
-   } = props;
-
+const CardElement: React.FC<Props> = ({card}): JSX.Element => {
    return (
       <li className="card">
          <p className="card__image">
