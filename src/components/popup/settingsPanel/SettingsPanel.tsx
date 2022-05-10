@@ -50,24 +50,6 @@ const EditManagement: React.FC = (): JSX.Element => {
     dispatch(setTemporaryCategories([...categories]));
   };
 
-  const renderEditButtons = (): JSX.Element => {
-    return (
-      <>
-        {isEditMode ? (
-          <ButtonsEdit
-            allButtonToDo={chooseAllCategoriesForEdit}
-            isDisabled={isAddingNewCategory || isEditingCategory}
-            switcher={isChooseAllCategories}
-            plus={addNewCategory}
-            check={checkChanges}
-          />
-        ) : (
-          <ButtonEditModeOn onClickToDo={editModeOn} />
-        )}
-      </>
-    );
-  };
-
   const showInfo = (): void => {
     console.log("here information");
   };
@@ -75,7 +57,17 @@ const EditManagement: React.FC = (): JSX.Element => {
   return (
     <div className="popup__settingsPanel">
       <p>Categories</p>
-      {renderEditButtons()}
+      {isEditMode ? (
+        <ButtonsEdit
+          allButtonToDo={chooseAllCategoriesForEdit}
+          isDisabled={isAddingNewCategory || isEditingCategory}
+          switcher={isChooseAllCategories}
+          plus={addNewCategory}
+          check={checkChanges}
+        />
+      ) : (
+        <ButtonEditModeOn onClickToDo={editModeOn} />
+      )}
       <button
         className={`settingsPanel__info ${isAddingNewCategory || isEditingCategory ? "unactivated" : ""}`}
         disabled={isAddingNewCategory || isEditingCategory}
