@@ -174,7 +174,8 @@ const EditCategories: React.FC = (): JSX.Element => {
           {renderButtonWithInputField(category)}
           {renderCharLeft(category)}
         </div>
-        {activeCategories.find((item) => item === category.name) && renderButtons(category)}
+        {activeCategories.find((item) => item === category.name && category.name !== "Uncategorised") &&
+          renderButtons(category)}
       </li>
     );
   });
