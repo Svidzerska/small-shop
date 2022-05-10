@@ -58,6 +58,10 @@
     color: $black;
   }
 
+  .categories-name__button:disabled {
+    opacity: 40%;
+  }
+
   i {
     display: inline-block;
     width: 30px;
