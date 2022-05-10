@@ -4,6 +4,7 @@ import { useSelector, RootStateOrAny } from "react-redux";
 import "./showCategories.scss";
 
 import { Category } from "../../../../interfaces/Category";
+import CategoryElement from "./categoryElement/CategoryElement";
 
 const ShowCategories: React.FC = (): JSX.Element => {
   const categories: Category[] = useSelector((state: RootStateOrAny) => state.categories.categoriesArray);
@@ -21,19 +22,12 @@ const ShowCategories: React.FC = (): JSX.Element => {
 
   const displayCategories: JSX.Element[] = categories.map((category: Category) => {
     return (
-      <li key={category.id}>
-        <button
-          onClick={chooseCategory}
-          className={
-            activeCategories.find((item) => item === category.name)
-              ? "categories-name__button active"
-              : "categories-name__button"
-          }
-          value={category.name}
-        >
-          {category.name}
-        </button>
-      </li>
+      <CategoryElement
+        key={category.id}
+        category={category}
+        onClickToDo={chooseCategory}
+        activeCategories={activeCategories}
+      />
     );
   });
 

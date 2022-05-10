@@ -13,19 +13,4 @@
     margin-bottom: 0;
     margin-left: 20px;
   }
-
-  .categories-name__button {
-    width: max-content;
-    cursor: pointer;
-    background-color: $light-gray;
-    border-radius: 10px;
-    border: 0;
-    padding: 5px;
-    margin: 5px;
-  }
-
-  .categories-name__button.active {
-    background-color: $violet;
-    color: $light-blue;
-  }
 }
