@@ -9,8 +9,10 @@ const Popup: React.FC = (): JSX.Element => {
   return (
     <div className="popup">
       <Header />
-      <SettingsPanel />
-      <Categories />
+      <section>
+        <SettingsPanel />
+        <Categories />
+      </section>
     </div>
   );
 };
