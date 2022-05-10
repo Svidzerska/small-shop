@@ -40,7 +40,7 @@ const ShowCategories: React.FC = (): JSX.Element => {
       <li>
         <button
           onClick={chooseAll}
-          className={activeCategories.length === 0 ? "categories-name__button active" : "categories-name__button"}
+          className={`categories-name__button ${activeCategories.length === 0 ? "active" : ""}`}
         >
           All
         </button>

@@ -119,11 +119,7 @@ const EditCategories: React.FC = (): JSX.Element => {
     return (
       <button
         onClick={chooseCategory}
-        className={
-          activeCategories.find((item) => item === category.name)
-            ? "categories-name__button active"
-            : "categories-name__button"
-        }
+        className={`categories-name__button ${activeCategories.find((item) => item === category.name) ? "active" : ""}`}
         value={category.name}
         disabled={isAddingNewCategory || isEditingCategory}
       >
@@ -169,7 +165,7 @@ const EditCategories: React.FC = (): JSX.Element => {
     return (
       <li
         key={category.id}
-        className={activeCategories.find((item) => item === category.name) ? "edit-component active" : "edit-component"}
+        className={`edit-component ${activeCategories.find((item) => item === category.name) ? "active" : ""}`}
       >
         <div>
           {renderButtonWithInputField(category)}
