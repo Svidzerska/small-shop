@@ -45,6 +45,7 @@ const EditCategories: React.FC = (): JSX.Element => {
     if (!isEditingCategory) {
       const targetValue: string = e.currentTarget.value;
       const checkIsActiveCategory: boolean = activeCategories.includes(e.currentTarget.value);
+
       checkIsActiveCategory
         ? setActiveCategories(activeCategories.filter((item) => item !== targetValue))
         : setActiveCategories((arr) => [...arr, `${targetValue}`]);

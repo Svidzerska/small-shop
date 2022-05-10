@@ -12,8 +12,8 @@ const ShowCategories: React.FC = (): JSX.Element => {
 
   const chooseCategory = (e: React.MouseEvent<HTMLButtonElement>): void => {
     const targetValue: string = e.currentTarget.value;
-
     const checkActiveCategory = activeCategories.includes(e.currentTarget.value);
+
     checkActiveCategory
       ? setActiveCategories(activeCategories.filter((item) => item !== targetValue))
       : setActiveCategories((arr) => [...arr, `${targetValue}`]);
