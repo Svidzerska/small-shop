@@ -9,20 +9,19 @@ interface Props {
   category?: Category;
   edit: Function;
   deleteElement: Function;
-  className: string;
   isDisabled: boolean;
 }
 
-const EditButtons: React.FC<Props> = ({ category, edit, deleteElement, className, isDisabled }): JSX.Element => {
+const EditButtons: React.FC<Props> = ({ category, edit, deleteElement, isDisabled }): JSX.Element => {
   return (
     <>
       <button onClick={(e) => edit(e, category?.id)} disabled={isDisabled}>
-        <i className={className}>
+        <i>
           <PensilIcon />
         </i>
       </button>
       <button onClick={(e) => deleteElement(e, category?.id)} disabled={isDisabled}>
-        <i className={className}>
+        <i>
           <TrashIcon />
         </i>
       </button>

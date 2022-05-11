@@ -68,11 +68,7 @@ const EditManagement: React.FC = (): JSX.Element => {
       ) : (
         <ButtonEditModeOn onClickToDo={editModeOn} />
       )}
-      <button
-        className={`settingsPanel__info ${isAddingNewCategory || isEditingCategory ? "unactivated" : ""}`}
-        disabled={isAddingNewCategory || isEditingCategory}
-        onClick={showInfo}
-      >
+      <button className={`settingsPanel__info`} disabled={isAddingNewCategory || isEditingCategory} onClick={showInfo}>
         <i>
           <InfoIcon />
         </i>

@@ -148,7 +148,6 @@ const EditCategories: React.FC = (): JSX.Element => {
                 category={category}
                 edit={editCategory}
                 deleteElement={deleteCategory}
-                className={isAddingNewCategory || isEditingCategory ? "unactivated" : ""}
                 isDisabled={isAddingNewCategory || isEditingCategory}
               />
             )}
