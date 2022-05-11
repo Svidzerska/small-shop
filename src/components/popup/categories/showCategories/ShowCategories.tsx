@@ -16,8 +16,8 @@ const ShowCategories: React.FC = (): JSX.Element => {
     const checkActiveCategory = activeCategories.includes(e.currentTarget.value);
 
     checkActiveCategory
-      ? setActiveCategories(activeCategories.filter((item) => item !== targetValue))
-      : setActiveCategories((arr) => [...arr, `${targetValue}`]);
+      ? setActiveCategories((prevState) => prevState.filter((item) => item !== targetValue))
+      : setActiveCategories((prevState) => [...prevState, `${targetValue}`]);
   };
 
   const displayCategories: JSX.Element[] = categories.map((category: Category) => {

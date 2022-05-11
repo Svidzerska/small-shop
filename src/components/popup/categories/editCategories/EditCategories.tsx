@@ -47,8 +47,8 @@ const EditCategories: React.FC = (): JSX.Element => {
       const checkIsActiveCategory: boolean = activeCategories.includes(e.currentTarget.value);
 
       checkIsActiveCategory
-        ? setActiveCategories(activeCategories.filter((item) => item !== targetValue))
-        : setActiveCategories((arr) => [...arr, `${targetValue}`]);
+        ? setActiveCategories((prevState) => prevState.filter((item) => item !== targetValue))
+        : setActiveCategories((prevState) => [...prevState, `${targetValue}`]);
 
       dispatch(setChooseAllCategories(false));
     }
@@ -58,6 +58,7 @@ const EditCategories: React.FC = (): JSX.Element => {
     setEditedCategory(id);
 
     const existingCategory: Category = temporaryCategories.find((item) => item.id === id)!;
+
     setCharAmountLeft(20 - existingCategory.name.length);
     setValue(existingCategory.name);
 
@@ -75,12 +76,12 @@ const EditCategories: React.FC = (): JSX.Element => {
     dispatch(setTemporaryCategories(temporaryCategories.filter((item) => item.id !== id)));
 
     const deleteCategory = temporaryCategories.find((item) => item.id === id);
-    setActiveCategories(activeCategories.filter((item) => item !== deleteCategory?.name));
+
+    setActiveCategories((prevState) => prevState.filter((item) => item !== deleteCategory?.name));
   };
 
   const doneCategory = (e: React.MouseEvent<HTMLButtonElement>, id: number): void => {
     const currentCategories: Category[] = [...temporaryCategories];
-
     const secondElementCategory = currentCategories.find((item) => item.name === value && item.id !== id);
 
     if (!secondElementCategory && value !== "") {
@@ -95,8 +96,8 @@ const EditCategories: React.FC = (): JSX.Element => {
       };
       dispatch(setTemporaryCategories(currentCategories));
 
-      setActiveCategories((arr) => {
-        const updateArr = [...arr];
+      setActiveCategories((prevState) => {
+        const updateArr = [...prevState];
         updateArr.splice(currentCategoryAsActive, 1, value);
         return updateArr;
       });
@@ -104,7 +105,7 @@ const EditCategories: React.FC = (): JSX.Element => {
       dispatch(setTemporaryCategories(currentCategories.filter((item) => item.id !== id)));
 
       const deleteCategory = currentCategories.find((item) => item.id === id);
-      setActiveCategories(activeCategories.filter((item) => item !== deleteCategory?.name));
+      setActiveCategories((prevState) => prevState.filter((item) => item !== deleteCategory?.name));
     }
     setEditedCategory(0);
     dispatch(setEditingCategory(false));
