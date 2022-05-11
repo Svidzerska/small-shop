@@ -20,7 +20,13 @@ const AddCategory: React.FC = (): JSX.Element => {
   );
 
   const [value, setValue] = useState<string>("New Category");
-  const [charAmountLeft, setCharAmountLeft] = useState<number>(20 - "New Category".length);
+  const [charAmountLeft, setCharAmountLeft] = useState<number>(20 - value.length);
+
+  useEffect(() => {
+    if (value === "New Category") {
+      setCharAmountLeft(20 - value.length);
+    }
+  }, [value]);
 
   // set New Category after canceling of editing
   useEffect(() => {
