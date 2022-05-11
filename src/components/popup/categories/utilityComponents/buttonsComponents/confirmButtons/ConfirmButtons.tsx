@@ -1,9 +1,9 @@
 import React from "react";
 
-import { ReactComponent as CheckIcon } from "../../../../../images/checkIcon.svg";
-import { ReactComponent as XMarkInSquareIcon } from "../../../../../images/squareXmarkIcon.svg";
+import { ReactComponent as CheckIcon } from "../../../../../../images/checkIcon.svg";
+import { ReactComponent as XMarkInSquareIcon } from "../../../../../../images/squareXmarkIcon.svg";
 
-import { Category } from "../../../../../interfaces/Category";
+import { Category } from "../../../../../../interfaces/Category";
 
 interface Props {
   category?: Category;

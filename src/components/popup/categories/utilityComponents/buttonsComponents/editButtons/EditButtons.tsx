@@ -1,9 +1,9 @@
 import React from "react";
 
-import { ReactComponent as PensilIcon } from "../../../../../images/pensilIcon.svg";
-import { ReactComponent as TrashIcon } from "../../../../../images/trashIcon.svg";
+import { ReactComponent as PensilIcon } from "../../../../../../images/pensilIcon.svg";
+import { ReactComponent as TrashIcon } from "../../../../../../images/trashIcon.svg";
 
-import { Category } from "../../../../../interfaces/Category";
+import { Category } from "../../../../../../interfaces/Category";
 
 interface Props {
   category?: Category;

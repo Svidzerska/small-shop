@@ -9,7 +9,7 @@ import {
 
 import { Category } from "../../../../interfaces/Category";
 
-import EditField from "../editField/EditField";
+import EditField from "../utilityComponents/editField/EditField";
 
 const AddCategory: React.FC = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const AddCategory: React.FC = (): JSX.Element => {
   );
 
   const [value, setValue] = useState<string>("New Category");
-  const [charAmountLeft, setCharAmountLeft] = useState<number>(20 - value.length);
+  const [charAmountLeft, setCharAmountLeft] = useState<number>(20 - "New Category".length);
 
   // set New Category after canceling of editing
   useEffect(() => {

@@ -2,7 +2,7 @@ import React from "react";
 
 import "./editField.scss";
 
-import { Category } from "../../../../interfaces/Category";
+import { Category } from "../../../../../interfaces/Category";
 
 import ConfirmButtons from "../buttonsComponents/confirmButtons/ConfirmButtons";
 

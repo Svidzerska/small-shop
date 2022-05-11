@@ -11,8 +11,8 @@ import {
 
 import { Category } from "../../../../interfaces/Category";
 
-import EditButtons from "../buttonsComponents/editButtons/EditButtons";
-import EditField from "../editField/EditField";
+import EditButtons from "../utilityComponents/buttonsComponents/editButtons/EditButtons";
+import EditField from "../utilityComponents/editField/EditField";
 
 const EditCategories: React.FC = (): JSX.Element => {
   const dispatch = useDispatch();
