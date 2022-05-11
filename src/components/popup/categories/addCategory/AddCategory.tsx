@@ -46,7 +46,6 @@ const AddCategory: React.FC = (): JSX.Element => {
 
   const doneNewCategory = (): void => {
     const currentCategories: Category[] = [...temporaryCategories];
-
     const secondElementCategory: Category | undefined = currentCategories.find((item) => item.name === value);
 
     if (value !== "" && value !== "New Category" && !secondElementCategory) {

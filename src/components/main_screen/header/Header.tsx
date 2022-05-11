@@ -13,9 +13,6 @@ const Header: React.FC = (): JSX.Element => {
 
   useEffect(() => {
     dispatch(getProducts());
-  }, []);
-
-  useEffect(() => {
     dispatch(getCategories());
   }, []);
 
