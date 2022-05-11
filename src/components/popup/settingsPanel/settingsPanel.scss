@@ -3,7 +3,6 @@
 .popup__settingsPanel {
   display: flex;
   flex-direction: row;
-  padding-left: 60px;
   align-items: center;
 
   p:first-child {
@@ -17,6 +16,7 @@
     padding-top: 5px;
     background: none;
     border: 0;
+    color: $black;
 
     i {
       display: inline-block;
@@ -35,6 +35,10 @@
     }
   }
 
+  button:disabled {
+    opacity: 30%;
+  }
+
   .settingsPanel__buttonAll {
     cursor: pointer;
     background-color: $light-gray;
@@ -42,6 +46,7 @@
     border-radius: 10px;
     padding: 5px;
     margin: 5px;
+    color: $black;
   }
 
   .settingsPanel__buttonAll.on {
@@ -49,7 +54,8 @@
     color: $white;
   }
 
-  .settingsPanel__buttonAll:disabled {
+  .settingsPanel__buttonAll:disabled,
+  .settingsPanel__buttonAll.on:disabled {
     opacity: 30%;
   }
 

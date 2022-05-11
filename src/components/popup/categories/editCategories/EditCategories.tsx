@@ -11,8 +11,8 @@ import {
 
 import { Category } from "../../../../interfaces/Category";
 
-import ConfirmButtons from "../buttonsComponents/confirmButtons/ConfirmButtons";
 import EditButtons from "../buttonsComponents/editButtons/EditButtons";
+import EditField from "../editField/EditField";
 
 const EditCategories: React.FC = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -116,64 +116,44 @@ const EditCategories: React.FC = (): JSX.Element => {
     dispatch(setEditingCategory(false));
   };
 
-  const renderButtonWithInputField = (category: Category): JSX.Element => {
-    return (
-      <button
-        onClick={chooseCategory}
-        className={`categories-name__button ${activeCategories.find((item) => item === category.name) ? "active" : ""}`}
-        value={category.name}
-        disabled={isAddingNewCategory || isEditingCategory}
-      >
-        {editedCategory === category.id ? (
-          <input
-            value={isEditingCategory ? value : category.name}
-            onChange={editCategoryInputField}
-            className="inputForEdit"
-            autoFocus
-          />
-        ) : (
-          category.name
-        )}
-      </button>
-    );
-  };
-
-  const renderCharLeft = (category: Category): JSX.Element => {
-    return (
-      <>
-        {activeCategories.find((item) => item === category.name) &&
-          isEditingCategory &&
-          editedCategory === category.id && <p className="edit-component__char-amount">{charAmountLeft} char. left</p>}
-      </>
-    );
-  };
-
-  const renderButtons = (category: Category): JSX.Element => {
-    return editedCategory === category.id ? (
-      <ConfirmButtons category={category} check={doneCategory} cancel={cancelEditCategory} />
-    ) : (
-      <EditButtons
-        category={category}
-        edit={editCategory}
-        deleteElement={deleteCategory}
-        className={isAddingNewCategory || isEditingCategory ? "unactivated" : ""}
-        isDisabled={isAddingNewCategory || isEditingCategory}
-      />
-    );
-  };
-
   const displayCategories: JSX.Element[] = temporaryCategories.map((category: Category) => {
     return (
       <li
         key={category.id}
         className={`edit-component ${activeCategories.find((item) => item === category.name) ? "active" : ""}`}
       >
-        <div>
-          {renderButtonWithInputField(category)}
-          {renderCharLeft(category)}
-        </div>
-        {activeCategories.find((item) => item === category.name && category.name !== "Uncategorised") &&
-          renderButtons(category)}
+        {editedCategory === category.id ? (
+          <EditField
+            value={isEditingCategory ? value : category.name}
+            onChangeToDo={editCategoryInputField}
+            check={doneCategory}
+            cancel={cancelEditCategory}
+            charAmountLeft={charAmountLeft}
+            category={category}
+          />
+        ) : (
+          <>
+            <button
+              onClick={chooseCategory}
+              className={`categories-name__button ${
+                activeCategories.find((item) => item === category.name) ? "active" : ""
+              }`}
+              value={category.name}
+              disabled={isAddingNewCategory || isEditingCategory}
+            >
+              {category.name}
+            </button>
+            {activeCategories.find((item) => item === category.name && category.name !== "Uncategorised") && (
+              <EditButtons
+                category={category}
+                edit={editCategory}
+                deleteElement={deleteCategory}
+                className={isAddingNewCategory || isEditingCategory ? "unactivated" : ""}
+                isDisabled={isAddingNewCategory || isEditingCategory}
+              />
+            )}
+          </>
+        )}
       </li>
     );
   });

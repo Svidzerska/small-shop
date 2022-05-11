@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 
-import "./addCategory.scss";
-
 import {
   setAddingNewCategory,
   setTemporaryCategories,
@@ -11,7 +9,7 @@ import {
 
 import { Category } from "../../../../interfaces/Category";
 
-import ConfirmButtons from "../buttonsComponents/confirmButtons/ConfirmButtons";
+import EditField from "../editField/EditField";
 
 const AddCategory: React.FC = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -22,8 +20,7 @@ const AddCategory: React.FC = (): JSX.Element => {
   );
 
   const [value, setValue] = useState<string>("New Category");
-  const [charAmountLeft, setCharAmountLeft] = useState<number>(20);
-  const [isEditInputField, setEditInputField] = useState<boolean>(false);
+  const [charAmountLeft, setCharAmountLeft] = useState<number>(20 - value.length);
 
   // set New Category after canceling of editing
   useEffect(() => {
@@ -35,7 +32,6 @@ const AddCategory: React.FC = (): JSX.Element => {
   };
 
   const editNewCategoryInputField = (e: React.FormEvent<HTMLInputElement>): void => {
-    setEditInputField(true);
     if (e.currentTarget.value.length <= 20) {
       setValue(e.currentTarget.value);
       setCharAmountLeft(20 - e.currentTarget.value.length);
@@ -56,36 +52,27 @@ const AddCategory: React.FC = (): JSX.Element => {
     dispatch(setAddingNewCategory(false));
 
     setValue("New Category");
-    setEditInputField(false);
   };
 
   const cancelNewCategory = (): void => {
     dispatch(setAddingNewCategory(false));
     setValue("New Category");
-    setEditInputField(false);
   };
 
-  const renderAddCategoryField = (): JSX.Element => {
-    return (
-      <div className="addField">
-        <div>
-          <div className="addField__inputField">
-            <input
-              value={value}
-              onChange={editNewCategoryInputField}
-              onFocus={selectRange}
-              className="inputForEdit"
-              autoFocus
-            />
-          </div>
-          <ConfirmButtons className="addField__buttonResult" check={doneNewCategory} cancel={cancelNewCategory} />
-        </div>
-        {isEditInputField && <p className="addField__char-amount">{charAmountLeft} char. left</p>}
-      </div>
-    );
-  };
-
-  return <>{isAddingNewCategory && renderAddCategoryField()}</>;
+  return (
+    <>
+      {isAddingNewCategory && (
+        <EditField
+          value={value}
+          onChangeToDo={editNewCategoryInputField}
+          onFocusToDo={selectRange}
+          check={doneNewCategory}
+          cancel={cancelNewCategory}
+          charAmountLeft={charAmountLeft}
+        />
+      )}
+    </>
+  );
 };
 
 export default AddCategory;
